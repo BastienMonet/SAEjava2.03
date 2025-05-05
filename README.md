@@ -1,2 +1,2 @@
 # SAEjava2.03
-<<<<<<< Bastien
+<<<<<<< Bastien test
