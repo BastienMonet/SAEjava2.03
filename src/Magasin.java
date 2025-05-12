@@ -1,16 +1,17 @@
-import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Magasin {
     private int idMag;
     private String nomMag;
     private String villeMag;
-    private List<Livre> livres;
+    private Map<Livre,Integer> livres;
 
-    public Magasin(int idMag, String nomMag, String villeMag, List<Livre> livres) {
-        this.livres = livres;
+    public Magasin(int idMag, String nomMag, String villeMag) {
         this.idMag = idMag;
         this.nomMag = nomMag;
         this.villeMag = villeMag;
+        this.livres = new HashMap<>();
     }
 
     public int getIdMag() {
@@ -22,8 +23,17 @@ public class Magasin {
     public String getVilleMag() {
         return villeMag;
     }
-    public List<Livre> getLivres() {
+    public Map<Livre,Integer> getLivres() {
         return livres;
     }
+
+    public void addLivre(Livre livre, int quantite) {
+        if (livres.containsKey(livre)) {
+            livres.put(livre, livres.get(livre) + quantite);
+        } else {
+            livres.put(livre, quantite);
+        }
+    }
+
 
 }
