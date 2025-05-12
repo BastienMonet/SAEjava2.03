@@ -35,5 +35,9 @@ public class Magasin {
         }
     }
 
+    public Boolean isDispo(Livre livre) {
+        return livres.containsKey(livre) && livres.get(livre) > 0;
+    }
+
 
 }
