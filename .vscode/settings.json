@@ -1,0 +1,17 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/junit-4.13.2.jar",
+        "lib/javafx.web.jar",
+        "lib/javafx.swing.jar",
+        "lib/javafx.media.jar",
+        "lib/javafx.graphics.jar",
+        "lib/javafx.fxml.jar",
+        "lib/javafx.controls.jar",
+        "lib/javafx.base.jar",
+        "lib/hamcrest-2.2.jar"
+    ],
+    "java.project.outputPath": "bin"
+}
