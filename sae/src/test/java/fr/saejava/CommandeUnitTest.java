@@ -1,3 +1,5 @@
+package fr.saejava;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,11 +13,11 @@ import java.util.Arrays;
 
 public class CommandeUnitTest
 {
-
     @Test
     public void test()
     {
-        assertEquals(1, 1);
+        Magasin m = new Magasin(0, null, null);
+        assertEquals(1,1);
     }
 
 }

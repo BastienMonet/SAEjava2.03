@@ -1,4 +1,4 @@
-import main.Magasin;
+package fr.saejava;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -16,7 +16,8 @@ public class AppTest
     @Test
     public void test()
     {
-        Magasin m = new Magasin(1, "a", "a");
+        Magasin m = new Magasin(0, null, null);
+        assertEquals(1,1);
     }
 
 }

@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class Editeur {
     private int idEdit;
     private String nomEdit;

@@ -1,3 +1,5 @@
+package fr.saejava;
+
 import java.util.Map;
 import java.util.HashMap;
 

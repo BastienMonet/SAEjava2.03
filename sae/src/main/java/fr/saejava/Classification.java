@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class Classification {
     private int ideway;
     private String nomClass;

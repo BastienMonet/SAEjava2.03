@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class CommandeUnit {
     private int numliq;
     private int qte;

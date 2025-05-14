@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class Auteur {
     private int idAuteur;
     private String nomAuteur;

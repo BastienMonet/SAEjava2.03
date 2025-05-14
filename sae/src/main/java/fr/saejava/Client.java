@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class Client extends Utilisateur {
     
     private String adresseUtil;

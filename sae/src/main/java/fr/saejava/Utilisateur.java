@@ -1,3 +1,6 @@
+package fr.saejava;
+
+
 public class Utilisateur {
     protected int idUtil;
     protected String nomUtil;
