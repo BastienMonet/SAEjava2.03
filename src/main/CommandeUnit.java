@@ -1,12 +1,11 @@
 public class CommandeUnit {
     private int numliq;
     private int qte;
-    private double prixVente;
+    private Livre livre;
 
-    public CommandeUnit(int numliq, int qte, double prixVente) {
-        this.numliq = numliq;
+
+    public CommandeUnit(Livre livre, int qte) {
         this.qte = qte;
-        this.prixVente = prixVente;
     }
 
     public int getNumliq() {
@@ -16,9 +15,6 @@ public class CommandeUnit {
     public int getQte() {
         return qte;
     }
-    public double getPrixVente() {
-        return prixVente;
-    }
 
     public void setNumliq(int numliq) {
         this.numliq = numliq;
@@ -27,8 +23,7 @@ public class CommandeUnit {
     public void setQte(int qte) {
         this.qte = qte;
     }
-
-    public void setPrixVente(double prixVente) {
-        this.prixVente = prixVente;
+        public Livre getLivre() {
+        return livre;
     }
 }
