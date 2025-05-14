@@ -3,7 +3,7 @@ public class Client extends Utilisateur {
     private String adresseUtil;
     private int codePostal;
     private String villeUtil;
-    private double monnaie
+    private double monnaie;
 
 
     public Client(int idUtil, String nomUtil, String prenomUtil, String pwd, String adresseUtil, int codePostal,
@@ -33,7 +33,7 @@ public class Client extends Utilisateur {
     }
 
     public void ajouteMonnaie(double montant){
-        this.monnaie += montant
+        this.monnaie += montant;
     }
 
 

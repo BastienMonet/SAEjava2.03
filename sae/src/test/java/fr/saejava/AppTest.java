@@ -1,6 +1,3 @@
-
-package test;
-
 import main.Magasin;
 
 import static org.junit.Assert.assertTrue;
