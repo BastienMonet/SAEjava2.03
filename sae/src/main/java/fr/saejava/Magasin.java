@@ -29,7 +29,7 @@ public class Magasin {
         return livres;
     }
 
-    public void addLivre(Livre livre, int quantite) {
+    public void ajouteLivre(Livre livre, int quantite) {
         if (livres.containsKey(livre)) {
             livres.put(livre, livres.get(livre) + quantite);
         } else {
