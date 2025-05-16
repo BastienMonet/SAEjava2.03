@@ -41,5 +41,19 @@ public class Magasin {
         return livres.containsKey(livre) && livres.get(livre) > 0;
     }
 
+    public void retireLivre(Livre livre) {
+        if (livres.containsKey(livre)) {
+            int quantite = livres.get(livre);
+            if (quantite > 0) {
+                livres.put(livre, quantite - 1);
+            } else {
+                throw new IllegalArgumentException("Aucun exemplaire de ce livre n'est disponible.");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
+        }
+    }
+
 
 }
