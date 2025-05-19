@@ -29,4 +29,8 @@ public class CommandeUnit {
         public Livre getLivre() {
         return livre;
     }
+
+    public int getPrixTotal() {
+        return livre.getPrix() * qte;
+    }
 }

@@ -71,4 +71,16 @@ public class Commande {
     public void removeCommandeUnit(CommandeUnit commandeUnit) {
         this.listeCommandes.remove(commandeUnit);
     }
+
+    public double prixTotCommande(){
+        int total = 0;
+        for (CommandeUnit comUnit : listeCommandes){
+            total += comUnit.getPrixTotal();
+        }
+        return total;
+    }
+
+    public void ajouterCommandeUnit(CommandeUnit commandeUnit) {
+        this.listeCommandes.add(commandeUnit);
+    }
 }
