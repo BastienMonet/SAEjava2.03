@@ -16,8 +16,8 @@ public class AppTest
     @Test
     public void test()
     {
-        Magasin m = new Magasin(0, null, null);
-        assertEquals(1,1);
+        Magasin m = new Magasin(1, null, null);
+        assertEquals(m.getIdMag(),1);
     }
 
 }
