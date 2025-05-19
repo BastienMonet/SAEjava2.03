@@ -1,3 +1,6 @@
 # SAEjava2.03
 
-Conflit = Conflit
+Monet Bastien
+Franchet Sileye
+Yang Irvine
+Laurin Alexandre
