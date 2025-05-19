@@ -29,7 +29,7 @@ public class Magasin {
         return livres;
     }
 
-    public void addLivre(Livre livre, int quantite) {
+    public void ajouteLivre(Livre livre, int quantite) {
         if (livres.containsKey(livre)) {
             livres.put(livre, livres.get(livre) + quantite);
         } else {
@@ -41,5 +41,22 @@ public class Magasin {
         return livres.containsKey(livre) && livres.get(livre) > 0;
     }
 
-
+    public void retireLivre(Livre livre) throws IllegalArgumentException {
+        if (livre == null) {
+            throw new IllegalArgumentException("Le livre ne peut pas être nul.");
+        }
+        if (livres.containsKey(livre)) {
+            int quantite = livres.get(livre);
+            if (quantite > 0) {
+                livres.put(livre, quantite - 1);
+            } else if (quantite == 1) {
+                livres.remove(livre);
+            } else {
+                throw new IllegalArgumentException("Aucun exemplaire de ce livre n'est disponible.");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
+        }
+    }
 }
