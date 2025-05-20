@@ -61,6 +61,10 @@ public class TestCommande {
         assertEquals(2, res);
 
         com.renvoyer();
+
+        int res2 = lesLivre.get(l1);
+
+        assertEquals(4, res2);
         
         Set<Livre> set = lesLivre.keySet();
         System.out.println(mag);

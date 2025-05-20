@@ -80,6 +80,10 @@ public class Livre {
 
 
     @Override
+    /*
+     * ! a ameliorer mais ne surtout pas mettre un equals avec nbreD'achat : c'est là
+     *   qu'est l'astuce pour conaitre le nombre de livre acheter dans un magasin
+     */
     public boolean equals(Object obj) {
         if (obj == null){return false;}
         if (obj == this){return true;}
