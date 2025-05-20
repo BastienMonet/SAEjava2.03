@@ -5,6 +5,7 @@ import java.util.List;
 public class Catalogue {
     List<Utilisateur> utilisateur;
     List<Magasin> magasin;
+    
 
     public Catalogue(List<Utilisateur> utilisateur, List<Magasin> magasin) {
         this.utilisateur = utilisateur;

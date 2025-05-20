@@ -9,9 +9,9 @@ public class Client extends Utilisateur {
     private double monnaie;
 
 
-    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd, String adresseUtil, int codePostal,
+    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd,Catalogue cat ,String adresseUtil, int codePostal,
             String villeUtil) {
-        super(idUtil, nomUtil, prenomUtil, pwd);
+        super(idUtil, nomUtil, prenomUtil, pwd, cat);
         this.adresseUtil = adresseUtil;
         this.codePostal = codePostal;
         this.villeUtil = villeUtil;
@@ -37,6 +37,20 @@ public class Client extends Utilisateur {
 
     public void ajouteMonnaie(double montant){
         this.monnaie += montant;
+    }
+
+    public void ajouteCommande(Commande com) throws Exception{
+        if (monnaie - com.prixTotCommande() > 0){
+            commandes.add(com);
+            monnaie -= com.prixTotCommande();
+        } else {
+            throw new Exception("prix de la commande trop élever");
+        }
+    }
+
+    public void retireCommande(Commande com){
+        this.monnaie += com.prixTotCommande();
+        commandes.remove(com);
     }
 
 

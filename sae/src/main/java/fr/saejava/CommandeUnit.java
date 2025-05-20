@@ -33,4 +33,9 @@ public class CommandeUnit {
     public int getPrixTotal() {
         return livre.getPrix() * qte;
     }
+
+    @Override
+    public String toString() {
+        return qte + " " + livre;
+    }
 }
