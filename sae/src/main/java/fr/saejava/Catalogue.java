@@ -18,4 +18,8 @@ public class Catalogue {
     public List<Magasin> getMagasin() {
         return magasin;
     }
+
+    public void ajouterMagasin(Magasin mag){
+        this.magasin.add(mag);
+    }
 }
