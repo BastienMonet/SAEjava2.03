@@ -3,7 +3,10 @@ import fr.saejava.Livre;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -18,10 +21,42 @@ public class TestCommande {
         
 
         CommandeUnit commandeUnit = new CommandeUnit(new Livre(123456789, "Test Book", 100, "2023-01-01", 20, null, null, null), 2);
-        Commande commande = new Commande(1, "2023-01-01", true, 'L', "2023-01-02");
+        Commande commande = new Commande(1, "2023-01-01", true, 'L', "2023-01-02", null);
 
         commande.ajouterCommandeUnit(commandeUnit);
         assertEquals(1, commande.getListeCommandes().size());
+    }
+
+
+    @Test
+    public void TestCommander(){
+        Map<Livre, Integer> lesLivre = new HashMap<>();
+
+        Livre l1 = new Livre(1, "a", 0, null, 0, null, null, null);
+        Livre l2 = new Livre(2, "b", 0, null, 0, null, null, null);
+        Livre l3 = new Livre(3, "c", 0, null, 0, null, null, null);
+
+        lesLivre.put(l1, 4);
+        lesLivre.put(l2, 2);
+        lesLivre.put(l3, 0);
+
+        Magasin mag = new Magasin(1, "mag1", null, lesLivre);
+
+        CommandeUnit comU1 = new CommandeUnit(l1, 2);
+
+        Commande com = new Commande(0, null, false, 'a', null, mag);
+        com.addCommandeUnit(comU1);
+
+        com.commander();
+
+        int res = lesLivre.get(l1);
+
+        assertEquals(res, 2);
+        Set<Livre> set = lesLivre.keySet();
+        System.out.println(set);
+
+
+
     }
 
 }

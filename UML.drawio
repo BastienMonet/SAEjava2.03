@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="XtBnml_JYqbg_8TcbxcI">
-        <mxGraphModel dx="1055" dy="953" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1593" dy="1420" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -109,7 +109,7 @@
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-45" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="OxnglPTWXYWyZ_FbC3Cn-43" vertex="1">
                     <mxGeometry y="101" width="234" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-46" value="&lt;div&gt;&lt;div&gt;+ Magasin(idmag, nommag, villemag)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;/div&gt;&lt;div&gt;+ nombreLivre() : int&lt;/div&gt;&lt;div&gt;+ estDisponible() : boolean&lt;/div&gt;&lt;div&gt;+ ajouteLivre(Livre, qte) : boolean&lt;/div&gt;&lt;div&gt;+ retireLivre(String nom) : boolean&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-43" vertex="1">
+                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-46" value="&lt;div&gt;&lt;div&gt;+ Magasin(idmag, nommag, villemag)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;/div&gt;&lt;div&gt;+ nombreLivre() : int&lt;/div&gt;&lt;div&gt;+ estDisponible() : boolean&lt;/div&gt;&lt;div&gt;+ ajouteLivre(Livre, qte) : boolean&lt;/div&gt;&lt;div&gt;+ retireLivre(Livre, qte) : boolean&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-43" vertex="1">
                     <mxGeometry y="109" width="234" height="124" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-47" value="Client" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">

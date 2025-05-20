@@ -68,11 +68,29 @@ public class Livre {
     }
 
     public void incrementeAchat(int qte){
-        nbreAchats += qte;
+        if (nbreAchats + qte > 0)
+            nbreAchats += qte;
+        else 
+            nbreAchats = 0;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){return false;}
+        if (obj == this){return true;}
+        if (! (obj instanceof Livre)){return false;}
+        Livre tmp = (Livre)obj;
+        return tmp.isbn == this.isbn;
+    }
+
+    @Override
+    public int hashCode(){
+        return isbn * 83;
     }
 
     @Override
     public String toString() {
-        return titre;
+        return titre + nbreAchats;
     }
 }

@@ -16,8 +16,8 @@ public class CommandeUnitTest
     @Test
     public void test()
     {
-        Magasin m = new Magasin(0, null, null);
-        assertEquals(m.getIdMag(),1);
+        Magasin m = new Magasin(0, null, null, null);
+        assertEquals(m.getIdMag(),0);
     }
 
 }
