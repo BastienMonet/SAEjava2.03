@@ -10,14 +10,16 @@ public class Commande {
     private char livraison;
     private String dateArrivee;
     private List<CommandeUnit> listeCommandes;
+    private Magasin mag; 
 
-    public Commande(int numCom, String dateCom, boolean enligne, char livraison, String dateArrivee) {
+    public Commande(int numCom, String dateCom, boolean enligne, char livraison, String dateArrivee, Magasin mag) {
         this.numCom = numCom;
         this.dateCom = dateCom;
         this.enligne = enligne;
         this.livraison = livraison;
         this.dateArrivee = dateArrivee;
         this.listeCommandes = new ArrayList<>();
+        this.mag = mag;
     }
 
     public int getNumCom() {
@@ -42,6 +44,11 @@ public class Commande {
 
     public List<CommandeUnit> getListeCommandes() {
         return listeCommandes;
+    }
+
+
+    public Magasin getMagasin() {
+        return mag;
     }
 
     public void setNumCom(int numCom) {
@@ -72,6 +79,7 @@ public class Commande {
         this.listeCommandes.remove(commandeUnit);
     }
 
+
     public double prixTotCommande(){
         int total = 0;
         for (CommandeUnit comUnit : listeCommandes){
@@ -86,12 +94,25 @@ public class Commande {
 
     public void commander(){
         /*
-         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasin grace au commande
+         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasins grace au commande
          */
+        Magasin lemagasin = getMagasin();
+        for (CommandeUnit comU : listeCommandes){
+            Livre lelivre = comU.getLivre();
+            int qte = comU.getQte();
+            lelivre.incrementeAchat(qte);
+            lemagasin.retireLivre(lelivre, qte);
+        } 
     }
 
     public void renvoyer(){
-        
+        Magasin lemagasin = getMagasin();
+        for (CommandeUnit comU : listeCommandes){
+            Livre lelivre = comU.getLivre();
+            int qte = comU.getQte();
+            lelivre.incrementeAchat(-qte);
+            lemagasin.ajouteLivre(lelivre, qte);
+        } 
     }
 
     @Override
