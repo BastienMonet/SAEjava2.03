@@ -92,9 +92,10 @@ public class Commande {
         this.listeCommandes.add(commandeUnit);
     }
 
-    public void commander(){
+    public void commander() throws IllegalArgumentException, Exception{
         /*
-         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasins grace au commande
+         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasins grace au commande en plus
+         * de les retirer du stock
          */
         Magasin lemagasin = getMagasin();
         for (CommandeUnit comU : listeCommandes){
@@ -105,7 +106,7 @@ public class Commande {
         } 
     }
 
-    public void renvoyer(){
+    public void renvoyer() throws IllegalArgumentException, Exception{
         Magasin lemagasin = getMagasin();
         for (CommandeUnit comU : listeCommandes){
             Livre lelivre = comU.getLivre();
