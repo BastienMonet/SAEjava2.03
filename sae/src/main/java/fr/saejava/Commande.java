@@ -85,21 +85,13 @@ public class Commande {
     }
 
     public void commander(){
-        for (CommandeUnit comUnit : listeCommandes){
-            int qte = comUnit.getQte();
-            comUnit.getLivre().incrementeAchat(qte);
-        }
+        /*
+         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasin grace au commande
+         */
     }
 
     public void renvoyer(){
-        for (CommandeUnit comUnit : listeCommandes){
-            int qte = comUnit.getQte();
-            if (comUnit.getLivre().getNbreAchats() - qte > 0)
-                comUnit.getLivre().incrementeAchat(-qte);
-            else {
-                comUnit.getLivre().setNbreAchats(0);
-            }
-        }
+        
     }
 
     @Override
