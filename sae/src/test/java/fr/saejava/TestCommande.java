@@ -16,6 +16,7 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 
 public class TestCommande {
+
     @Test
     public void testAjout() {
         
@@ -29,7 +30,7 @@ public class TestCommande {
 
 
     @Test
-    public void TestCommander(){
+    public void TestCommander() throws IllegalArgumentException, Exception{
         Map<Livre, Integer> lesLivre = new HashMap<>();
 
         Livre l1 = new Livre(1, "a", 0, null, 0, null, null, null);
@@ -43,20 +44,26 @@ public class TestCommande {
         Magasin mag = new Magasin(1, "mag1", null, lesLivre);
 
         CommandeUnit comU1 = new CommandeUnit(l1, 2);
+        CommandeUnit comU2 = new CommandeUnit(l2, 3);
 
         Commande com = new Commande(0, null, false, 'a', null, mag);
         com.addCommandeUnit(comU1);
 
+        Commande com2 = new Commande(0, null, false, 'a', null, mag);
+        com2.addCommandeUnit(comU2);
+
+
         com.commander();
+        // com2.commander(); -> L'exception fonctionne
 
         int res = lesLivre.get(l1);
 
-        assertEquals(res, 2);
+        assertEquals(2, res);
+
+        com.renvoyer();
+        
         Set<Livre> set = lesLivre.keySet();
-        System.out.println(set);
-
-
-
+        System.out.println(mag);
     }
 
 }

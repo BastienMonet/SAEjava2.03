@@ -41,7 +41,7 @@ public class Magasin {
         return livres.containsKey(livre);
     }
 
-    public void retireLivre(Livre livre, int qte) throws IllegalArgumentException {
+    public void retireLivre(Livre livre, int qte) throws IllegalArgumentException, Exception {
         if (livre == null) {
             throw new IllegalArgumentException("Le livre ne peut pas être nul.");
         }
@@ -49,8 +49,10 @@ public class Magasin {
             int quantite = livres.get(livre);
             if (quantite - qte > 0) {
                 livres.put(livre, quantite - qte);
-            } else {
+            } else if (quantite - qte == 0){
                 livres.remove(livre);
+            } else {
+                throw new Exception("il n'y a pas assez de livre dans le magsin");
             }
         }
         else {

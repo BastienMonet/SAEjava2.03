@@ -49,7 +49,7 @@ public class Client extends Utilisateur {
         }
     }
 
-    public void retireCommande(Commande com){
+    public void retireCommande(Commande com) throws IllegalArgumentException, Exception{
         this.monnaie += com.prixTotCommande();
         commandes.remove(com);
         com.renvoyer();

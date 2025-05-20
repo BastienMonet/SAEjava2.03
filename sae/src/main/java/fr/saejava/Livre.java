@@ -67,11 +67,15 @@ public class Livre {
         this.nbreAchats = nbreAchats;
     }
 
-    public void incrementeAchat(int qte){
-        if (nbreAchats + qte > 0)
+    public void incrementeAchat(int qte) throws Exception{
+        /*
+         * permet d'incrementer ou de decrementer le compteur d'achat nbre d'achat
+         * @param : int la quantite correspondant au nombre de livre acheter
+         */
+        if (nbreAchats + qte >= 0)
             nbreAchats += qte;
         else 
-            nbreAchats = 0;
+            throw new Exception("impossible, il ne peut pas y avoir un nombre négatif d'achat");
     }
 
 
