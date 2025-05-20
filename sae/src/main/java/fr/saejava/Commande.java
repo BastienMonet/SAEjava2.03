@@ -83,4 +83,9 @@ public class Commande {
     public void ajouterCommandeUnit(CommandeUnit commandeUnit) {
         this.listeCommandes.add(commandeUnit);
     }
+
+    @Override
+    public String toString() {
+        return "la commande : " + numCom + "contient : " + listeCommandes;
+    }
 }

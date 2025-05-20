@@ -59,4 +59,14 @@ public class Magasin {
             throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "le magasin" + nomMag + "possède" + livres.toString();
+    }
+
+
 }
+
+
+

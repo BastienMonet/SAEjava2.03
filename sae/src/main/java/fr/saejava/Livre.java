@@ -55,4 +55,9 @@ public class Livre {
     public List<Editeur> getEditeurs() {
         return editeurs;
     }
+
+    @Override
+    public String toString() {
+        return titre;
+    }
 }
