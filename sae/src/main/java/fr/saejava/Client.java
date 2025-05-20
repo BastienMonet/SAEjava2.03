@@ -43,6 +43,7 @@ public class Client extends Utilisateur {
         if (monnaie - com.prixTotCommande() > 0){
             commandes.add(com);
             monnaie -= com.prixTotCommande();
+            com.commander();
         } else {
             throw new Exception("prix de la commande trop élever");
         }
@@ -51,6 +52,7 @@ public class Client extends Utilisateur {
     public void retireCommande(Commande com){
         this.monnaie += com.prixTotCommande();
         commandes.remove(com);
+        com.renvoyer();
     }
 
 
