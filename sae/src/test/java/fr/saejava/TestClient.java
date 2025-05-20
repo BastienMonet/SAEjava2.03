@@ -8,8 +8,13 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-public class TestUtilisateur {
+public class TestClient {
     
     @Test
-    public void test(){}
+    public void test(){
+
+        Client u = new Client(0, null, null, null, null, null, 0, null);
+        
+
+    }
 }

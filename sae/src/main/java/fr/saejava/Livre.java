@@ -9,6 +9,7 @@ public class Livre {
     private int nbPages;
     private String datePubli;
     private int prix;
+    private int nbreAchats = 0;
     private List<Auteur> auteurs;
     private List<Classification> classification;
     private List<Editeur> editeurs;
@@ -54,6 +55,20 @@ public class Livre {
 
     public List<Editeur> getEditeurs() {
         return editeurs;
+    }
+
+
+    public int getNbreAchats() {
+        return nbreAchats;
+    }
+
+        
+    public void setNbreAchats(int nbreAchats) {
+        this.nbreAchats = nbreAchats;
+    }
+
+    public void incrementeAchat(int qte){
+        nbreAchats += qte;
     }
 
     @Override

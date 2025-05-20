@@ -84,6 +84,24 @@ public class Commande {
         this.listeCommandes.add(commandeUnit);
     }
 
+    public void commander(){
+        for (CommandeUnit comUnit : listeCommandes){
+            int qte = comUnit.getQte();
+            comUnit.getLivre().incrementeAchat(qte);
+        }
+    }
+
+    public void renvoyer(){
+        for (CommandeUnit comUnit : listeCommandes){
+            int qte = comUnit.getQte();
+            if (comUnit.getLivre().getNbreAchats() - qte > 0)
+                comUnit.getLivre().incrementeAchat(-qte);
+            else {
+                comUnit.getLivre().setNbreAchats(0);
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "la commande : " + numCom + "contient : " + listeCommandes;

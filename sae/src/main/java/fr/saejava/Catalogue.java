@@ -12,6 +12,11 @@ public class Catalogue {
         this.magasin = magasin;
     }
 
+
+    public void ajouteUtilisateur(Utilisateur user){
+        utilisateur.add(user);
+    }
+
     public List<Utilisateur> getUtilisateur() {
         return utilisateur;
     }
