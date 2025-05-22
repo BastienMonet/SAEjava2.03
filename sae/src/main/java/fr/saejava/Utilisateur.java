@@ -24,7 +24,7 @@ public class Utilisateur {
         this.pwd = pwd;
         this.catalogue = cat;
         commandes = new HashSet<>();
-        laConnexion = laConnexion;
+        this.laConnexion = laConnexion;
     }
 
 
@@ -66,6 +66,9 @@ public class Utilisateur {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+
+    
 
 
 

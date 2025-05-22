@@ -32,15 +32,22 @@ CREATE TABLE CLASSIFICATION (
   nomclass varchar(50)
 );
 
-CREATE TABLE CLIENT (
-  PRIMARY KEY (idcli),
-  idcli      int NOT NULL,
+CREATE TABLE UTILISATEUR (
+  PRIMARY KEY (iduse),
+  iduse      int NOT NULL,
   nomcli     varchar(50),
   prenomcli  varchar(30),
+  pwd        varchar(30)
+);
+
+CREATE TABLE CLIENT(
+  primary key (iduse),
+  iduse      int NOT NULL,
   adressecli varchar(100),
   codepostal varchar(5),
   villecli   varchar(100)
 );
+
 
 CREATE TABLE COMMANDE (
   PRIMARY KEY (numcom),
@@ -125,3 +132,5 @@ ALTER TABLE POSSEDER ADD FOREIGN KEY (idmag) REFERENCES MAGASIN (idmag);
 
 ALTER TABLE THEMES ADD FOREIGN KEY (iddewey) REFERENCES CLASSIFICATION (iddewey);
 ALTER TABLE THEMES ADD FOREIGN KEY (isbn) REFERENCES LIVRE (isbn);
+
+ALTER TABLE CLIENT ADD FOREIGN KEY (iduse) REFERENCES UTILISATEUR(iduse);
