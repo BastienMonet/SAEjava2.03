@@ -91,6 +91,7 @@ public class Livre {
         Livre tmp = (Livre)obj;
         return tmp.isbn == this.isbn;
     }
+    
 
     @Override
     public int hashCode(){
