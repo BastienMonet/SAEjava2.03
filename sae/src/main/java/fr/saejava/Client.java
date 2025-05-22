@@ -1,5 +1,6 @@
 package fr.saejava;
 
+import java.sql.*;
 
 public class Client extends Utilisateur {
     
@@ -8,13 +9,14 @@ public class Client extends Utilisateur {
     private String villeUtil;
     private double monnaie;
 
-
     public Client(int idUtil, String nomUtil, String prenomUtil, String pwd,Catalogue cat ,String adresseUtil, int codePostal,
-            String villeUtil) {
-        super(idUtil, nomUtil, prenomUtil, pwd, cat);
+            String villeUtil, ConnexionMySQL laConnexion) {
+        super(idUtil, nomUtil, prenomUtil, pwd, cat, laConnexion);
         this.adresseUtil = adresseUtil;
         this.codePostal = codePostal;
         this.villeUtil = villeUtil;
+
+        this.laConnexion = laConnexion;
     }
     public String getAdresseUtil() {
         return adresseUtil;
@@ -54,6 +56,5 @@ public class Client extends Utilisateur {
         commandes.remove(com);
         com.renvoyer();
     }
-
 
 }
