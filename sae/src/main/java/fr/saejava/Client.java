@@ -56,5 +56,23 @@ public class Client extends Utilisateur {
         commandes.remove(com);
         com.renvoyer();
     }
+    @Override
+    public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
+        String sql = "SELECT * \n" + //
+                        "FROM UTILISATEUR\n" + //
+                        "JOIN CLIENT ON UTILISATEUR.iduse = CLIENT.iduse where nomcli = ? and prenomcli = ? and pwd = ?";
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement(sql);
+        ps.setString(1, nom);
+        ps.setString(2, prenom);
+        ps.setString(3, pwd);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
