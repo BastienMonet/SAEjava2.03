@@ -9,11 +9,11 @@ public class Magasin {
     private String villeMag;
     private Map<Livre,Integer> livres;
 
-    public Magasin(int idMag, String nomMag, String villeMag) {
+    public Magasin(int idMag, String nomMag, String villeMag, Map<Livre, Integer> livres) {
         this.idMag = idMag;
         this.nomMag = nomMag;
         this.villeMag = villeMag;
-        this.livres = new HashMap<>();
+        this.livres = livres;
     }
 
     public int getIdMag() {
@@ -38,25 +38,35 @@ public class Magasin {
     }
 
     public Boolean isDispo(Livre livre) {
-        return livres.containsKey(livre) && livres.get(livre) > 0;
+        return livres.containsKey(livre);
     }
 
-    public void retireLivre(Livre livre) throws IllegalArgumentException {
+    public void retireLivre(Livre livre, int qte) throws IllegalArgumentException, Exception {
         if (livre == null) {
             throw new IllegalArgumentException("Le livre ne peut pas être nul.");
         }
         if (livres.containsKey(livre)) {
             int quantite = livres.get(livre);
-            if (quantite > 0) {
-                livres.put(livre, quantite - 1);
-            } else if (quantite == 1) {
+            if (quantite - qte > 0) {
+                livres.put(livre, quantite - qte);
+            } else if (quantite - qte == 0){
                 livres.remove(livre);
             } else {
-                throw new IllegalArgumentException("Aucun exemplaire de ce livre n'est disponible.");
+                throw new Exception("il n'y a pas assez de livre dans le magsin");
             }
         }
         else {
             throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "le magasin" + nomMag + "possède" + livres.toString();
+    }
+
+
 }
+
+
+

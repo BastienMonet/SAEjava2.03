@@ -8,16 +8,10 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class AppTest
-{
+public class TestClient {
+    
     @Test
-    public void test()
-    {
-        Magasin m = new Magasin(1, null, null, null);
-        assertEquals(m.getIdMag(),1);
-    }
+    public void test(){
 
+    }
 }

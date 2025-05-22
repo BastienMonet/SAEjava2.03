@@ -9,6 +9,7 @@ public class CommandeUnit {
 
     public CommandeUnit(Livre livre, int qte) {
         this.qte = qte;
+        this.livre = livre;
     }
 
     public int getNumliq() {
@@ -26,11 +27,16 @@ public class CommandeUnit {
     public void setQte(int qte) {
         this.qte = qte;
     }
-        public Livre getLivre() {
+    public Livre getLivre() {
         return livre;
     }
 
     public int getPrixTotal() {
         return livre.getPrix() * qte;
+    }
+
+    @Override
+    public String toString() {
+        return qte + " " + livre;
     }
 }

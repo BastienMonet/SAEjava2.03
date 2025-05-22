@@ -1,0 +1,1 @@
+select idcli, nommag,nomcli, prenomcli, adressecli, codepostal, villecli ,numcom, datecom, isbn, titre, prixvente, qte, prixvente * qte as som from  CLIENT natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join MAGASIN where  month(datecom) = ? and Year(datecom) = ? order by nommag, idcli 
