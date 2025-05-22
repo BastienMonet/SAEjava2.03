@@ -13,8 +13,5 @@ public class TestClient {
     @Test
     public void test(){
 
-        Client u = new Client(0, null, null, null, null, null, 0, null);
-        
-
     }
 }

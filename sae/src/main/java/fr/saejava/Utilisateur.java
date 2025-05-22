@@ -3,6 +3,8 @@ package fr.saejava;
 import java.util.HashSet;
 import java.util.Set;
 
+import java.sql.*;
+
 public class Utilisateur {
     protected int idUtil;
     protected String nomUtil;
@@ -11,14 +13,18 @@ public class Utilisateur {
 
     protected Catalogue catalogue;
     protected Set<Commande> commandes;
+
+    protected ConnexionMySQL laConnexion;
+    protected Statement st;
     
     
-    public Utilisateur(int idUtil, String nomUtil, String prenomUtil, String pwd, Catalogue cat) {
+    public Utilisateur(int idUtil, String nomUtil, String prenomUtil, String pwd, Catalogue cat, ConnexionMySQL laConnexion) {
         this.nomUtil = nomUtil;
         this.prenomUtil = prenomUtil;
         this.pwd = pwd;
         this.catalogue = cat;
         commandes = new HashSet<>();
+        laConnexion = laConnexion;
     }
 
 

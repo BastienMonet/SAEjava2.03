@@ -4,6 +4,10 @@ java -cp bin:lib/hamcrest-2.2.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCor
 
 
 
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '4dameorc' WITH GRANT OPTION;
+
+
+# Maven
 mvn compile 
 mvn exec:java -Dexec.mainClass="fr.saejava.Executable"
 
