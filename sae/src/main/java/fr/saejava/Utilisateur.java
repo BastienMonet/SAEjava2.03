@@ -5,7 +5,7 @@ import java.util.Set;
 
 import java.sql.*;
 
-public class Utilisateur {
+public abstract class Utilisateur {
     protected int idUtil;
     protected String nomUtil;
     protected String prenomUtil;
@@ -67,8 +67,7 @@ public class Utilisateur {
         this.pwd = pwd;
     }
 
-
-    
+    public abstract boolean seConnecter(String nom, String prenom, String pwd) throws SQLException;
 
 
 

@@ -20,7 +20,10 @@ public class Executable {
 
         Client c1 = new Client(1, "rober", "lauran", "123446", null, null, null, null, co);
         // a.retireLivreBD(1);
-        a.ajouteClientBD(c1);
+        // a.ajouteClientBD(c1);
+        boolean b = c1.seConnecter("rober", "lauran", "123446");
+
+        System.out.println(b);
         
         
         System.out.println("ça marche");
