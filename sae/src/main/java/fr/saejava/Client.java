@@ -75,4 +75,36 @@ public class Client extends Utilisateur {
         }
     }
 
+
+
+    public void ajouteCommandeBD(Commande com) throws SQLException {
+        /*
+         * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
+         */
+        PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
+        ps.setInt(1, com.getNumCom());
+        ps.setString(2, com.getDateCom());
+        ps.setString(3, com.getDateArrivee());
+        ps.setString(4, String.valueOf(com.getLivraison()));
+        ps.setInt(5, this.getIdUtil());
+        ps.setInt(6, com.getMagasin().getIdMag());
+
+        for (CommandeUnit comU : com.getListeCommandes()){
+            ajouteCommandeUnitBD(com.getNumCom(),comU);
+        }
+        ps.executeUpdate();
+    }
+
+    public void ajouteCommandeUnitBD(int numCommande,CommandeUnit comU) throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("insert into DETAILCOMMANDE values (?, ?, ?, ?, ?)");
+        ps.setInt(1, numCommande);
+        ps.setInt(2, comU.getNumliq());
+        ps.setInt(3, comU.getQte());
+        ps.setInt(4, comU.getPrixTotal());
+        ps.setInt(5, comU.getLivre().getIsbn());
+
+        ps.executeUpdate();
+
+    }
+
 }
