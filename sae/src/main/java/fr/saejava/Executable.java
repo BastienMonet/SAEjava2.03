@@ -17,7 +17,10 @@ public class Executable {
         Livre l1 = new Livre(0, null, 0, 0, 0);
         Livre l2 = new Livre(1, null, 0, 0, 0);
         Livre l3 = new Livre(2, null, 0, 0, 0);
-        a.ajouteLivreBD(l1);
+
+        Client c1 = new Client(1, "rober", "lauran", "123446", null, null, null, null, co);
+        // a.retireLivreBD(1);
+        a.ajouteClientBD(c1);
         
         
         System.out.println("ça marche");

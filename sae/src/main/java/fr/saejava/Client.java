@@ -5,11 +5,11 @@ import java.sql.*;
 public class Client extends Utilisateur {
     
     private String adresseUtil;
-    private int codePostal;
+    private String codePostal;
     private String villeUtil;
     private double monnaie;
 
-    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd,Catalogue cat ,String adresseUtil, int codePostal,
+    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd,Catalogue cat ,String adresseUtil, String codePostal,
             String villeUtil, ConnexionMySQL laConnexion) {
         super(idUtil, nomUtil, prenomUtil, pwd, cat, laConnexion);
         this.adresseUtil = adresseUtil;
@@ -21,7 +21,7 @@ public class Client extends Utilisateur {
     public String getAdresseUtil() {
         return adresseUtil;
     }
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
     public String getVilleUtil() {
@@ -30,7 +30,7 @@ public class Client extends Utilisateur {
     public void setAdresseUtil(String adresseUtil) {
         this.adresseUtil = adresseUtil;
     }
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
     public void setVilleUtil(String villeUtil) {
