@@ -74,13 +74,32 @@ public class Adiministrateur extends Utilisateur {
         
     }
 
+    public int getMaxIdMag() throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(idMag) AS maxId FROM MAGASIN");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("maxId") + 1;
+        } else {
+            return 1;
+        }
+    }
+
+    public void ajouteMagasinBD(Magasin m) throws SQLException {
+        int newIdMag = getMaxIdMag();
+        PreparedStatement ps = laConnexion.prepareStatement("INSERT INTO MAGASIN VALUES (?, ?, ?)");
+        ps.setInt(1, getMaxIdMag());
+        ps.setString(2, m.getNomMag());
+        ps.setString(3, m.getVilleMag());
+        try {
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'seConnecter'");
     }
-
-
-
 }
