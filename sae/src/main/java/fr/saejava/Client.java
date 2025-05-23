@@ -126,11 +126,12 @@ public class Client extends Utilisateur {
         ps.setString(4, String.valueOf(com.getLivraison()));
         ps.setInt(5, this.getIdUtil());
         ps.setInt(6, com.getMagasin().getIdMag());
+        ps.executeUpdate();
 
         for (CommandeUnit comU : com.getListeCommandes()){
             ajouteCommandeUnitBD(max,comU);
         }
-        ps.executeUpdate();
+        
     }
 
     public void ajouteCommandeUnitBD(int numCommande,CommandeUnit comU) throws SQLException {
