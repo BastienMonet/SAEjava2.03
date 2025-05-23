@@ -1,6 +1,8 @@
 package fr.saejava;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client extends Utilisateur {
     
@@ -67,8 +69,7 @@ public class Client extends Utilisateur {
     }
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
-        // rajouter monnaie après
-        String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli \n" + //
+        String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
                         "FROM UTILISATEUR\n" + //
                         "JOIN CLIENT ON UTILISATEUR.iduse = CLIENT.iduse where nomcli = ? and prenomcli = ? and pwd = ?";
         st = laConnexion.createStatement();
@@ -86,21 +87,40 @@ public class Client extends Utilisateur {
             this.adresseUtil = rs.getString(5);
             this.codePostal = rs.getString(6);
             this.villeUtil = rs.getString(7);
-            // this.monnaie = rs.getDouble(8);
+            this.monnaie = rs.getDouble(8);
             return true;
         } else {
             return false;
         }
     }
 
+    public int getMaxnumCom() throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numcom) AS maxcom FROM COMMANDE");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("maxcom") + 1;
+        } else {
+            return 1;
+        }
+    }
 
+    public int getMaxnumComU() throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numlig) AS maxlig FROM DETAILCOMMANDE");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("maxlig") + 1;
+        } else {
+            return 1;
+        }
+    }
 
     public void ajouteCommandeBD(Commande com) throws SQLException {
         /*
          * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
          */
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
-        ps.setInt(1, com.getNumCom());
+        int max = getMaxnumCom();
+        ps.setInt(1, max);
         ps.setString(2, com.getDateCom());
         ps.setString(3, com.getDateArrivee());
         ps.setString(4, String.valueOf(com.getLivraison()));
@@ -108,7 +128,7 @@ public class Client extends Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
 
         for (CommandeUnit comU : com.getListeCommandes()){
-            ajouteCommandeUnitBD(com.getNumCom(),comU);
+            ajouteCommandeUnitBD(max,comU);
         }
         ps.executeUpdate();
     }
@@ -116,12 +136,22 @@ public class Client extends Utilisateur {
     public void ajouteCommandeUnitBD(int numCommande,CommandeUnit comU) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("insert into DETAILCOMMANDE values (?, ?, ?, ?, ?)");
         ps.setInt(1, numCommande);
-        ps.setInt(2, comU.getNumliq());
+        ps.setInt(2, getMaxnumComU());
         ps.setInt(3, comU.getQte());
         ps.setInt(4, comU.getPrixTotal());
         ps.setInt(5, comU.getLivre().getIsbn());
 
         ps.executeUpdate();
+
+    }
+
+    public List<Commande> voirSesCommande() throws SQLException{
+        List<Commande> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        ResultSet rs = st.executeQuery("select ");
+        return res;
+
 
     }
     
