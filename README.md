@@ -1,6 +1,6 @@
 # SAEjava2.03
 
 Monet Bastien\
-Franchet Sileye\
+**Franchet Sileye**\
 Yang Irvine\
 Laurin Alexandre
