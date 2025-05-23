@@ -112,6 +112,8 @@ public class Adiministrateur extends Utilisateur {
         }
     }
 
+    
+
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) {
         // TODO Auto-generated method stub
