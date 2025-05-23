@@ -67,7 +67,8 @@ public class Client extends Utilisateur {
     }
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
-        String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
+        // rajouter monnaie après
+        String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli \n" + //
                         "FROM UTILISATEUR\n" + //
                         "JOIN CLIENT ON UTILISATEUR.iduse = CLIENT.iduse where nomcli = ? and prenomcli = ? and pwd = ?";
         st = laConnexion.createStatement();
@@ -85,7 +86,7 @@ public class Client extends Utilisateur {
             this.adresseUtil = rs.getString(5);
             this.codePostal = rs.getString(6);
             this.villeUtil = rs.getString(7);
-            this.monnaie = rs.getDouble(8);
+            // this.monnaie = rs.getDouble(8);
             return true;
         } else {
             return false;
