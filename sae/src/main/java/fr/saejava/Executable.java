@@ -10,7 +10,7 @@ public class Executable {
     public static void main(String[] args) throws SQLException, ClassNotFoundException{
         ConnexionMySQL co = new ConnexionMySQL();
         // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBfranchet", "franchet", "franchet");
+        co.connecter(null, "DBmonet", "root", "4dameorc");
 
 
         Adiministrateur a = new Adiministrateur(0, null, null, null, null, co);
@@ -21,13 +21,13 @@ public class Executable {
 
         Client c1 = new Client(1, "rober", "lauran", "123446", null, null, null, null, co);
         // a.retireLivreBD(1);
-        // a.ajouteClientBD(c1);
+        a.ajouteClientBD(c1);
 
-        Magasin baxMagasin = new Magasin(0, "BAX livres", "BAXville", new HashMap<>());
+        // Magasin baxMagasin = new Magasin(0, "BAX livres", "BAXville", new HashMap<>());
 
         // boolean b = c1.seConnecter("rober", "lauran", "123446");
 
-        a.ajouteMagasinBD(baxMagasin);
+        // a.ajouteMagasinBD(baxMagasin);
         
         
         System.out.println("ça marche");
