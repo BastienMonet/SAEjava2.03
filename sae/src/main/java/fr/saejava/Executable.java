@@ -26,14 +26,16 @@ public class Executable {
         // a.ajouteLivreBD(l1);
 
         // c1.seConnecter("a", "b", "c");
-        Commande com = new Commande(0, null, false, 'C', null, baxMagasin);
+        Commande com = new Commande(0, "14", 'O', 'C', baxMagasin);
         CommandeUnit comU = new CommandeUnit(l1, 2);
         
-        com.addCommandeUnit(comU);
+        // com.addCommandeUnit(comU);
 
         c1.seConnecter("a", "b", "c");
 
-        c1.ajouteCommandeBD(com);
+        // c1.ajouteCommandeBD(com);
+
+        System.out.println(c1.voirSesCommande());
 
 
         System.out.println(c1);

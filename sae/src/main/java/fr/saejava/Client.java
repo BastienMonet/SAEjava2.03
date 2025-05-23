@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.m;
+
 public class Client extends Utilisateur {
     
     private String adresseUtil;
@@ -122,7 +124,7 @@ public class Client extends Utilisateur {
         int max = getMaxnumCom();
         ps.setInt(1, max);
         ps.setString(2, com.getDateCom());
-        ps.setString(3, com.getDateArrivee());
+        ps.setString(3, String.valueOf(com.enligne()));
         ps.setString(4, String.valueOf(com.getLivraison()));
         ps.setInt(5, this.getIdUtil());
         ps.setInt(6, com.getMagasin().getIdMag());
@@ -141,16 +143,31 @@ public class Client extends Utilisateur {
         ps.setInt(3, comU.getQte());
         ps.setInt(4, comU.getPrixTotal());
         ps.setInt(5, comU.getLivre().getIsbn());
-
         ps.executeUpdate();
 
     }
 
     public List<Commande> voirSesCommande() throws SQLException{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
         List<Commande> res = new ArrayList<>();
 
         st = laConnexion.createStatement();
-        ResultSet rs = st.executeQuery("select ");
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT numcom, datecom, enligne, livraison, nommag \n" + //
+                        "FROM UTILISATEUR AS u \n" + //
+                        "JOIN COMMANDE AS c \n" + //
+                        "ON u.iduse = c.iduse \n" + //
+                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
+        ps.setInt(1, this.idUtil);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Commande c = new Commande(rs.getInt(1), rs.getString(2), rs.getString(3).charAt(0), rs.getString(4).charAt(0), new Magasin(0, rs.getString(5), null, null));
+            res.add(c);
+
+        }
         return res;
 
 

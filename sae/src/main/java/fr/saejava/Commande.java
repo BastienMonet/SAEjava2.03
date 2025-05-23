@@ -6,18 +6,16 @@ import java.util.ArrayList;
 public class Commande {
     private int numCom;
     private String dateCom;
-    private boolean enligne;
-    private char livraison;
-    private String dateArrivee;
+    private Character enligne;
+    private Character livraison;
     private List<CommandeUnit> listeCommandes;
     private Magasin mag; 
 
-    public Commande(int numCom, String dateCom, boolean enligne, char livraison, String dateArrivee, Magasin mag) {
+    public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag) {
         this.numCom = numCom;
         this.dateCom = dateCom;
         this.enligne = enligne;
         this.livraison = livraison;
-        this.dateArrivee = dateArrivee;
         this.listeCommandes = new ArrayList<>();
         this.mag = mag;
     }
@@ -30,16 +28,12 @@ public class Commande {
         return dateCom;
     }
 
-    public boolean enligne() {
+    public Character enligne() {
         return enligne;
     }
 
-    public char getLivraison() {
+    public Character getLivraison() {
         return livraison;
-    }
-
-    public String getDateArrivee() {
-        return dateArrivee;
     }
 
     public List<CommandeUnit> getListeCommandes() {
@@ -59,16 +53,12 @@ public class Commande {
         this.dateCom = dateCom;
     }
 
-    public void setEnligne(boolean enligne) {
+    public void setEnligne(char enligne) {
         this.enligne = enligne;
     }
 
     public void setLivraison(char livraison) {
         this.livraison = livraison;
-    }
-
-    public void setDateArrivee(String dateArrivee) {
-        this.dateArrivee = dateArrivee;
     }
 
     public void addCommandeUnit(CommandeUnit commandeUnit) {
@@ -118,6 +108,6 @@ public class Commande {
 
     @Override
     public String toString() {
-        return "la commande : " + numCom + "contient : " + listeCommandes;
+        return "la commande " + numCom + " de " + mag.getNomMag()  + " : " + " contient : " + listeCommandes;
     }
 }

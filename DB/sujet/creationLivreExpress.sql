@@ -62,7 +62,7 @@ CREATE TABLE VENDEUR(
 CREATE TABLE COMMANDE (
   PRIMARY KEY (numcom),
   numcom  int NOT NULL,
-  datecom date,
+  datecom VARCHAR(42),
   enligne char(1),
   livraison char(1),
   iduse   int NOT NULL,
