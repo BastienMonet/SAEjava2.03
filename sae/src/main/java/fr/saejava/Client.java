@@ -7,17 +7,23 @@ public class Client extends Utilisateur {
     private String adresseUtil;
     private String codePostal;
     private String villeUtil;
-    private double monnaie;
+    private Double monnaie;
 
-    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd,Catalogue cat ,String adresseUtil, String codePostal,
-            String villeUtil, ConnexionMySQL laConnexion) {
-        super(idUtil, nomUtil, prenomUtil, pwd, cat, laConnexion);
+
+    public Client(ConnexionMySQL laConnexion) {
+        super(laConnexion);
+    }
+
+    public Client(String nomUtil, String prenomUtil, String pwd, String adresseUtil, String codePostal,
+            String villeUtil, Double monnaie) {
+        super(nomUtil, prenomUtil, pwd);
         this.adresseUtil = adresseUtil;
         this.codePostal = codePostal;
         this.villeUtil = villeUtil;
-
-        this.laConnexion = laConnexion;
+        this.monnaie = monnaie;
     }
+
+
     public String getAdresseUtil() {
         return adresseUtil;
     }
@@ -26,6 +32,9 @@ public class Client extends Utilisateur {
     }
     public String getVilleUtil() {
         return villeUtil;
+    }
+    public double getMonnaie() {
+        return monnaie;
     }
     public void setAdresseUtil(String adresseUtil) {
         this.adresseUtil = adresseUtil;
@@ -58,7 +67,7 @@ public class Client extends Utilisateur {
     }
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
-        String sql = "SELECT * \n" + //
+        String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
                         "FROM UTILISATEUR\n" + //
                         "JOIN CLIENT ON UTILISATEUR.iduse = CLIENT.iduse where nomcli = ? and prenomcli = ? and pwd = ?";
         st = laConnexion.createStatement();
@@ -69,6 +78,14 @@ public class Client extends Utilisateur {
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()){
+            this.idUtil = rs.getInt(1);
+            this.nomUtil = rs.getString(2);
+            this.prenomUtil = rs.getString(3);
+            this.pwd = rs.getString(4);
+            this.adresseUtil = rs.getString(5);
+            this.codePostal = rs.getString(6);
+            this.villeUtil = rs.getString(7);
+            this.monnaie = rs.getDouble(8);
             return true;
         } else {
             return false;
@@ -105,6 +122,16 @@ public class Client extends Utilisateur {
 
         ps.executeUpdate();
 
+    }
+    
+
+    @Override
+    public String toString() {
+        if (idUtil == 0){
+            return "ce client n'a pas encore d'identité";
+        } else {
+            return super.toString() + " | " + adresseUtil + " | " + codePostal + " | " + villeUtil + " | " + monnaie;
+        }
     }
 
 }
