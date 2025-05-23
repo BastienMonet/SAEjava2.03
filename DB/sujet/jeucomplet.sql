@@ -1,3 +1,5 @@
+-- n'est pluys viable
+
 -- les magasins
 insert into MAGASIN(idmag, nommag, villemag) values
        (1,'La librairie parisienne','Paris'),
@@ -113,7 +115,7 @@ insert into CLASSIFICATION(iddewey, nomclass) values
 
 
 -- les clients
-insert into CLIENT (idcli, nomcli, prenomcli, adressecli, codepostal, villecli) values
+insert into UTILISATEUR (iduse, nomcli, prenomcli, adressecli, codepostal, villecli) values
        (1, 'Rodriguez', 'Fatima', '188 chemin de la Forêt', '45000', 'Orléans'),
        (2, 'Garcia', 'Hugo', '167 avenue de la Forêt', '06000', 'Nice'),
        (3, 'Martin', 'Julie', '133 boulevard de l''Université', '45000', 'Orléans'),
@@ -13049,7 +13051,7 @@ insert into POSSEDER(idmag, isbn, qte) values
 	(1, '9782081271654', 9),
 	(7, '9782070570669', 6);
 
-insert into COMMANDE(numcom, datecom, enligne, livraison, idcli, idmag) values
+insert into COMMANDE(numcom, datecom, enligne, livraison, iduse, idmag) values
 	(1,str_to_date('1/1/2020','%d/%m/%Y'),'N','M',356,5),
 	(2,str_to_date('1/1/2020','%d/%m/%Y'),'O','C',130,6),
 	(3,str_to_date('2/1/2020','%d/%m/%Y'),'O','C',36,1),
