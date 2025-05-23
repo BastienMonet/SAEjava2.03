@@ -6,7 +6,7 @@ import java.util.Set;
 import java.sql.*;
 
 public abstract class Utilisateur {
-    protected int idUtil;
+    protected int idUtil = 0;
     protected String nomUtil;
     protected String prenomUtil;
     protected String pwd;
@@ -18,14 +18,21 @@ public abstract class Utilisateur {
     protected Statement st;
     
     
-    public Utilisateur(int idUtil, String nomUtil, String prenomUtil, String pwd, Catalogue cat, ConnexionMySQL laConnexion) {
+    public Utilisateur(ConnexionMySQL laConnexion) {
+        // this.nomUtil = nomUtil;
+        // this.prenomUtil = prenomUtil;
+        // this.pwd = pwd;
+        // this.catalogue = cat;
+        // commandes = new HashSet<>();
+        this.laConnexion = laConnexion;
+    }
+
+    public Utilisateur(String nomUtil, String prenomUtil, String pwd) {
         this.nomUtil = nomUtil;
         this.prenomUtil = prenomUtil;
         this.pwd = pwd;
-        this.catalogue = cat;
-        commandes = new HashSet<>();
-        this.laConnexion = laConnexion;
     }
+
 
 
     public int getIdUtil() {
@@ -69,6 +76,10 @@ public abstract class Utilisateur {
 
     public abstract boolean seConnecter(String nom, String prenom, String pwd) throws SQLException;
 
+    @Override
+    public String toString() {
+        return idUtil + " | " + nomUtil + " | " + prenomUtil + " | " + pwd;
+    }
 
 
 }

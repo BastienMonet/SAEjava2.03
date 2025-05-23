@@ -45,7 +45,8 @@ CREATE TABLE CLIENT(
   iduse      int NOT NULL,
   adressecli varchar(100),
   codepostal varchar(5),
-  villecli   varchar(100)
+  villecli   varchar(100),
+  monnaie decimal(6,2)
 );
 
 CREATE TABLE ADMINISTRATEUR(
