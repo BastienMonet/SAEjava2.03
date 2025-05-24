@@ -141,13 +141,40 @@ public class Client extends Utilisateur {
         ps.setInt(1, numCommande);
         ps.setInt(2, getMaxnumComU());
         ps.setInt(3, comU.getQte());
-        ps.setInt(4, comU.getPrixTotal());
+        ps.setDouble(4, comU.getPrixTotal());
         ps.setInt(5, comU.getLivre().getIsbn());
         ps.executeUpdate();
 
     }
 
-    public List<Commande> voirSesCommande() throws SQLException{
+    public List<CommandeUnit> voirSesDetailCommande(Commande com) throws SQLException, Exception{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
+        List<CommandeUnit> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT *" +
+                                                    "FROM COMMANDE "+
+                                                    "JOIN DETAILCOMMANDE ON COMMANDE.numcom = DETAILCOMMANDE.numcom " +
+                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn");
+        ps.setInt(1, com.getNumCom());
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix")), rs.getInt("qte"));
+            
+            res.add(cU);
+        }
+        return res;
+    }
+
+
+
+
+
+    public List<Commande> voirSesCommande() throws SQLException, Exception{
 
         /*
          * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
@@ -156,18 +183,26 @@ public class Client extends Utilisateur {
         List<Commande> res = new ArrayList<>();
 
         st = laConnexion.createStatement();
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT numcom, datecom, enligne, livraison, nommag \n" + //
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
                         "FROM UTILISATEUR AS u \n" + //
                         "JOIN COMMANDE AS c \n" + //
                         "ON u.iduse = c.iduse \n" + //
                         "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
         ps.setInt(1, this.idUtil);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            Commande c = new Commande(rs.getInt(1), rs.getString(2), rs.getString(3).charAt(0), rs.getString(4).charAt(0), new Magasin(0, rs.getString(5), null, null));
-            res.add(c);
+        if (rs.next()){
+            while(rs.next()){
+                Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), new Magasin(0, rs.getString("nommag"), rs.getString("villemag"), null));
+                c.setListeCommandeUnit(voirSesDetailCommande(c));
+                res.add(c);
+            }
 
+
+        } else {
+            throw new Exception("vous n'avez acctuelement aucune commande");
         }
+
+        
         return res;
 
 
