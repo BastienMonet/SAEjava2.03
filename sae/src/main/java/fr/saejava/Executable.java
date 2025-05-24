@@ -39,7 +39,7 @@ public class Executable {
 
         // a.retireLivreDansMagasin(baxMagasin, l3, 5);
 
-        System.out.println(c1.voirSesCommande());
+        System.out.println(c1.onVousRecommande());
 
 
         System.out.println(c1);

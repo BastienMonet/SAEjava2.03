@@ -171,9 +171,6 @@ public class Client extends Utilisateur {
     }
 
 
-
-
-
     public List<Commande> voirSesCommande() throws SQLException, Exception{
 
         /*
@@ -201,11 +198,23 @@ public class Client extends Utilisateur {
         } else {
             throw new Exception("vous n'avez acctuelement aucune commande");
         }
-
-        
         return res;
+    }
 
+    public List<Livre> onVousRecommande() throws SQLException{
+        List<Livre> res = new ArrayList<>();
 
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
+                                                            "FROM LIVRE " +
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn");
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            
+            res.add(l);
+        }
+        return res;
     }
     
 
