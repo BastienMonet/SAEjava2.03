@@ -130,8 +130,15 @@ public class Client extends Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
+        Adiministrateur a = new Adiministrateur(laConnexion);
+
         for (CommandeUnit comU : com.getListeCommandes()){
+            try {
+            a.retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
             ajouteCommandeUnitBD(max,comU);
+            } catch (Exception e){
+                System.err.println("vous avez demmander une commande impossible");
+            }
         }
         
     }
