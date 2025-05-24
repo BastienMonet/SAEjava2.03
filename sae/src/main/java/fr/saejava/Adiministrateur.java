@@ -32,7 +32,7 @@ public class Adiministrateur extends Utilisateur {
         ps.setString(2, l.getTitre());
         ps.setInt(3, l.getNbPages());
         ps.setInt(4, l.getDatePubli());
-        ps.setInt(5, l.getPrix());
+        ps.setDouble(5, l.getPrix());
         try{
         ps.executeUpdate();
         } catch (SQLException e){

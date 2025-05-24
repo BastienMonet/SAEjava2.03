@@ -61,6 +61,10 @@ public class Commande {
         this.livraison = livraison;
     }
 
+    public void setListeCommandeUnit(List<CommandeUnit> cU){
+        this.listeCommandes = cU;
+    }
+
     public void addCommandeUnit(CommandeUnit commandeUnit) {
         this.listeCommandes.add(commandeUnit);
     }

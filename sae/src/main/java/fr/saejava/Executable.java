@@ -31,15 +31,15 @@ public class Executable {
         
         // com.addCommandeUnit(comU);
 
-        // c1.seConnecter("a", "b", "c");
+        c1.seConnecter("a", "b", "c");
 
         // c1.ajouteCommandeBD(com);
 
         // a.ajouteLivreDansMagasin(baxMagasin, l3, 3);
 
-        a.retireLivreDansMagasin(baxMagasin, l3, 5);
+        // a.retireLivreDansMagasin(baxMagasin, l3, 5);
 
-        // System.out.println(c1.voirSesCommande());
+        System.out.println(c1.voirSesCommande());
 
 
         System.out.println(c1);

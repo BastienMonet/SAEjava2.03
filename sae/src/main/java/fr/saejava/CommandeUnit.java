@@ -31,12 +31,12 @@ public class CommandeUnit {
         return livre;
     }
 
-    public int getPrixTotal() {
+    public Double getPrixTotal() {
         return livre.getPrix() * qte;
     }
 
     @Override
     public String toString() {
-        return qte + " " + livre;
+        return qte + " " + livre + " " + getPrixTotal().toString() + "$";
     }
 }
