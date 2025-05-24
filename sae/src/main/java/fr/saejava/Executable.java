@@ -24,20 +24,18 @@ public class Executable {
         // a.ajouteClientBD(new Client("a", "b", "c", "d", "e", "f", 0.0));
         // a.ajouteMagasinBD(baxMagasin);
         // a.ajouteLivreBD(l1);
+        a.ajouteLivreDansMagasin(baxMagasin, l1, 5);
 
         // c1.seConnecter("a", "b", "c");
         Commande com = new Commande(0, "14", 'O', 'C', baxMagasin);
         CommandeUnit comU = new CommandeUnit(l1, 2);
         
-        // com.addCommandeUnit(comU);
+        com.addCommandeUnit(comU);
 
         c1.seConnecter("a", "b", "c");
 
-        // c1.ajouteCommandeBD(com);
+        c1.ajouteCommandeBD(com);
 
-        // a.ajouteLivreDansMagasin(baxMagasin, l3, 3);
-
-        // a.retireLivreDansMagasin(baxMagasin, l3, 5);
 
         System.out.println(c1.onVousRecommande());
 
