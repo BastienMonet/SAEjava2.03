@@ -229,6 +229,42 @@ public class Client extends Utilisateur {
         }
         return res;
     }
+
+    public Magasin getMagasinBDparId(int idmag) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN where idmag = ? ");
+        ps.setInt(1, idmag);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Magasin(rs.getInt(idmag), rs.getString("nommag"), rs.getString("villemag"), null);
+        } else {
+            throw new Exception("ce magasin n'existe pas");
+        }
+        
+    }
+
+
+    public Livre getLivreBDparId(int isbn) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM LIVRE where isbn = ? ");
+        ps.setInt(1, isbn);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+        } else {
+            throw new Exception("ce livre n'existe pas");
+        }
+        
+    }
+
+    public String qteParMagasin(Livre l) throws SQLException{
+        String res = "";
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER JOIN MAGASIN on POSSEDER.idmag = MAGASIN.idmag where isbn = ? ");
+        ps.setInt(1, l.getIsbn());
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            res += "choix numero " + rs.getString("idmag") + " il y a " + rs.getString("qte") + " fois l'exemplaire dans le magasin " + rs.getString("nommag") + "\n";
+        }
+        return res;
+    }
     
 
     @Override

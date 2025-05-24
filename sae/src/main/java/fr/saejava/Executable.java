@@ -84,13 +84,14 @@ public class Executable {
                         if (seco == true){
                             finiClient = false;
                             System.out.println("connection reussi");
+                            System.out.println("bienvenue " + c );
                             while (! finiClient){
                             System.out.println();
                             System.out.println("que souhaiter vous faire");
                             System.out.println("1 - consulter le catalogue");
                             System.out.println("2 - créer une commande");
                             System.out.println("3 - consulter ses commande");
-                            System.out.println("4 - quitter");
+                            System.out.println("4 - quitter se compte");
                             BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
                             String res5 = r5.readLine();
                             switch (res5) {
@@ -102,8 +103,8 @@ public class Executable {
                                     break;
                                 case ("3") :
                                     List<Commande> lstCommande = c.voirSesCommande();
-                                    for (Commande c : lstCommande){
-                                        System.out.println(c);
+                                    for (Commande comande : lstCommande){
+                                        System.out.println(comande);
                                     }
                                     break;
 
