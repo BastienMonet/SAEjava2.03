@@ -35,7 +35,9 @@ public class Executable {
 
         // c1.ajouteCommandeBD(com);
 
-        a.ajouteLivreDansMagasin(baxMagasin, l3, 3);
+        // a.ajouteLivreDansMagasin(baxMagasin, l3, 3);
+
+        a.retireLivreDansMagasin(baxMagasin, l3, 5);
 
         // System.out.println(c1.voirSesCommande());
 
