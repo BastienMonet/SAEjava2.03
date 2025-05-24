@@ -112,6 +112,46 @@ public class Adiministrateur extends Utilisateur {
         }
     }
 
+
+    public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException{
+        PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
+        ps.setInt(1, m.getIdMag());
+        ps.setInt(2, l.getIsbn());
+
+        ResultSet rs = ps.executeQuery();
+        
+
+        if (rs.next()){
+            int qteActuel = rs.getInt("qte");
+
+            PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
+            ps2.setInt(1, qteActuel + qte);
+            ps2.setInt(2, m.getIdMag());
+            ps2.setInt(3, l.getIsbn());
+            try{
+                ps2.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 2");
+            }
+            
+        } else {
+            PreparedStatement ps3 = laConnexion.prepareStatement("insert into POSSEDER values (?, ?, ?)");
+            ps3.setInt(1, m.getIdMag());
+            ps3.setInt(2, l.getIsbn());
+            ps3.setInt(3, qte);
+            try{
+                ps3.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 3");
+            }
+
+        }
+
+
+    }
+
     
 
     @Override

@@ -17,7 +17,7 @@ public class Executable {
         
         Livre l1 = new Livre(1, null, 0, 0, 0);
         Livre l2 = new Livre(1, null, 0, 0, 0);
-        Livre l3 = new Livre(2, null, 0, 0, 0);
+        Livre l3 = new Livre(1, null, 0, 0, 0);
         Client c1 = new Client(co);
         Magasin baxMagasin = new Magasin(1, "BAX livres", "BAXville", new HashMap<>());
         // a.retireLivreBD(1);
@@ -31,11 +31,13 @@ public class Executable {
         
         // com.addCommandeUnit(comU);
 
-        c1.seConnecter("a", "b", "c");
+        // c1.seConnecter("a", "b", "c");
 
         // c1.ajouteCommandeBD(com);
 
-        System.out.println(c1.voirSesCommande());
+        a.ajouteLivreDansMagasin(baxMagasin, l3, 3);
+
+        // System.out.println(c1.voirSesCommande());
 
 
         System.out.println(c1);
