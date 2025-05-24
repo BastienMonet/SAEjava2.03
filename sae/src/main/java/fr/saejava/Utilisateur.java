@@ -7,9 +7,9 @@ import java.sql.*;
 
 public abstract class Utilisateur {
     protected int idUtil = 0;
-    protected String nomUtil;
-    protected String prenomUtil;
-    protected String pwd;
+    protected String nomUtil = "?";
+    protected String prenomUtil = "?";
+    protected String pwd = "?";
 
     protected Catalogue catalogue;
     protected Set<Commande> commandes;

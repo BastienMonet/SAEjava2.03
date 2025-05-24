@@ -2,16 +2,18 @@ package fr.saejava;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.checkerframework.checker.units.qual.m;
 
 public class Client extends Utilisateur {
     
-    private String adresseUtil;
-    private String codePostal;
-    private String villeUtil;
-    private Double monnaie;
+    private String adresseUtil = "?";
+    private String codePostal = "?";
+    private String villeUtil = "?";
+    private Double monnaie = 0.00;
 
 
     public Client(ConnexionMySQL laConnexion) {
@@ -90,8 +92,12 @@ public class Client extends Utilisateur {
             this.codePostal = rs.getString(6);
             this.villeUtil = rs.getString(7);
             this.monnaie = rs.getDouble(8);
+
+            rs.close();
             return true;
         } else {
+            rs.close();
+
             return false;
         }
     }
@@ -208,8 +214,8 @@ public class Client extends Utilisateur {
         return res;
     }
 
-    public List<Livre> onVousRecommande() throws SQLException{
-        List<Livre> res = new ArrayList<>();
+    public Set<Livre> onVousRecommande() throws SQLException{
+        Set<Livre> res = new HashSet<>();
 
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
