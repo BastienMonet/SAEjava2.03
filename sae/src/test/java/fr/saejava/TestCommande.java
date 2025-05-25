@@ -22,7 +22,7 @@ public class TestCommande {
         
 
         CommandeUnit commandeUnit = new CommandeUnit(new Livre(123456789, "Test Book", 100, 1, 20), 2);
-        Commande commande = new Commande(1, "2023-01-01", true, 'L', "2023-01-02", null);
+        Commande commande = new Commande(1, "2023-01-01", 'a', 'L', null);
 
         commande.ajouterCommandeUnit(commandeUnit);
         assertEquals(1, commande.getListeCommandes().size());
@@ -46,10 +46,10 @@ public class TestCommande {
         CommandeUnit comU1 = new CommandeUnit(l1, 2);
         CommandeUnit comU2 = new CommandeUnit(l2, 3);
 
-        Commande com = new Commande(0, null, false, 'a', null, mag);
+        Commande com = new Commande(0, null, 'a', 'a', mag);
         com.addCommandeUnit(comU1);
 
-        Commande com2 = new Commande(0, null, false, 'a', null, mag);
+        Commande com2 = new Commande(0, null, 'a', 'a', mag);
         com2.addCommandeUnit(comU2);
 
 

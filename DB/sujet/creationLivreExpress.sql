@@ -45,17 +45,27 @@ CREATE TABLE CLIENT(
   iduse      int NOT NULL,
   adressecli varchar(100),
   codepostal varchar(5),
-  villecli   varchar(100)
+  villecli   varchar(100),
+  monnaie decimal(6,2)
 );
 
+CREATE TABLE ADMINISTRATEUR(
+  primary key (iduse),
+  iduse int NOT NULL
+);
+
+CREATE TABLE VENDEUR(
+  primary key (iduse),
+  iduse int NOT NULL
+);
 
 CREATE TABLE COMMANDE (
   PRIMARY KEY (numcom),
   numcom  int NOT NULL,
-  datecom date,
+  datecom VARCHAR(42),
   enligne char(1),
   livraison char(1),
-  idcli   int NOT NULL,
+  iduse   int NOT NULL,
   idmag   VARCHAR(42) NOT NULL
 );
 
@@ -116,7 +126,7 @@ CREATE TABLE THEMES (
 );
 
 ALTER TABLE COMMANDE ADD FOREIGN KEY (idmag) REFERENCES MAGASIN (idmag);
-ALTER TABLE COMMANDE ADD FOREIGN KEY (idcli) REFERENCES CLIENT (iduse);
+ALTER TABLE COMMANDE ADD FOREIGN KEY (iduse) REFERENCES CLIENT (iduse);
 
 ALTER TABLE DETAILCOMMANDE ADD FOREIGN KEY (isbn) REFERENCES LIVRE (isbn);
 ALTER TABLE DETAILCOMMANDE ADD FOREIGN KEY (numcom) REFERENCES COMMANDE (numcom);
@@ -134,3 +144,5 @@ ALTER TABLE THEMES ADD FOREIGN KEY (iddewey) REFERENCES CLASSIFICATION (iddewey)
 ALTER TABLE THEMES ADD FOREIGN KEY (isbn) REFERENCES LIVRE (isbn);
 
 ALTER TABLE CLIENT ADD FOREIGN KEY (iduse) REFERENCES UTILISATEUR(iduse);
+ALTER TABLE ADMINISTRATEUR ADD FOREIGN KEY (iduse) REFERENCES UTILISATEUR(iduse);
+ALTER TABLE VENDEUR ADD FOREIGN KEY (iduse) REFERENCES UTILISATEUR(iduse);

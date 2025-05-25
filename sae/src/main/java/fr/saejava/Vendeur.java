@@ -4,8 +4,13 @@ import java.sql.*;
 
 public class Vendeur extends Utilisateur {
     
-    public Vendeur(int idUtil, String nomUtil, String prenomUtil, String pwd, Catalogue cat, ConnexionMySQL laConnexion){
-        super(idUtil, nomUtil, prenomUtil, pwd, cat, laConnexion);
+    public Vendeur(ConnexionMySQL laConnexion){
+        super(laConnexion);
+    }
+
+
+    public Vendeur(String nomUtil, String prenomUtil, String pwd){
+        super(nomUtil, prenomUtil, pwd);
     }
 
     @Override
@@ -13,6 +18,9 @@ public class Vendeur extends Utilisateur {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'seConnecter'");
     }
+
+
+    
 
 
 

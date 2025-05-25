@@ -8,10 +8,10 @@ public class Livre {
     private String titre;
     private int nbPages;
     private int datePubli;
-    private int prix;
+    private double prix = 0;
     private int nbreAchats = 0;
 
-    public Livre(int isbn, String titre, int nbPages, int datePubli, int prix) {
+    public Livre(int isbn, String titre, int nbPages, int datePubli, double prix) {
         this.isbn = isbn;
         this.titre = titre;
         this.nbPages = nbPages;
@@ -35,7 +35,7 @@ public class Livre {
         return datePubli;
     }
 
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -81,6 +81,6 @@ public class Livre {
 
     @Override
     public String toString() {
-        return titre + nbreAchats;
+        return titre + " " + datePubli + " " + prix + " " + "$";
     }
 }

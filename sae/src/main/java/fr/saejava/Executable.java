@@ -1,33 +1,248 @@
 package fr.saejava;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Connection;
+import java.util.List;
+import java.util.Set;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 
 public class Executable {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException{
+
+
+    public static void menuCommander(Utilisateur u, Commande com) throws Exception{
+        boolean finiCommande = false;
+        while (! finiCommande){
+            System.out.println("que voulez vous faire ?");
+            System.out.println("1 - ajouter un achat");
+            System.out.println("2 - faire les comptes");
+            System.out.println("3 - finaliser la commande");
+            System.out.println("4 - annuler la commande");
+            BufferedReader r1 = new BufferedReader(new InputStreamReader(System.in));
+            String res1 = r1.readLine();
+            switch (res1){
+                case ("1"):
+
+                    System.out.println("quel livre souhaitez vous");
+                    System.out.println("entrer le nom du livre");
+
+                    Set<Livre> lstLivre = u.onVousRecommandeDansMagasin(com.getMagasin());
+
+                    for (Livre l : lstLivre){
+                        System.out.println(l);
+                    }
+
+
+                    BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
+                    String res2 = r2.readLine();
+                    Livre livre = u.getLivreBDparTitre(res2);
+
+                    System.out.println("combien de livre souhaitez vous acheter?");
+
+                    // u.qteDansMagasin(livre, com.getMagasin());
+
+                    BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
+                    Integer qte = Integer.valueOf(r3.readLine());
+
+                    CommandeUnit comU = new CommandeUnit(livre, qte);
+                    com.addCommandeUnit(comU);
+                    System.out.println("votre achat a bien été ajouter à la commande");
+
+
+                    break;
+                case ("2"):
+                    List<CommandeUnit> lstComU =  u.voirSesDetailCommande(com);
+                    for (CommandeUnit cmuU : lstComU){
+                        System.out.println(cmuU);
+                    }
+                    System.out.println("cela vous fait :" + com.prixTotCommande() + "$ pour l'instant" );
+                    break;
+                case ("3"):
+                    u.ajouteCommandeBD(com);
+                    System.out.println("votre commande a bien été sauvegarder");
+                    break;
+                case ("4"):
+                    finiCommande = true;
+                    break;
+            }
+
+        }
+
+    }
+
+
+    public static void menuClient(Client c) throws SQLException, Exception{
+        boolean finiClient = false;
+        System.out.println("connection reussi");
+        System.out.println("bienvenue " + c );
+        while (! finiClient){
+            System.out.println();
+            System.out.println("que souhaiter vous faire");
+            System.out.println("1 - consulter le catalogue");
+            System.out.println("2 - créer une commande");
+            System.out.println("3 - consulter ses commande");
+            System.out.println("4 - quitter se compte");
+            BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
+            String res5 = r5.readLine();
+            switch (res5) {
+                case ("1") :
+                    Set<Livre> lstLivre = c.onVousRecommande();
+                    for (Livre l : lstLivre){
+                        System.out.println(l);
+                    }
+                    break;
+                case ("2") :
+                    System.out.println("4 - la commande est t-elle en ligne");
+                    LocalDate myObj;
+                    BufferedReader r6 = new BufferedReader(new InputStreamReader(System.in));
+                    char res6 = r6.readLine().charAt(0);
+                    System.out.println("4 - ou doit être fait la livraison");
+                    BufferedReader r7 = new BufferedReader(new InputStreamReader(System.in));
+                    char res7 = r7.readLine().charAt(0);
+                    System.out.println("4 - dans quel magasin effectuer la commande");
+                    List<Magasin> lstMag = c.voirToutLesMagasin();
+                    System.out.println(lstMag);
+                    BufferedReader r8 = new BufferedReader(new InputStreamReader(System.in));
+                    Magasin res8 = c.getMagasinBDparId(r8.readLine());
+
+                    Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
+                    menuCommander(c, com);
+                    break;
+
+                case ("3") :
+                    List<Commande> lstCommande = c.voirSesCommande();
+                    for (Commande comande : lstCommande){
+                        System.out.println(comande);
+                    }
+                    break;
+
+                case ("4") :
+                    finiClient = true;
+                    break;
+
+            }
+            }
+
+    }
+
+
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
         ConnexionMySQL co = new ConnexionMySQL();
         // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBfranchet", "franchet", "franchet");
+        co.connecter(null, "DBmonet", "root", "4dameorc");
 
 
-        Adiministrateur a = new Adiministrateur(0, null, null, null, null, co);
+        Adiministrateur a = new Adiministrateur(co);
+
+        Livre l1 = new Livre(1, "les dents de la mer", 169, 1990, 19.99);
+        Livre l2 = new Livre(2, "le magicien", 142, 2003, 15.00);
+        Livre l3 = new Livre(3, "fuir", 546, 2016, 45.05);
+
+        // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));
+        Magasin babar = new Magasin(1, "babar", "BAXville", new HashMap<>());
+        // Magasin centreMagasin = new Magasin(2, "centre librairie", "centre", new HashMap<>());
+        // // a.retireLivreBD(1);
+        // // a.ajouteClientBD(new Client("a", "b", "c", "d", "e", "f", 0.0));
+        // a.ajouteMagasinBD(baxMagasin);
+        // a.ajouteMagasinBD(centreMagasin);
+        // a.ajouteLivreBD(l1);
+        // a.ajouteLivreBD(l2);
+        // a.ajouteLivreBD(l3);
+        // a.ajouteLivreBD(new Livre(5, "le grand bleu", 324, 1243, 87.00));
+        // a.ajouteLivreDansMagasin(baxMagasin, l1, 5);
+        // a.ajouteLivreDansMagasin(baxMagasin, l2, 5);
+        // a.ajouteLivreDansMagasin(a.getMagasinBDparId("centre librairie"), a.getLivreBDparTitre("fuir"), 3);
+        // a.ajouteLivreDansMagasin(baxMagasin, l3, 5);
+
+
+        // Client c1 = new Client(co);
+        // Commande com = new Commande(0, "14", 'O', 'C', babar);
+        // CommandeUnit comU = new CommandeUnit(l1, 2);
         
-        Livre l1 = new Livre(0, null, 0, 0, 0);
-        Livre l2 = new Livre(1, null, 0, 0, 0);
-        Livre l3 = new Livre(2, null, 0, 0, 0);
+        // com.addCommandeUnit(comU);
 
-        Client c1 = new Client(1, "rober", "lauran", "123446", null, null, null, null, co);
-        // a.retireLivreBD(1);
-        // a.ajouteClientBD(c1);
+        // c1.seConnecter("a", "b", "c");
 
-        Magasin baxMagasin = new Magasin(0, "BAX livres", "BAXville", new HashMap<>());
 
-        // boolean b = c1.seConnecter("rober", "lauran", "123446");
+        // c1.ajouteCommandeBD(com);
 
-        a.ajouteMagasinBD(baxMagasin);
+        // List<Commande> lstcom = c1.voirSesCommande();
+        // System.out.println(lstcom);
+
+
+        // System.out.println(c1.qteParMagasin(a.getLivreBDparTitre("fuir")));
+
+
+        // System.out.println();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        boolean fini = false;
+        boolean finiClient = false;
+        while (!fini){
+            System.out.println("bonjour et bienvenue, selectionner l'action de votre choix");
+            System.out.println("1 - Se connecter en tant que client");
+            System.out.println("2 - Se connecter en tant qu'admin");
+            System.out.println("3 - quitter");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String input = reader.readLine();
+            switch (input){
+                case ("1") :
+                    System.out.println("entrer votre nom d'utilisateur");
+                    BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
+                    String username = r2.readLine();
+                    System.out.println("entrer votre prenom");
+                    BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
+                    String lastname = r3.readLine();
+                    System.out.println("entrer votre mot de passe");
+                    BufferedReader r4 = new BufferedReader(new InputStreamReader(System.in));
+                    String pwd = r4.readLine();
+                    try{
+                        Client c = new Client(co);
+                        boolean seco = c.seConnecter(username, lastname, pwd);
+                        if (seco == true){
+                            menuClient(c);
+            
+                        } else {
+                            System.out.println("echec de la connection");
+                        }
+
+                    } catch (SQLException e) {
+                        System.out.println("la base de donnée a rencontrer un problème");
+                        System.err.println(e.getMessage());
+
+                    }
+                    break;
+                case ("2") :
+                    System.out.println("WIP");
+                    break;
+                case ("3") :
+                    fini = true;
+                    break;
+
+            }
+                
+        }
+        
+        
+
+        
         
         
         System.out.println("ça marche");
