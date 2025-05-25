@@ -1,6 +1,8 @@
 package fr.saejava;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import java.sql.*;
@@ -75,6 +77,202 @@ public abstract class Utilisateur {
     }
 
     public abstract boolean seConnecter(String nom, String prenom, String pwd) throws SQLException;
+
+    public List<Magasin> voirToutLesMagasin() throws SQLException{
+        List<Magasin> lstMag = new ArrayList<>();
+
+        String query = "SELECT * FROM MAGASIN";
+        st = laConnexion.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()){
+            lstMag.add(new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag"), null));
+        }
+        return lstMag;
+    }
+
+    public Set<Livre> onVousRecommande() throws SQLException{
+        Set<Livre> res = new HashSet<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
+                                                            "FROM LIVRE " +
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn");
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            
+            res.add(l);
+        }
+        return res;
+    }
+
+    public Set<Livre> onVousRecommandeDansMagasin(Magasin m) throws SQLException{
+        Set<Livre> res = new HashSet<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
+                                                            "FROM LIVRE " +
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ?");
+        ps.setInt(1, m.getIdMag());
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            
+            res.add(l);
+        }
+        return res;
+    }
+
+    public Magasin getMagasinBDparId(String nommag) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN where nommag = ? ");
+        ps.setString(1, nommag);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag"), null);
+        } else {
+            throw new Exception("ce magasin n'existe pas");
+        }
+        
+    }
+
+
+    public Livre getLivreBDparTitre(String titre) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM LIVRE where titre = ? ");
+        ps.setString(1, titre);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+        } else {
+            throw new Exception("ce livre n'existe pas");
+        }
+        
+    }
+
+    public int getMaxnumCom() throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numcom) AS maxcom FROM COMMANDE");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("maxcom") + 1;
+        } else {
+            return 1;
+        }
+    }
+
+    public int getMaxnumComU() throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numlig) AS maxlig FROM DETAILCOMMANDE");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("maxlig") + 1;
+        } else {
+            return 1;
+        }
+    }
+
+    public void ajouteCommandeBD(Commande com) throws SQLException {
+        /*
+         * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
+         */
+        PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
+        int max = getMaxnumCom();
+        ps.setInt(1, max);
+        ps.setString(2, com.getDateCom());
+        ps.setString(3, String.valueOf(com.enligne()));
+        ps.setString(4, String.valueOf(com.getLivraison()));
+        ps.setInt(5, this.getIdUtil());
+        ps.setInt(6, com.getMagasin().getIdMag());
+        ps.executeUpdate();
+
+        Adiministrateur a = new Adiministrateur(laConnexion);
+
+        for (CommandeUnit comU : com.getListeCommandes()){
+            try {
+            a.retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
+            ajouteCommandeUnitBD(max,comU);
+            } catch (Exception e){
+                System.err.println("vous avez demmander une commande impossible");
+            }
+        }
+        
+    }
+
+    public void ajouteCommandeUnitBD(int numCommande,CommandeUnit comU) throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("insert into DETAILCOMMANDE values (?, ?, ?, ?, ?)");
+        ps.setInt(1, numCommande);
+        ps.setInt(2, getMaxnumComU());
+        ps.setInt(3, comU.getQte());
+        ps.setDouble(4, comU.getPrixTotal());
+        ps.setInt(5, comU.getLivre().getIsbn());
+        ps.executeUpdate();
+
+    }
+
+
+    public List<CommandeUnit> voirSesDetailCommande(Commande com) throws SQLException, Exception{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
+        List<CommandeUnit> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT *" +
+                                                    "FROM COMMANDE "+
+                                                    "JOIN DETAILCOMMANDE ON COMMANDE.numcom = DETAILCOMMANDE.numcom " +
+                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn");
+        ps.setInt(1, com.getNumCom());
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix")), rs.getInt("qte"));
+            
+            res.add(cU);
+        }
+        return res;
+    }
+
+
+    public List<Commande> voirSesCommande() throws SQLException, Exception{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
+        List<Commande> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
+                        "FROM UTILISATEUR AS u \n" + //
+                        "JOIN COMMANDE AS c \n" + //
+                        "ON u.iduse = c.iduse \n" + //
+                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
+        ps.setInt(1, this.idUtil);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            while(rs.next()){
+                Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), new Magasin(0, rs.getString("nommag"), rs.getString("villemag"), null));
+                c.setListeCommandeUnit(voirSesDetailCommande(c));
+                res.add(c);
+            }
+
+
+        } else {
+            System.err.println("vous n'avez acctuelement aucune commande");
+        }
+        return res;
+    }
+
+    public String qteDansMagasin(Livre l, Magasin m) throws SQLException{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
+        ps.setInt(1, l.getIsbn());
+        ps.setString(2, m.getNomMag());
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return " il y a " + rs.getString("qte") + " fois l'exemplaire dans le magasin " + rs.getString("nommag") + "\n";
+        } else {
+            return " desoler mais ce magasin ne possède pas ce livre";
+        }
+    }
 
     @Override
     public String toString() {
