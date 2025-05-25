@@ -81,6 +81,6 @@ public class Livre {
 
     @Override
     public String toString() {
-        return isbn + " " + titre + " " + datePubli + " " + prix + " " + "$";
+        return titre + " " + datePubli + " " + prix + " " + "$";
     }
 }
