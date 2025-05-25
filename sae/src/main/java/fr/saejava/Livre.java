@@ -8,7 +8,7 @@ public class Livre {
     private String titre;
     private int nbPages;
     private int datePubli;
-    private double prix;
+    private double prix = 0;
     private int nbreAchats = 0;
 
     public Livre(int isbn, String titre, int nbPages, int datePubli, double prix) {
