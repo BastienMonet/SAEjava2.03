@@ -42,13 +42,13 @@ public class Executable {
 
                     System.out.println("combien de livre souhaitez vous acheter?");
 
-                    u.qteDansMagasin(livre, com.getMagasin());
+                    // u.qteDansMagasin(livre, com.getMagasin());
 
                     BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
                     Integer qte = Integer.valueOf(r3.readLine());
 
                     CommandeUnit comU = new CommandeUnit(livre, qte);
-                    com.addCommandeUnit(null);
+                    com.addCommandeUnit(comU);
                     System.out.println("votre achat a bien été ajouter à la commande");
 
 
@@ -143,7 +143,7 @@ public class Executable {
         Livre l3 = new Livre(3, "fuir", 546, 2016, 45.05);
 
         // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));
-        // Magasin baxMagasin = new Magasin(1, "BAX livres", "BAXville", new HashMap<>());
+        Magasin babar = new Magasin(1, "babar", "BAXville", new HashMap<>());
         // Magasin centreMagasin = new Magasin(2, "centre librairie", "centre", new HashMap<>());
         // // a.retireLivreBD(1);
         // // a.ajouteClientBD(new Client("a", "b", "c", "d", "e", "f", 0.0));
@@ -159,17 +159,19 @@ public class Executable {
         // a.ajouteLivreDansMagasin(baxMagasin, l3, 5);
 
 
-        Client c1 = new Client(co);
-        // Commande com = new Commande(0, "14", 'O', 'C', baxMagasin);
+        // Client c1 = new Client(co);
+        // Commande com = new Commande(0, "14", 'O', 'C', babar);
         // CommandeUnit comU = new CommandeUnit(l1, 2);
         
         // com.addCommandeUnit(comU);
 
-        c1.seConnecter("a", "b", "c");
+        // c1.seConnecter("a", "b", "c");
 
-        c1.qteDansMagasin(c1.getLivreBDparTitre("fuir"), c1.getMagasinBDparId("BAX livres"));
 
         // c1.ajouteCommandeBD(com);
+
+        // List<Commande> lstcom = c1.voirSesCommande();
+        // System.out.println(lstcom);
 
 
         // System.out.println(c1.qteParMagasin(a.getLivreBDparTitre("fuir")));
