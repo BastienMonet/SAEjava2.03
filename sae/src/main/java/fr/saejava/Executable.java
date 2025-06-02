@@ -106,7 +106,7 @@ public class Executable {
                     List<Magasin> lstMag = c.voirToutLesMagasin();
                     System.out.println(lstMag);
                     BufferedReader r8 = new BufferedReader(new InputStreamReader(System.in));
-                    Magasin res8 = c.getMagasinBDparId(r8.readLine());
+                    Magasin res8 = c.getMagasinBDparNom(r8.readLine());
 
                     Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
                     menuCommander(c, com);
@@ -132,8 +132,8 @@ public class Executable {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
         ConnexionMySQL co = new ConnexionMySQL();
-        // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBmonet", "root", "4dameorc");
+        co.connecter(null, "DBmonet", "monet", "monet");
+        // co.connecter(null, "DBmonet", "root", "4dameorc");
 
 
         Adiministrateur a = new Adiministrateur(co);
@@ -143,10 +143,10 @@ public class Executable {
         Livre l3 = new Livre(3, "fuir", 546, 2016, 45.05);
 
         // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));
-        Magasin babar = new Magasin(1, "babar", "BAXville", new HashMap<>());
-        // Magasin centreMagasin = new Magasin(2, "centre librairie", "centre", new HashMap<>());
+        Magasin baxMagasin = new Magasin(1, "babar", "BAXville", new HashMap<>());
+        Magasin centreMagasin = new Magasin(2, "centre librairie", "centre", new HashMap<>());
         // // a.retireLivreBD(1);
-        // // a.ajouteClientBD(new Client("a", "b", "c", "d", "e", "f", 0.0));
+        // a.ajouteClientBD(new Client("a", "b", "c", "d", "e", "f", 0.0));
         // a.ajouteMagasinBD(baxMagasin);
         // a.ajouteMagasinBD(centreMagasin);
         // a.ajouteLivreBD(l1);
@@ -159,19 +159,20 @@ public class Executable {
         // a.ajouteLivreDansMagasin(baxMagasin, l3, 5);
 
 
-        // Client c1 = new Client(co);
+        Client c1 = new Client(co);
         // Commande com = new Commande(0, "14", 'O', 'C', babar);
         // CommandeUnit comU = new CommandeUnit(l1, 2);
         
         // com.addCommandeUnit(comU);
 
-        // c1.seConnecter("a", "b", "c");
+        c1.seConnecter("a", "b", "c");
+        System.out.println(c1);
 
 
         // c1.ajouteCommandeBD(com);
 
-        // List<Commande> lstcom = c1.voirSesCommande();
-        // System.out.println(lstcom);
+        List<Commande> lstcom = c1.voirSesCommande();
+        System.out.println(lstcom);
 
 
         // System.out.println(c1.qteParMagasin(a.getLivreBDparTitre("fuir")));
