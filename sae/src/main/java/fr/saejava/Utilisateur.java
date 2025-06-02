@@ -124,7 +124,7 @@ public abstract class Utilisateur {
         return res;
     }
 
-    public Magasin getMagasinBDparId(String nommag) throws SQLException, Exception{
+    public Magasin getMagasinBDparNom(String nommag) throws SQLException, Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN where nommag = ? ");
         ps.setString(1, nommag);
         ResultSet rs = ps.executeQuery();
@@ -220,7 +220,7 @@ public abstract class Utilisateur {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT *" +
                                                     "FROM COMMANDE "+
                                                     "JOIN DETAILCOMMANDE ON COMMANDE.numcom = DETAILCOMMANDE.numcom " +
-                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn");
+                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn where COMMANDE.numcom = ?");
         ps.setInt(1, com.getNumCom());
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
@@ -248,17 +248,12 @@ public abstract class Utilisateur {
                         "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
         ps.setInt(1, this.idUtil);
         ResultSet rs = ps.executeQuery();
-        if (rs.next()){
-            while(rs.next()){
-                Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), new Magasin(0, rs.getString("nommag"), rs.getString("villemag"), null));
-                c.setListeCommandeUnit(voirSesDetailCommande(c));
-                res.add(c);
-            }
-
-
-        } else {
-            System.err.println("vous n'avez acctuelement aucune commande");
+        while(rs.next()){
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
+            c.setListeCommandeUnit(voirSesDetailCommande(c));
+            res.add(c);
         }
+
         return res;
     }
 

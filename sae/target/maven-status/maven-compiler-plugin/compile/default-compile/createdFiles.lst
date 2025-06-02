@@ -1,7 +1,7 @@
 fr/saejava/Magasin.class
 fr/saejava/Auteur.class
-fr/saejava/ConnexionMySQL.class
 fr/saejava/Adiministrateur.class
+fr/saejava/ConnexionMySQL.class
 fr/saejava/Executable.class
 fr/saejava/Vendeur.class
 fr/saejava/Utilisateur.class
