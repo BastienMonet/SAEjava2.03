@@ -257,15 +257,15 @@ public abstract class Utilisateur {
         return res;
     }
 
-    public String qteDansMagasin(Livre l, Magasin m) throws SQLException{
+    public int qteDansMagasin(Livre l, Magasin m) throws Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
         ps.setInt(1, l.getIsbn());
         ps.setString(2, m.getNomMag());
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
-            return " il y a " + rs.getString("qte") + " fois l'exemplaire dans le magasin " + rs.getString("nommag") + "\n";
+            return rs.getInt("qte");
         } else {
-            return " desoler mais ce magasin ne possède pas ce livre";
+            throw new Exception("il n'y a plus de livre dans ce magasin");
         }
     }
 

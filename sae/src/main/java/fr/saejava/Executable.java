@@ -40,16 +40,28 @@ public class Executable {
                     String res2 = r2.readLine();
                     Livre livre = u.getLivreBDparTitre(res2);
 
+                    System.out.println("il y a " + u.qteDansMagasin(livre, com.getMagasin()) + "fois l'exemplaire dans " + com.getMagasin());
+
                     System.out.println("combien de livre souhaitez vous acheter?");
 
-                    // u.qteDansMagasin(livre, com.getMagasin());
+                    System.out.println("! mettre une valeur plus grande que le nombre d'exemplaire annulera celle-ci !");
 
                     BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
-                    Integer qte = Integer.valueOf(r3.readLine());
+                    try{
+                        Integer qte = Integer.valueOf(r3.readLine());
 
-                    CommandeUnit comU = new CommandeUnit(livre, qte);
-                    com.addCommandeUnit(comU);
-                    System.out.println("votre achat a bien été ajouter à la commande");
+                        if (qte <= u.qteDansMagasin(livre, com.getMagasin())){
+                            CommandeUnit comU = new CommandeUnit(livre, qte);
+                            com.addCommandeUnit(comU);
+                            System.out.println("votre achat a bien été ajoutée à la commande");
+                        } else {
+                            System.out.println("votre achat n'a pas été pris en compte");
+                        }
+                    } catch(Exception e){
+                        finiCommande = true;
+                    }
+
+                    
 
 
                     break;
@@ -59,10 +71,12 @@ public class Executable {
                         System.out.println(cmuU);
                     }
                     System.out.println("cela vous fait :" + com.prixTotCommande() + "$ pour l'instant" );
+                    System.out.println(com);
                     break;
                 case ("3"):
                     u.ajouteCommandeBD(com);
                     System.out.println("votre commande a bien été sauvegarder");
+                    finiCommande = true;
                     break;
                 case ("4"):
                     finiCommande = true;
@@ -132,8 +146,8 @@ public class Executable {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
         ConnexionMySQL co = new ConnexionMySQL();
-        co.connecter(null, "DBmonet", "monet", "monet");
-        // co.connecter(null, "DBmonet", "root", "4dameorc");
+        // co.connecter(null, "DBmonet", "monet", "monet");
+        co.connecter(null, "DBmonet", "root", "4dameorc");
 
 
         Adiministrateur a = new Adiministrateur(co);
@@ -166,13 +180,14 @@ public class Executable {
         // com.addCommandeUnit(comU);
 
         c1.seConnecter("a", "b", "c");
+        System.out.println(c1.qteDansMagasin(c1.getLivreBDparTitre("fuir"), c1.getMagasinBDparNom("BAX livres")));
         System.out.println(c1);
 
 
         // c1.ajouteCommandeBD(com);
 
-        List<Commande> lstcom = c1.voirSesCommande();
-        System.out.println(lstcom);
+        // List<Commande> lstcom = c1.voirSesCommande();
+        // System.out.println(lstcom);
 
 
         // System.out.println(c1.qteParMagasin(a.getLivreBDparTitre("fuir")));
