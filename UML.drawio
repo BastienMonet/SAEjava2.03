@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="XtBnml_JYqbg_8TcbxcI">
-        <mxGraphModel dx="2995" dy="1347" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1802" dy="1589" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -104,7 +104,7 @@
                     <mxGeometry y="144" width="276.5" height="167" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-51" value="Administrateur" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-748" y="-562" width="340" height="206" as="geometry"/>
+                    <mxGeometry x="-748" y="-562" width="340" height="315" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-52" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-51" vertex="1">
                     <mxGeometry y="26" width="340" height="35" as="geometry"/>
@@ -112,8 +112,8 @@
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-53" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="OxnglPTWXYWyZ_FbC3Cn-51" vertex="1">
                     <mxGeometry y="61" width="340" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-54" value="&lt;div&gt;+ Administrateur(idUtil, nomUtil, prenomUtil, pwd)&lt;/div&gt;&lt;div&gt;+ creeCompteClient(nom, prenom, pwd)&lt;/div&gt;&lt;div&gt;+ creerNewLibairie( idmag, nommg, villemag) : void&lt;/div&gt;&lt;div&gt;+ consulterStat() : void&lt;/div&gt;&lt;div&gt;+ ajouteLivre(Livre, qte ,Magasin) : void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-51" vertex="1">
-                    <mxGeometry y="69" width="340" height="137" as="geometry"/>
+                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-54" value="&lt;div&gt;+ Administrateur(idUtil, nomUtil, prenomUtil, pwd)&lt;/div&gt;&lt;div&gt;+ Administrateur(laconexion : Connexion)&lt;/div&gt;&lt;div&gt;+ getmaxisbn() : int&lt;/div&gt;&lt;div&gt;+ ajouteLivreBD(l : Livre) : void&lt;/div&gt;&lt;div&gt;+ retireLivreBD(isbn : int) : void&lt;/div&gt;&lt;div&gt;+ getMaxIdCli() : int&lt;/div&gt;&lt;div&gt;+ ajouteClientBD(c : Client) : void&lt;/div&gt;&lt;div&gt;+ getMaxIdMag() : int&lt;/div&gt;&lt;div&gt;+ ajouteMagasinBD(m : Magasin)&lt;/div&gt;&lt;div&gt;+ ajouteLivreDansMagasin(m : Magasin, l: Livre, qte : int) : void&lt;/div&gt;&lt;div&gt;+ retireLivreDansMagasin(m : Magasin, l : Livre, qte : int) : void&lt;/div&gt;&lt;div&gt;+seConnecter(nom : String, prenom : String, pwd : String)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-51" vertex="1">
+                    <mxGeometry y="69" width="340" height="246" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-55" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.067;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;entryPerimeter=0;" parent="1" source="OxnglPTWXYWyZ_FbC3Cn-20" target="OxnglPTWXYWyZ_FbC3Cn-44" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
