@@ -1,11 +1,11 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="XtBnml_JYqbg_8TcbxcI">
-        <mxGraphModel dx="1802" dy="1589" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1786" dy="1989" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-1" value="Utilisateur" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-298" y="-262" width="257" height="190" as="geometry"/>
+                    <mxGeometry x="-298" y="-262" width="257" height="433" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-2" value="&lt;div&gt;# idUtil : int&lt;/div&gt;&lt;div&gt;# nomUtili : String&lt;/div&gt;&lt;div&gt;# prenomUtil : String&lt;/div&gt;&lt;div&gt;# pwd : String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-1" vertex="1">
                     <mxGeometry y="26" width="257" height="76" as="geometry"/>
@@ -13,8 +13,8 @@
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="OxnglPTWXYWyZ_FbC3Cn-1" vertex="1">
                     <mxGeometry y="102" width="257" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-4" value="&lt;div&gt;+ Utilisateur(idUtil, nomUtil, prenomUtil, pwd)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;div&gt;+ seconnecter&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-1" vertex="1">
-                    <mxGeometry y="110" width="257" height="80" as="geometry"/>
+                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-4" value="&lt;div&gt;+ Utilisateur(idUtil, nomUtil, prenomUtil, pwd)&lt;/div&gt;&lt;div&gt;+ Utilisateur(laconnexion : ConnexionMySQL)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;div&gt;+ &lt;b&gt;abstract&lt;/b&gt; seconnecter(nom : String, prenom : String : pwd : String)&lt;/div&gt;&lt;div&gt;+ onVousRecomande() : Set&amp;lt;Livre&amp;gt;&lt;/div&gt;&lt;div&gt;+ onVousRecommandeDansMagasin() : Set&amp;lt;Livre&amp;gt;&lt;/div&gt;&lt;div&gt;+ getMagasinBDparNom(nommag : String)&lt;/div&gt;&lt;div&gt;+ getLivreBDparTitre(titre : String)&lt;/div&gt;&lt;div&gt;+ getMaxnumCom() : int&lt;/div&gt;&lt;div&gt;getMaxnumComU : int&lt;/div&gt;&lt;div&gt;+ ajouteCommandeBD(com : Commande)&lt;/div&gt;&lt;div&gt;+ ajouteCommandeUnitBD(numXommande : int, comU : CommandeUnit)&lt;/div&gt;&lt;div&gt;+ voirSesDetailCommande(com : Commande) : CommandeUnit[*]&lt;/div&gt;&lt;div&gt;+ voirSesCommande() : Commande[*]&lt;/div&gt;&lt;div&gt;+ qteDansMagasin(l : Livre, m : Magasin) : String&amp;nbsp;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-1" vertex="1">
+                    <mxGeometry y="110" width="257" height="323" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-6" value="Livre" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="252" y="240" width="204" height="261" as="geometry"/>
@@ -32,7 +32,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-19" value="Commande" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="201" y="-255" width="226" height="291" as="geometry"/>
+                    <mxGeometry x="201" y="-255" width="226" height="255" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-20" value="&lt;div&gt;- numCom : int&lt;/div&gt;&lt;div&gt;- dateCom : String&lt;/div&gt;&lt;div&gt;- enligne : boolean&lt;/div&gt;&lt;div&gt;- livraison : char&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-19" vertex="1">
                     <mxGeometry y="26" width="226" height="116" as="geometry"/>
@@ -40,8 +40,8 @@
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-21" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="OxnglPTWXYWyZ_FbC3Cn-19" vertex="1">
                     <mxGeometry y="142" width="226" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-22" value="&lt;div&gt;&lt;div&gt;+ Commande(numCom, dateCom, enligne, livraison, dateArrivee)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;/div&gt;&lt;div&gt;+ prixTotCommande() : double&lt;/div&gt;&lt;div&gt;+ ajouteCommandeUnit(Livre ,qte) : void&lt;/div&gt;&lt;div&gt;+ commander()&lt;/div&gt;&lt;div&gt;+ renvoyer()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-19" vertex="1">
-                    <mxGeometry y="150" width="226" height="141" as="geometry"/>
+                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-22" value="&lt;div&gt;&lt;div&gt;+ Commande(numCom, dateCom, enligne, livraison, dateArrivee)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;/div&gt;&lt;div&gt;+ prixTotCommande() : double&lt;/div&gt;&lt;div&gt;+ ajouteCommandeUnit(Livre ,qte) : void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-19" vertex="1">
+                    <mxGeometry y="150" width="226" height="105" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-25" value="Editeur" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="490" y="418" width="204" height="196" as="geometry"/>
@@ -100,11 +100,11 @@
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-49" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="OxnglPTWXYWyZ_FbC3Cn-47" vertex="1">
                     <mxGeometry y="136" width="276.5" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-50" value="&lt;div&gt;+ Client(idUtil, nomUtil, prenomUtil, pwd, adresseUtil, codepostal, villeUtil)&lt;/div&gt;&lt;div&gt;+ Client(laConnexion ConnexionMysql)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;div&gt;+ ajouteMonnaie(montant) : void&lt;/div&gt;&lt;div&gt;+ ajouteCommande(Commande) : void&lt;/div&gt;&lt;div&gt;+ retireCommande(Commande) : void&lt;/div&gt;&lt;div&gt;+ seConnecter(nom : String, prenom : String, pwd : String) : boolean&lt;/div&gt;&lt;div&gt;+ consulteCommande()&lt;/div&gt;&lt;div&gt;+ onVousRecommande() : Livre[*]&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-47" vertex="1">
+                <mxCell id="OxnglPTWXYWyZ_FbC3Cn-50" value="&lt;div&gt;+ Client(idUtil, nomUtil, prenomUtil, pwd, adresseUtil, codepostal, villeUtil)&lt;/div&gt;&lt;div&gt;+ Client(laConnexion ConnexionMysql)&lt;/div&gt;&lt;div&gt;+ get&lt;/div&gt;&lt;div&gt;+ set&lt;/div&gt;&lt;div&gt;+ ajouteMonnaie(montant) : void&lt;/div&gt;&lt;div&gt;+ ajouteCommande(Commande) : void&lt;/div&gt;&lt;div&gt;+ retireCommande(Commande) : void&lt;/div&gt;&lt;div&gt;+ seConnecter(nom : String, prenom : String, pwd : String) : boolean&lt;/div&gt;&lt;div&gt;+ consulteCommande()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-47" vertex="1">
                     <mxGeometry y="144" width="276.5" height="213" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-51" value="Administrateur" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-748" y="-562" width="340" height="315" as="geometry"/>
+                    <mxGeometry x="-744" y="-623" width="340" height="315" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-52" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-51" vertex="1">
                     <mxGeometry y="26" width="340" height="35" as="geometry"/>
@@ -122,7 +122,7 @@
                     <mxGeometry x="541" y="-207" width="102" height="31" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-59" value="CommandeUnit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-149" y="76" width="211" height="195" as="geometry"/>
+                    <mxGeometry x="1.5" y="153" width="211" height="195" as="geometry"/>
                 </mxCell>
                 <mxCell id="OxnglPTWXYWyZ_FbC3Cn-60" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;- qte : int&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;- livre : Livre&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="OxnglPTWXYWyZ_FbC3Cn-59" vertex="1">
                     <mxGeometry y="26" width="211" height="76" as="geometry"/>
@@ -176,7 +176,22 @@
                     <mxGeometry x="237" y="184.5" width="70" height="31" as="geometry"/>
                 </mxCell>
                 <mxCell id="d8kxSNb8FKwBSeNOoYn2-8" value="- commandesUnit *" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
-                    <mxGeometry x="98" y="86" width="154" height="31" as="geometry"/>
+                    <mxGeometry x="69" y="61" width="154" height="31" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Executable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-58" y="-928" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="ConnexionMysql" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="137" y="-845" width="276.5" height="208" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;div&gt;- mysql : Connection&lt;/div&gt;&lt;div&gt;- connecte : boolean&lt;/div&gt;&lt;div&gt;&lt;br style=&quot;color: rgb(63, 63, 63);&quot;&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="12">
+                    <mxGeometry y="26" width="276.5" height="58" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="12">
+                    <mxGeometry y="84" width="276.5" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;div&gt;+ ConnexionMySQL()&lt;/div&gt;&lt;div&gt;+ connecter(nomServeur, nomBase, nomLogin, pwd) : void&lt;/div&gt;&lt;div&gt;+ close() : void&lt;/div&gt;&lt;div&gt;+ isConnecte : boolean&lt;/div&gt;&lt;div&gt;+ prepareStatement(req : String)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="12">
+                    <mxGeometry y="92" width="276.5" height="116" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
