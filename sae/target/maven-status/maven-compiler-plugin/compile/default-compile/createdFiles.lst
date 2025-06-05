@@ -5,8 +5,8 @@ fr/saejava/ConnexionMySQL.class
 fr/saejava/Executable.class
 fr/saejava/Vendeur.class
 fr/saejava/Utilisateur.class
-fr/saejava/Client.class
 fr/saejava/Catalogue.class
+fr/saejava/Client.class
 fr/saejava/Classification.class
 fr/saejava/CommandeUnit.class
 fr/saejava/Editeur.class

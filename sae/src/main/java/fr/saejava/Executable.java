@@ -84,7 +84,7 @@ public class Executable {
             System.out.println("1 - consulter le catalogue");
             System.out.println("2 - créer une commande");
             System.out.println("3 - consulter ses commande");
-            System.out.println("4 - quitter se compte");
+            System.out.println("4 - quitter ce compte");
             BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
             String res5 = r5.readLine();
             switch (res5) {
