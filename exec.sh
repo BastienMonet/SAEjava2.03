@@ -9,6 +9,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '4dameorc' WITH 
 
 # Maven
 mvn compile 
-mvn exec:java -Dexec.mainClass="fr.saejava.Executable"
+mvn exec:java -Dexec.mainClass="fr.saejava.ExecutableTest"
 
 mvn test

@@ -102,6 +102,31 @@ public class Client extends Utilisateur {
         }
     }
 
+    public List<Commande> voirSesCommande() throws SQLException, Exception{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
+        List<Commande> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
+                        "FROM UTILISATEUR AS u \n" + //
+                        "JOIN COMMANDE AS c \n" + //
+                        "ON u.iduse = c.iduse \n" + //
+                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
+        ps.setInt(1, this.idUtil);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
+            c.setListeCommandeUnit(voirDetailCommande(c));
+            res.add(c);
+        }
+
+        return res;
+    }
+
     @Override
     public String toString() {
         if (idUtil == 0){

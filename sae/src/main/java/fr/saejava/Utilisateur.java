@@ -208,7 +208,19 @@ public abstract class Utilisateur {
     }
 
 
-    public List<CommandeUnit> voirSesDetailCommande(Commande com) throws SQLException, Exception{
+    public int qteDansMagasin(Livre l, Magasin m) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
+        ps.setInt(1, l.getIsbn());
+        ps.setString(2, m.getNomMag());
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return rs.getInt("qte");
+        } else {
+            throw new Exception("il n'y a plus de livre dans ce magasin");
+        }
+    }
+
+    public List<CommandeUnit> voirDetailCommande(Commande com) throws SQLException, Exception{
 
         /*
          * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
@@ -225,48 +237,10 @@ public abstract class Utilisateur {
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix")), rs.getInt("qte"));
-            
             res.add(cU);
         }
+        rs.close();
         return res;
-    }
-
-
-    public List<Commande> voirSesCommande() throws SQLException, Exception{
-
-        /*
-         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
-         * 
-         */
-        List<Commande> res = new ArrayList<>();
-
-        st = laConnexion.createStatement();
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
-                        "FROM UTILISATEUR AS u \n" + //
-                        "JOIN COMMANDE AS c \n" + //
-                        "ON u.iduse = c.iduse \n" + //
-                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
-        ps.setInt(1, this.idUtil);
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
-            c.setListeCommandeUnit(voirSesDetailCommande(c));
-            res.add(c);
-        }
-
-        return res;
-    }
-
-    public int qteDansMagasin(Livre l, Magasin m) throws Exception{
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
-        ps.setInt(1, l.getIsbn());
-        ps.setString(2, m.getNomMag());
-        ResultSet rs = ps.executeQuery();
-        if(rs.next()){
-            return rs.getInt("qte");
-        } else {
-            throw new Exception("il n'y a plus de livre dans ce magasin");
-        }
     }
 
     @Override
