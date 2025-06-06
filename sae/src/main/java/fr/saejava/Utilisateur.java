@@ -243,6 +243,24 @@ public abstract class Utilisateur {
         return res;
     }
 
+    public void retireDetailCommande(int numCom) throws Exception{
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("DELETE DETAILCOMMANDE " +
+                                                    "FROM DETAILCOMMANDE where numcom = ?");
+        ps.setInt(1, numCom);
+        ps.executeUpdate();
+        
+    }
+
+    // public void getNbreAchats()
+
+    // public void incrementeAchat(Livre l) throws Exception{
+    //     st = laConnexion.createStatement();
+    //     PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbAchat = ? where isbn = ?");
+
+
+    // }
+
     @Override
     public String toString() {
         return idUtil + " | " + nomUtil + " | " + prenomUtil + " | " + pwd;

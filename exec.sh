@@ -11,4 +11,8 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '4dameorc' WITH 
 mvn compile 
 mvn exec:java -Dexec.mainClass="fr.saejava.ExecutableTest"
 
+mvn exec:java -Dexec.mainClass="fr.saejava.InterfaceCLI"
+
+
+
 mvn test
