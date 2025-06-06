@@ -10,7 +10,7 @@ public class ExecutableTest {
         // co.connecter(null, "DBmonet", "monet", "monet");
         co.connecter(null, "DBmonet", "root", "4dameorc");
 
-        Adiministrateur a = new Adiministrateur(co);
+        // Adiministrateur a = new Adiministrateur(co);
 
         // Livre l1 = new Livre(1, "les dents de la mer", 169, 1990, 19.99);
         // Livre l2 = new Livre(2, "le magicien", 142, 2003, 15.00);
@@ -29,29 +29,13 @@ public class ExecutableTest {
         // a.ajouteLivreBD(new Livre(5, "le grand bleu", 324, 1243, 87.00));
         // a.ajouteLivreDansMagasin(baxMagasin, l1, 5);
         // a.ajouteLivreDansMagasin(baxMagasin, l2, 5);
-        // a.ajouteLivreDansMagasin(a.getMagasinBDparId("centre librairie"), a.getLivreBDparTitre("fuir"), 3);
+        // a.ajouteLivreDansMagasin(a.getMagasinBDparNom("centre librairie"), a.getLivreBDparTitre("fuir"), 3);
         // a.ajouteLivreDansMagasin(baxMagasin, l3, 5);
 
+        // System.out.println("ça marche");
 
-        Vendeur v = new Vendeur(co);
-        // Commande com = new Commande(0, "14", 'O', 'C', babar);
-        // CommandeUnit comU = new CommandeUnit(l1, 2);
+
         
-        // com.addCommandeUnit(comU);
-
-        System.out.println(v.voirCommande());
-
-
-        // c1.ajouteCommandeBD(com);
-
-        // List<Commande> lstcom = c1.voirSesCommande();
-        // System.out.println(lstcom);
-
-
-        // System.out.println(c1.qteParMagasin(a.getLivreBDparTitre("fuir")));
-
-
-        // System.out.println();
 
     }
 }

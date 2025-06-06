@@ -15,7 +15,7 @@ public class Vendeur extends Utilisateur {
         super(nomUtil, prenomUtil, pwd);
     }
 
-    public List<Commande> voirCommande() throws SQLException, Exception{
+    public List<Commande> voirCommande() throws Exception{
 
         /*
          * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
@@ -38,6 +38,22 @@ public class Vendeur extends Utilisateur {
 
         return res;
     }
+
+
+
+    public void retireCommande(int numCom) throws Exception{
+        retireDetailCommande(numCom);
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("DELETE COMMANDE FROM COMMANDE where numcom = ?");
+        ps.setInt(1, numCom);
+        ps.executeUpdate();
+        ps.close();
+
+        
+        
+    }
+
 
 
     @Override

@@ -127,6 +127,21 @@ public class Client extends Utilisateur {
         return res;
     }
 
+    public void retireSaCommande(int numCom) throws Exception{
+
+        retireDetailCommande(numCom);
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("DELETE COMMANDE FROM COMMANDE where iduse = ? and numcom = ?");
+        ps.setInt(1, this.idUtil);
+        ps.setInt(2, numCom);
+        ps.executeUpdate();
+
+       
+        
+    }
+
+
     @Override
     public String toString() {
         if (idUtil == 0){
