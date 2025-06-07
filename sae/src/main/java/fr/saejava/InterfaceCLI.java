@@ -13,6 +13,24 @@ import java.io.InputStreamReader;
 public class InterfaceCLI {
 
 
+    private Client cli;
+    private Administrateur adm;
+    private Vendeur vend;
+    private ConnexionMySQL co;
+
+
+    public InterfaceCLI() throws Exception{
+        co = new ConnexionMySQL();
+        // co.connecter(null, "DBmonet", "monet", "monet");
+        co.connecter(null, "DBmonet", "root", "4dameorc");
+        cli = new Client(co);
+        vend = new Vendeur(co);
+        adm = new Administrateur(co);
+    }
+
+
+
+
     public static void menuCommander(Utilisateur u, Commande com) throws Exception{
         boolean finiCommande = false;
         while (! finiCommande){
@@ -142,13 +160,13 @@ public class InterfaceCLI {
 
     }
 
+    public static void menuAdmin(Administrateur a) throws SQLException, Exception{
+
+    }
 
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
-        ConnexionMySQL co = new ConnexionMySQL();
-        // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBmonet", "root", "4dameorc");
 
+    public void menuMain() throws Exception{
 
         boolean fini = false;
         while (!fini){
@@ -158,49 +176,53 @@ public class InterfaceCLI {
             System.out.println("3 - quitter");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
-            switch (input){
-                case ("1") :
-                    System.out.println("entrer votre nom d'utilisateur");
-                    BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
-                    String username = r2.readLine();
-                    System.out.println("entrer votre prenom");
-                    BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
-                    String lastname = r3.readLine();
-                    System.out.println("entrer votre mot de passe");
-                    BufferedReader r4 = new BufferedReader(new InputStreamReader(System.in));
-                    String pwd = r4.readLine();
+            if (input.equals("1") || input.equals("2")){
+                System.out.println("entrer votre nom d'utilisateur");
+                BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
+                String username = r2.readLine();
+                System.out.println("entrer votre prenom");
+                BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
+                String lastname = r3.readLine();
+                System.out.println("entrer votre mot de passe");
+                BufferedReader r4 = new BufferedReader(new InputStreamReader(System.in));
+                String pwd = r4.readLine();
+
                     try{
-                        Client c = new Client(co);
-                        boolean seco = c.seConnecter(username, lastname, pwd);
-                        if (seco == true){
-                            menuClient(c);
-            
-                        } else {
-                            System.out.println("echec de la connection");
-                        }
+                        boolean seco;
 
+                        switch(input){
+                            case ("1"):
+                                seco = cli.seConnecter(username, lastname, pwd);
+                                if (seco == true){
+                                    menuClient(cli);
+                    
+                                } else {
+                                    System.out.println("echec de la connection");
+                                }
+                            
+                            case("2"):
+                                seco = adm.seConnecter(username, lastname, pwd);
+                                    if (seco == true){
+                                        menuAdmin(adm);
+                        
+                                    } else {
+                                        System.out.println("echec de la connection");
+                                    }
+
+
+                        } 
+                        
                     } catch (SQLException e) {
-                        System.out.println("la base de donnée a rencontrer un problème");
-                        System.err.println(e.getMessage());
-
+                            System.out.println("la base de donnée a rencontrer un problème");
+                            System.err.println(e.getMessage());
                     }
-                    break;
-                case ("2") :
-                    System.out.println("WIP");
-                    break;
-                case ("3") :
-                    fini = true;
-                    break;
+                    
+            } else if (input.equals("3")){
+                fini = true;
+            }
 
             }
-                
-        }
-        
-        
 
-        
-        
-        
         System.out.println("ça marche");
         
          

@@ -183,7 +183,7 @@ public abstract class Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
-        Adiministrateur a = new Adiministrateur(laConnexion);
+        Administrateur a = new Administrateur(laConnexion);
 
         for (CommandeUnit comU : com.getListeCommandes()){
             try {

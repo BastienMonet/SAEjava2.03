@@ -6,13 +6,16 @@ import java.util.HashMap;
 public class ExecutableTest {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
-        ConnexionMySQL co = new ConnexionMySQL();
-        // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBmonet", "root", "4dameorc");
 
-        Adiministrateur a = new Adiministrateur(co);
+        InterfaceCLI i = new InterfaceCLI();
+        i.menuMain();
+        // ConnexionMySQL co = new ConnexionMySQL();
+        // // co.connecter(null, "DBmonet", "monet", "monet");
+        // co.connecter(null, "DBmonet", "root", "4dameorc");
 
-        a.ajouteAdminBD(new Adiministrateur("bastien", "monet", "1234"));
+        // Administrateur a = new Administrateur(co);
+
+        // a.ajouteAdminBD(new Administrateur("bastien", "monet", "1234"));
         // boolean res = a.seConnecter("john", "vincent", "1234");
 
         // System.out.println(res);
