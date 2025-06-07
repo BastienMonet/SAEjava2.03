@@ -112,8 +112,8 @@ public class InterfaceCLI {
             System.out.println("que souhaiter vous faire");
             System.out.println("1 - consulter le catalogue");
             System.out.println("2 - créer une commande");
-            System.out.println("3 - consulter ses commande");
-            System.out.println("4 - supprimer ses commande");
+            System.out.println("3 - consulter ses commandes");
+            System.out.println("4 - supprimer une commande");
             System.out.println("5 - quitter ce compte");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String res5 = reader.readLine();
@@ -175,6 +175,7 @@ public class InterfaceCLI {
 
     }
 
+
     public static void menuAdmin(Administrateur a) throws SQLException, Exception{
         System.out.println("WIP");
 
@@ -187,10 +188,91 @@ public class InterfaceCLI {
             System.out.println("1 - ajouter un magasin");
             System.out.println("2 - ajouter une livre");
             System.out.println("3 - ajouter un livre dans un magasin");
-            System.out.println("4 - ajouter un compte");
             System.out.println("5 - quitter");
-            BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
-            String res5 = r5.readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String input = reader.readLine();
+            switch (input) {
+                case ("1"):
+                    System.out.println("la base de donnée comporte ces magasin");
+                    System.out.println(a.voirToutLesMagasin());
+                    
+
+                    System.out.println("entrer le nom du magasin");
+                    String nom = reader.readLine();
+                    System.out.println("entrer la ville ou se situe le magasin");
+                    String nomville = reader.readLine();
+
+                    try {
+                        a.ajouteMagasinBD(new Magasin(0, nom, nomville, null));
+
+                        System.out.println("ajout réussi");
+                    } catch (Exception e){
+                        System.out.println(e.getMessage());
+                        System.out.println("une erreur c'est produite");
+                    }
+                    break;
+                case ("2"):
+                    System.out.println("la base de donnée comporte ces livres");
+                    System.out.println(a.onVousRecommande());
+
+                    System.out.println("entrer le titre du livre");
+                    String noml = reader.readLine();
+                    System.out.println("entrer le nombre de page du livre");
+                    int nbpl = Integer.valueOf(reader.readLine());
+                    System.out.println("entrer l'année de la publication");
+                    int annpublil = Integer.valueOf(reader.readLine());
+                    System.out.println("entrer le prix ");
+                    double prix = Double.valueOf(reader.readLine());
+                    
+
+                    try {
+                        a.ajouteLivreBD(new Livre(0, noml, nbpl, annpublil, prix));
+                        System.out.println("ajout réussi");
+                    } catch (Exception e){
+                        System.out.println(e.getMessage());
+                        System.out.println("une erreur c'est produite");
+                    }
+                    break;
+                case ("3"):
+                    System.out.println("quel livre? entrer son nom");
+                    System.out.println(a.onVousRecommande());
+                    String nomlivre = reader.readLine();
+
+                    System.out.println("dans quel magasin?");
+                    System.out.println(a.voirToutLesMagasin());
+                    String nomMag = reader.readLine();
+
+                    System.out.println("quel quantité?");
+                    int qte = Integer.valueOf(reader.readLine());
+
+                    System.out.println("ajouter ou retirer A/R");
+                    String action = reader.readLine();
+
+                    if (action.equals("A")) {
+                        try {
+                            a.ajouteLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), qte);
+                            System.out.println("ajout effectif");
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                            System.out.println("une erreur c'est produite");
+                        }
+                    }
+
+                    else if (action.equals("R")) {
+
+                        try {
+                            a.retireLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), qte);
+                            System.out.println("retrait effectif");
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                            System.out.println("une erreur c'est produite");
+                        }
+                    }
+                    break;
+                case ("4"):
+                    finiAdmin = true;
+                    break;
+            }
             
         }
     }
