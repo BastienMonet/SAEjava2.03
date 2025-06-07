@@ -10,7 +10,12 @@ public class ExecutableTest {
         // co.connecter(null, "DBmonet", "monet", "monet");
         co.connecter(null, "DBmonet", "root", "4dameorc");
 
-        // Adiministrateur a = new Adiministrateur(co);
+        Adiministrateur a = new Adiministrateur(co);
+
+        a.ajouteAdminBD(new Adiministrateur("bastien", "monet", "1234"));
+        // boolean res = a.seConnecter("john", "vincent", "1234");
+
+        // System.out.println(res);
 
         // Livre l1 = new Livre(1, "les dents de la mer", 169, 1990, 19.99);
         // Livre l2 = new Livre(2, "le magicien", 142, 2003, 15.00);
