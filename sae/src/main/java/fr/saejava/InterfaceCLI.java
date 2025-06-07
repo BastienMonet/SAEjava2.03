@@ -39,8 +39,8 @@ public class InterfaceCLI {
             System.out.println("2 - faire les comptes");
             System.out.println("3 - finaliser la commande");
             System.out.println("4 - annuler la commande");
-            BufferedReader r1 = new BufferedReader(new InputStreamReader(System.in));
-            String res1 = r1.readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String res1 = reader.readLine();
             switch (res1){
                 case ("1"):
 
@@ -53,9 +53,7 @@ public class InterfaceCLI {
                         System.out.println(l);
                     }
 
-
-                    BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
-                    String res2 = r2.readLine();
+                    String res2 = reader.readLine();
                     Livre livre = u.getLivreBDparTitre(res2);
 
                     System.out.println("il y a " + u.qteDansMagasin(livre, com.getMagasin()) + "fois l'exemplaire dans " + com.getMagasin());
@@ -64,9 +62,8 @@ public class InterfaceCLI {
 
                     System.out.println("! mettre une valeur plus grande que le nombre d'exemplaire annulera celle-ci !");
 
-                    BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
                     try{
-                        Integer qte = Integer.valueOf(r3.readLine());
+                        Integer qte = Integer.valueOf(reader.readLine());
 
                         if (qte <= u.qteDansMagasin(livre, com.getMagasin())){
                             CommandeUnit comU = new CommandeUnit(livre, qte);
@@ -117,8 +114,8 @@ public class InterfaceCLI {
             System.out.println("2 - créer une commande");
             System.out.println("3 - consulter ses commande");
             System.out.println("4 - quitter ce compte");
-            BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
-            String res5 = r5.readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String res5 = reader.readLine();
             switch (res5) {
                 case ("1") :
                     Set<Livre> lstLivre = c.onVousRecommande();
@@ -128,17 +125,13 @@ public class InterfaceCLI {
                     break;
                 case ("2") :
                     System.out.println("4 - la commande est t-elle en ligne");
-                    LocalDate myObj;
-                    BufferedReader r6 = new BufferedReader(new InputStreamReader(System.in));
-                    char res6 = r6.readLine().charAt(0);
+                    char res6 = reader.readLine().charAt(0);
                     System.out.println("4 - ou doit être fait la livraison");
-                    BufferedReader r7 = new BufferedReader(new InputStreamReader(System.in));
-                    char res7 = r7.readLine().charAt(0);
+                    char res7 = reader.readLine().charAt(0);
                     System.out.println("4 - dans quel magasin effectuer la commande");
                     List<Magasin> lstMag = c.voirToutLesMagasin();
                     System.out.println(lstMag);
-                    BufferedReader r8 = new BufferedReader(new InputStreamReader(System.in));
-                    Magasin res8 = c.getMagasinBDparNom(r8.readLine());
+                    Magasin res8 = c.getMagasinBDparNom(reader.readLine());
 
                     Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
                     menuCommander(c, com);
@@ -194,14 +187,12 @@ public class InterfaceCLI {
             String input = reader.readLine();
             if (input.equals("1") || input.equals("2")){
                 System.out.println("entrer votre nom d'utilisateur");
-                BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
-                String username = r2.readLine();
+            
+                String username = reader.readLine();
                 System.out.println("entrer votre prenom");
-                BufferedReader r3 = new BufferedReader(new InputStreamReader(System.in));
-                String lastname = r3.readLine();
+                String lastname = reader.readLine();
                 System.out.println("entrer votre mot de passe");
-                BufferedReader r4 = new BufferedReader(new InputStreamReader(System.in));
-                String pwd = r4.readLine();
+                String pwd = reader.readLine();
 
                     try{
                         boolean seco;
