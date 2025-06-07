@@ -263,4 +263,9 @@ public class Administrateur extends Utilisateur {
                 throw new Exception("le livre n'est pas dans le magasin");
             }
         }
+
+        @Override
+        public String toString() {
+            return "Admin " + super.toString();
+        }
 }

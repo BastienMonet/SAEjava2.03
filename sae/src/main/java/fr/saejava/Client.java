@@ -147,7 +147,7 @@ public class Client extends Utilisateur {
         if (idUtil == 0){
             return "ce client n'a pas encore d'identité";
         } else {
-            return super.toString() + " | " + adresseUtil + " | " + codePostal + " | " + villeUtil + " | " + monnaie;
+            return "Client " + super.toString() + " | " + adresseUtil + " | " + codePostal + " | " + villeUtil + " | " + monnaie;
         }
     }
 

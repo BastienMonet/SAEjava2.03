@@ -82,5 +82,10 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Vendeur " + super.toString();
+    }
+
 
 }
