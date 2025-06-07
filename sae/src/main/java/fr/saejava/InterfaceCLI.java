@@ -113,7 +113,8 @@ public class InterfaceCLI {
             System.out.println("1 - consulter le catalogue");
             System.out.println("2 - créer une commande");
             System.out.println("3 - consulter ses commande");
-            System.out.println("4 - quitter ce compte");
+            System.out.println("4 - supprimer ses commande");
+            System.out.println("5 - quitter ce compte");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String res5 = reader.readLine();
             switch (res5) {
@@ -143,8 +144,29 @@ public class InterfaceCLI {
                         System.out.println(comande);
                     }
                     break;
+                
+                case ("4"):
+                    List<Commande> lstCommande1 = c.voirSesCommande();
+                    for (Commande comande : lstCommande1){
+                        System.out.println(comande);
+                    }
 
-                case ("4") :
+                    System.out.println("laquel voulez vous supprimer (entrer son numero)");
+                    int comSuppr = Integer.valueOf(reader.readLine());
+                    
+                    try {
+                        c.retireSaCommande(comSuppr);
+
+                        System.out.println("la commande a bien été retirer");
+                    } catch (Exception e){
+                        System.out.println("le numero que vous avez demander ne correspond pas");
+                    }
+
+
+                    break;
+                
+
+                case ("5") :
                     finiClient = true;
                     break;
 
