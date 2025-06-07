@@ -161,7 +161,23 @@ public class InterfaceCLI {
     }
 
     public static void menuAdmin(Administrateur a) throws SQLException, Exception{
+        System.out.println("WIP");
 
+        boolean finiAdmin = false;
+        System.out.println("connection reussi");
+        System.out.println("bienvenue " + a );
+        while (! finiAdmin){
+            System.out.println();
+            System.out.println("que souhaitez vous faire");
+            System.out.println("1 - ajouter un magasin");
+            System.out.println("2 - ajouter une livre");
+            System.out.println("3 - ajouter un livre dans un magasin");
+            System.out.println("4 - ajouter un compte");
+            System.out.println("5 - quitter");
+            BufferedReader r5 = new BufferedReader(new InputStreamReader(System.in));
+            String res5 = r5.readLine();
+            
+        }
     }
 
 
