@@ -238,7 +238,7 @@ public class InterfaceCLI {
                     System.out.println(a.onVousRecommande());
                     String nomlivre = reader.readLine();
 
-                    System.out.println("dans quel magasin?");
+                    System.out.println("dans quel magasin? enter son nom");
                     System.out.println(a.voirToutLesMagasin());
                     String nomMag = reader.readLine();
 
