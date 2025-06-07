@@ -4,13 +4,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Adiministrateur extends Utilisateur {
+public class Administrateur extends Utilisateur {
     
-    public Adiministrateur(ConnexionMySQL laconnexion){
+    public Administrateur(ConnexionMySQL laconnexion){
         super(laconnexion);
     }
 
-    public Adiministrateur(String nomUtil, String prenomUtil, String pwd){
+    public Administrateur(String nomUtil, String prenomUtil, String pwd){
         super(nomUtil, prenomUtil, pwd);
     }
 
@@ -116,7 +116,7 @@ public class Adiministrateur extends Utilisateur {
         
     }
 
-    public void ajouteAdminBD(Adiministrateur a) throws SQLException{
+    public void ajouteAdminBD(Administrateur a) throws SQLException{
         st = laConnexion.createStatement();
         PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
         int max = getMaxIdUtil();
@@ -127,6 +127,27 @@ public class Adiministrateur extends Utilisateur {
 
 
         PreparedStatement ps2 = laConnexion.prepareStatement("insert into ADMINISTRATEUR values (?)");
+        ps2.setInt(1, max);
+        try{
+        ps1.executeUpdate();
+        ps2.executeUpdate();
+        } catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        
+    }
+
+    public void ajouteVendeurBD(Vendeur v) throws SQLException{
+        st = laConnexion.createStatement();
+        PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
+        int max = getMaxIdUtil();
+        ps1.setInt(1, max);
+        ps1.setString(2, v.getNomUtil());
+        ps1.setString(3, v.getPrenomUtil());
+        ps1.setString(4, v.getPwd());
+
+
+        PreparedStatement ps2 = laConnexion.prepareStatement("insert into VENDEUR values (?)");
         ps2.setInt(1, max);
         try{
         ps1.executeUpdate();

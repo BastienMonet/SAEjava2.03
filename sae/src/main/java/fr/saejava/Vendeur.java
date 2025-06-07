@@ -55,17 +55,32 @@ public class Vendeur extends Utilisateur {
     }
 
 
-
     @Override
-    public boolean seConnecter(String nom, String prenom, String pwd) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'seConnecter'");
+    public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
+        String sql = "SELECT VENDEUR.iduse, nomcli, prenomcli, pwd \n" + //
+                        "FROM UTILISATEUR\n" + //
+                        "JOIN VENDEUR ON UTILISATEUR.iduse = VENDEUR.iduse where nomcli = ? and prenomcli = ? and pwd = ?";
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement(sql);
+        ps.setString(1, nom);
+        ps.setString(2, prenom);
+        ps.setString(3, pwd);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()){
+            this.idUtil = rs.getInt(1);
+            this.nomUtil = rs.getString(2);
+            this.prenomUtil = rs.getString(3);
+            this.pwd = rs.getString(4);
+
+            rs.close();
+            return true;
+        } else {
+            rs.close();
+
+            return false;
+        }
     }
-
-
-    
-
-
 
 
 }
