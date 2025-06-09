@@ -102,7 +102,8 @@ CREATE TABLE LIVRE (
   titre     varchar(200),
   nbpages   int,
   datepubli int,
-  prix      decimal(6,2)
+  prix      decimal(6,2),
+  nbreAchat int
 );
 
 CREATE TABLE MAGASIN (

@@ -62,7 +62,7 @@ public class Magasin {
 
     @Override
     public String toString() {
-        return  idMag + " le magasin " + nomMag;
+        return  idMag + " " + nomMag;
         
     }
 

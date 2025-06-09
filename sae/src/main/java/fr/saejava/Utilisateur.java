@@ -91,40 +91,51 @@ public abstract class Utilisateur {
         return lstMag;
     }
 
-    public Set<Livre> onVousRecommande() throws SQLException{
-        Set<Livre> res = new HashSet<>();
+    public List<Livre> voirToutLesLivre() throws SQLException{
+        List<Livre> lstLivre = new ArrayList<>();
 
+        String query = "SELECT * FROM LIVRE";
         st = laConnexion.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()){
+            lstLivre.add(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")));
+        }
+        return lstLivre;
+    }
+
+    public List<Livre> onVousRecommande() throws SQLException{
+        List<Livre> res = new ArrayList<>();
+
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn");
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn ORDER BY nbreAchat DESC");
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
             
             res.add(l);
         }
         return res;
     }
 
-    public Set<Livre> onVousRecommandeDansMagasin(Magasin m) throws SQLException{
-        Set<Livre> res = new HashSet<>();
-
-        st = laConnexion.createStatement();
+    public List<Livre> onVousRecommandeDansMagasin(Magasin m) throws SQLException{
+        List<Livre> res = new ArrayList<>();
+        
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ?");
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? ORDER BY nbreAchat DESC");
         ps.setInt(1, m.getIdMag());
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
             
             res.add(l);
         }
         return res;
     }
 
-    public Magasin getMagasinBDparId(String nommag) throws SQLException, Exception{
+    public Magasin getMagasinBDparNom(String nommag) throws SQLException, Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN where nommag = ? ");
         ps.setString(1, nommag);
         ResultSet rs = ps.executeQuery();
@@ -142,7 +153,7 @@ public abstract class Utilisateur {
         ps.setString(1, titre);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
         } else {
             throw new Exception("ce livre n'existe pas");
         }
@@ -169,10 +180,75 @@ public abstract class Utilisateur {
         }
     }
 
+    public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
+        ps.setInt(1, m.getIdMag());
+        ps.setInt(2, l.getIsbn());
+
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()){
+            int qteActuel = rs.getInt("qte");
+
+            if(qteActuel > qte){
+                PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
+                ps2.setInt(1, qteActuel - qte);
+                ps2.setInt(2, m.getIdMag());
+                ps2.setInt(3, l.getIsbn());
+                try{
+                    ps2.executeUpdate();
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println("erreur a la requete 2");
+                }
+
+            } else if (qteActuel == qte){
+                PreparedStatement ps2 = laConnexion.prepareStatement("DELETE from POSSEDER where idmag = ? and isbn = ?");
+                ps2.setInt(1, m.getIdMag());
+                ps2.setInt(2, l.getIsbn());
+                try{
+                    ps2.executeUpdate();
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println("erreur a la requete 3");
+                }
+
+            } else {
+                throw new Exception("il n'y a pas assez de livre pour retirer une tel quantite");
+            }
+
+            
+        } else {
+            throw new Exception("le livre n'est pas dans le magasin");
+        }
+    }
+
+
+    public Commande getCommande(int numCom) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select * from COMMANDE join MAGASIN on COMMANDE.idmag = MAGASIN.idmag where numcom = ?");
+        ps.setInt(1, numCom);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), getMagasinBDparNom(rs.getString("nommag")));
+            getCommandeUnit(c);
+            return c;
+        } else {
+            throw new SQLException();
+        }
+    }
+
+    public void getCommandeUnit(Commande c) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select * from DETAILCOMMANDE join LIVRE on DETAILCOMMANDE.isbn = LIVRE.isbn where numcom = ?");
+        ps.setInt(1, c.getNumCom());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            c.addCommandeUnit(new CommandeUnit(getLivreBDparTitre(rs.getString("titre")), rs.getInt("qte")));
+        }
+        
+    }
+
+
     public void ajouteCommandeBD(Commande com) throws SQLException {
-        /*
-         * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
-         */
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
         ps.setInt(1, max);
@@ -183,13 +259,13 @@ public abstract class Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
-        Adiministrateur a = new Adiministrateur(laConnexion);
-
         for (CommandeUnit comU : com.getListeCommandes()){
             try {
-            a.retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
+            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
             ajouteCommandeUnitBD(max,comU);
+            incrementeAchat(comU.getLivre().getIsbn());
             } catch (Exception e){
+                System.err.println(e.getMessage());
                 System.err.println("vous avez demmander une commande impossible");
             }
         }
@@ -208,7 +284,19 @@ public abstract class Utilisateur {
     }
 
 
-    public List<CommandeUnit> voirSesDetailCommande(Commande com) throws SQLException, Exception{
+    public int qteDansMagasin(Livre l, Magasin m) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
+        ps.setInt(1, l.getIsbn());
+        ps.setString(2, m.getNomMag());
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return rs.getInt("qte");
+        } else {
+            throw new Exception("il n'y a plus de livre dans ce magasin");
+        }
+    }
+
+    public List<CommandeUnit> voirDetailCommande(Commande com) throws SQLException, Exception{
 
         /*
          * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
@@ -220,59 +308,92 @@ public abstract class Utilisateur {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT *" +
                                                     "FROM COMMANDE "+
                                                     "JOIN DETAILCOMMANDE ON COMMANDE.numcom = DETAILCOMMANDE.numcom " +
-                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn");
+                                                    "JOIN LIVRE ON DETAILCOMMANDE.isbn = LIVRE.isbn where COMMANDE.numcom = ?");
         ps.setInt(1, com.getNumCom());
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix")), rs.getInt("qte"));
-            
+            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")), rs.getInt("qte"));
             res.add(cU);
         }
+        rs.close();
         return res;
     }
 
-
-    public List<Commande> voirSesCommande() throws SQLException, Exception{
-
-        /*
-         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
-         * 
-         */
-        List<Commande> res = new ArrayList<>();
-
+    public void retireDetailCommande(int numCom) throws Exception{
+        // TODO
         st = laConnexion.createStatement();
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
-                        "FROM UTILISATEUR AS u \n" + //
-                        "JOIN COMMANDE AS c \n" + //
-                        "ON u.iduse = c.iduse \n" + //
-                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
-        ps.setInt(1, this.idUtil);
+        PreparedStatement ps = laConnexion.prepareStatement("DELETE DETAILCOMMANDE " +
+                                                    "FROM DETAILCOMMANDE where numcom = ?");
+        ps.setInt(1, numCom);
+        ps.executeUpdate();
+        
+    }
+
+    public int getNbreAchats(int isbn) throws Exception {
+        PreparedStatement ps = laConnexion.prepareStatement("Select * from LIVRE where isbn = ?");
+        ps.setInt(1, isbn);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
-            while(rs.next()){
-                Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), new Magasin(0, rs.getString("nommag"), rs.getString("villemag"), null));
-                c.setListeCommandeUnit(voirSesDetailCommande(c));
-                res.add(c);
-            }
-
-
+            return rs.getInt("nbreAchat");
         } else {
-            System.err.println("vous n'avez acctuelement aucune commande");
+            throw new SQLException("le livre n'existe pas");
         }
-        return res;
+        
+
     }
 
-    public String qteDansMagasin(Livre l, Magasin m) throws SQLException{
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
-        ps.setInt(1, l.getIsbn());
-        ps.setString(2, m.getNomMag());
+    public void incrementeAchat(int isbn) throws Exception{
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbreAchat = ? where isbn = ?");
+        ps.setInt(1, getNbreAchats(isbn) + 1);
+        ps.setInt(2, isbn);
+        ps.executeUpdate();
+    }
+
+    public void decrementeAchat(int isbn) throws Exception{
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbreAchat = ? where isbn = ?");
+        ps.setInt(1, getNbreAchats(isbn) - 1);
+        ps.setInt(2, isbn);
+        ps.executeUpdate();
+    }
+
+    public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException{
+        PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
+        ps.setInt(1, m.getIdMag());
+        ps.setInt(2, l.getIsbn());
+
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
-            return " il y a " + rs.getString("qte") + " fois l'exemplaire dans le magasin " + rs.getString("nommag") + "\n";
+        
+
+        if (rs.next()){
+            int qteActuel = rs.getInt("qte");
+
+            PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
+            ps2.setInt(1, qteActuel + qte);
+            ps2.setInt(2, m.getIdMag());
+            ps2.setInt(3, l.getIsbn());
+            try{
+                ps2.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 2");
+            }
+            
         } else {
-            return " desoler mais ce magasin ne possède pas ce livre";
+            PreparedStatement ps3 = laConnexion.prepareStatement("insert into POSSEDER values (?, ?, ?)");
+            ps3.setInt(1, m.getIdMag());
+            ps3.setInt(2, l.getIsbn());
+            ps3.setInt(3, qte);
+            try{
+                ps3.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 3");
+            }
         }
-    }
+
+        }
 
     @Override
     public String toString() {

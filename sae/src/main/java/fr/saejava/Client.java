@@ -56,21 +56,6 @@ public class Client extends Utilisateur {
         this.monnaie += montant;
     }
 
-    public void ajouteCommande(Commande com) throws Exception{
-        if (monnaie - com.prixTotCommande() > 0){
-            commandes.add(com);
-            monnaie -= com.prixTotCommande();
-            com.commander();
-        } else {
-            throw new Exception("prix de la commande trop élever");
-        }
-    }
-
-    public void retireCommande(Commande com) throws IllegalArgumentException, Exception{
-        this.monnaie += com.prixTotCommande();
-        commandes.remove(com);
-        com.renvoyer();
-    }
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
         String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
@@ -102,12 +87,57 @@ public class Client extends Utilisateur {
         }
     }
 
+    public List<Commande> voirSesCommande() throws SQLException, Exception{
+
+        /*
+         * si il y a le temps, ajouter une jointure au magasin pour connaitre ces sepciticité
+         * 
+         */
+        List<Commande> res = new ArrayList<>();
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * \n" + //
+                        "FROM UTILISATEUR AS u \n" + //
+                        "JOIN COMMANDE AS c \n" + //
+                        "ON u.iduse = c.iduse \n" + //
+                        "JOIN MAGASIN AS m ON c.idmag = m.idmag where u.iduse = ?");
+        ps.setInt(1, this.idUtil);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
+            c.setListeCommandeUnit(voirDetailCommande(c));
+            res.add(c);
+        }
+
+        return res;
+    }
+
+    public void retireSaCommande(Commande c) throws Exception{
+
+        retireDetailCommande(c.getNumCom());
+
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("DELETE COMMANDE FROM COMMANDE where iduse = ? and numcom = ?");
+        ps.setInt(1, this.idUtil);
+        ps.setInt(2, c.getNumCom());
+        ps.executeUpdate();
+
+        for (CommandeUnit comU : c.getListeCommandes()){
+            ajouteLivreDansMagasin(c.getMagasin(), comU.getLivre(), comU.getQte());
+            decrementeAchat(comU.getLivre().getIsbn());
+        }
+
+       
+        
+    }
+
+
     @Override
     public String toString() {
         if (idUtil == 0){
             return "ce client n'a pas encore d'identité";
         } else {
-            return super.toString() + " | " + adresseUtil + " | " + codePostal + " | " + villeUtil + " | " + monnaie;
+            return "Client " + super.toString() + " | " + adresseUtil + " | " + codePostal + " | " + villeUtil + " | " + monnaie;
         }
     }
 
