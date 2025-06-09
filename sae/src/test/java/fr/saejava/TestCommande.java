@@ -21,7 +21,7 @@ public class TestCommande {
     public void testAjout() {
         
 
-        CommandeUnit commandeUnit = new CommandeUnit(new Livre(123456789, "Test Book", 100, 1, 20), 2);
+        CommandeUnit commandeUnit = new CommandeUnit(new Livre(123456789, "Test Book", 100, 1, 20, 0), 2);
         Commande commande = new Commande(1, "2023-01-01", 'a', 'L', null);
 
         commande.ajouterCommandeUnit(commandeUnit);
@@ -33,9 +33,9 @@ public class TestCommande {
     public void TestCommander() throws IllegalArgumentException, Exception{
         Map<Livre, Integer> lesLivre = new HashMap<>();
 
-        Livre l1 = new Livre(1, "a", 0, 1, 0);
-        Livre l2 = new Livre(2, "b", 0, 1, 0);
-        Livre l3 = new Livre(3, "c", 0, 1, 0);
+        Livre l1 = new Livre(1, "a", 0, 1, 0, 0);
+        Livre l2 = new Livre(2, "b", 0, 1, 0, 0);
+        Livre l3 = new Livre(3, "c", 0, 1, 0, 0);
 
         lesLivre.put(l1, 4);
         lesLivre.put(l2, 2);

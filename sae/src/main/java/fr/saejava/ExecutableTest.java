@@ -7,8 +7,6 @@ public class ExecutableTest {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
 
-        InterfaceCLI i = new InterfaceCLI();
-        i.menuMain();
         // ConnexionMySQL co = new ConnexionMySQL();
         // // co.connecter(null, "DBmonet", "monet", "monet");
         // co.connecter(null, "DBmonet", "root", "4dameorc");
@@ -16,6 +14,12 @@ public class ExecutableTest {
         // Administrateur a = new Administrateur(co);
 
         // a.ajouteAdminBD(new Administrateur("bastien", "monet", "1234"));
+
+        // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));
+
+        InterfaceCLI i = new InterfaceCLI();
+        i.menuMain();
+        
         // boolean res = a.seConnecter("john", "vincent", "1234");
 
         // System.out.println(res);
@@ -24,7 +28,7 @@ public class ExecutableTest {
         // Livre l2 = new Livre(2, "le magicien", 142, 2003, 15.00);
         // Livre l3 = new Livre(3, "fuir", 546, 2016, 45.05);
 
-        // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));
+        
         // Magasin baxMagasin = new Magasin(1, "babar", "BAXville", new HashMap<>());
         // Magasin centreMagasin = new Magasin(2, "centre librairie", "centre", new HashMap<>());
         // // a.retireLivreBD(1);

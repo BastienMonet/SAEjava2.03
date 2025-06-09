@@ -56,7 +56,7 @@ public class InterfaceCLI {
                     String res2 = reader.readLine();
                     Livre livre = u.getLivreBDparTitre(res2);
 
-                    System.out.println("il y a " + u.qteDansMagasin(livre, com.getMagasin()) + "fois l'exemplaire dans " + com.getMagasin());
+                    System.out.println("il y a " + u.qteDansMagasin(livre, com.getMagasin()) + " fois l'exemplaire dans " + com.getMagasin());
 
                     System.out.println("combien de livre souhaitez vous acheter?");
 
@@ -188,7 +188,7 @@ public class InterfaceCLI {
             System.out.println("1 - ajouter un magasin");
             System.out.println("2 - ajouter une livre");
             System.out.println("3 - ajouter un livre dans un magasin");
-            System.out.println("5 - quitter");
+            System.out.println("4 - quitter");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
             switch (input) {
@@ -213,7 +213,7 @@ public class InterfaceCLI {
                     break;
                 case ("2"):
                     System.out.println("la base de donnée comporte ces livres");
-                    System.out.println(a.onVousRecommande());
+                    System.out.println(a.voirToutLesLivre());
 
                     System.out.println("entrer le titre du livre");
                     String noml = reader.readLine();
@@ -226,7 +226,7 @@ public class InterfaceCLI {
                     
 
                     try {
-                        a.ajouteLivreBD(new Livre(0, noml, nbpl, annpublil, prix));
+                        a.ajouteLivreBD(new Livre(0, noml, nbpl, annpublil, prix, 0));
                         System.out.println("ajout réussi");
                     } catch (Exception e){
                         System.out.println(e.getMessage());
@@ -235,7 +235,7 @@ public class InterfaceCLI {
                     break;
                 case ("3"):
                     System.out.println("quel livre? entrer son nom");
-                    System.out.println(a.onVousRecommande());
+                    System.out.println(a.voirToutLesLivre());
                     String nomlivre = reader.readLine();
 
                     System.out.println("dans quel magasin? enter son nom");
