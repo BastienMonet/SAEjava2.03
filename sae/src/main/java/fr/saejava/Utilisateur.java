@@ -107,7 +107,6 @@ public abstract class Utilisateur {
     public List<Livre> onVousRecommande() throws SQLException{
         List<Livre> res = new ArrayList<>();
 
-        st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
                                                             "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn ORDER BY nbreAchat DESC");
@@ -122,8 +121,7 @@ public abstract class Utilisateur {
 
     public List<Livre> onVousRecommandeDansMagasin(Magasin m) throws SQLException{
         List<Livre> res = new ArrayList<>();
-
-        st = laConnexion.createStatement();
+        
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
                                                             "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? ORDER BY nbreAchat DESC");
