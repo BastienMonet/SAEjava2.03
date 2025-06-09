@@ -91,16 +91,29 @@ public abstract class Utilisateur {
         return lstMag;
     }
 
+    public List<Livre> voirToutLesLivre() throws SQLException{
+        List<Livre> lstLivre = new ArrayList<>();
+
+        String query = "SELECT * FROM LIVRE";
+        st = laConnexion.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()){
+            lstLivre.add(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")));
+        }
+        return lstLivre;
+    }
+
     public Set<Livre> onVousRecommande() throws SQLException{
         Set<Livre> res = new HashSet<>();
 
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn");
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn ORDER BY nbreAchat");
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
             
             res.add(l);
         }
@@ -113,11 +126,11 @@ public abstract class Utilisateur {
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ?");
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? ORDER BY nbreAchat");
         ps.setInt(1, m.getIdMag());
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
             
             res.add(l);
         }
@@ -142,7 +155,7 @@ public abstract class Utilisateur {
         ps.setString(1, titre);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"));
+            return new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
         } else {
             throw new Exception("ce livre n'existe pas");
         }
@@ -169,6 +182,50 @@ public abstract class Utilisateur {
         }
     }
 
+    public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException, Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
+        ps.setInt(1, m.getIdMag());
+        ps.setInt(2, l.getIsbn());
+
+        ResultSet rs = ps.executeQuery();
+        
+
+        if (rs.next()){
+            int qteActuel = rs.getInt("qte");
+
+            if(qteActuel > qte){
+                PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
+                ps2.setInt(1, qteActuel - qte);
+                ps2.setInt(2, m.getIdMag());
+                ps2.setInt(3, l.getIsbn());
+                try{
+                    ps2.executeUpdate();
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println("erreur a la requete 2");
+                }
+
+            } else if (qteActuel == qte){
+                PreparedStatement ps2 = laConnexion.prepareStatement("DELETE from POSSEDER where idmag = ? and isbn = ?");
+                ps2.setInt(1, m.getIdMag());
+                ps2.setInt(2, l.getIsbn());
+                try{
+                    ps2.executeUpdate();
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println("erreur a la requete 3");
+                }
+
+            } else {
+                throw new Exception("il n'y a pas assez de livre pour retirer une tel quantite");
+            }
+
+            
+        } else {
+            throw new Exception("le livre n'est pas dans le magasin");
+        }
+    }
+
     public void ajouteCommandeBD(Commande com) throws SQLException {
         /*
          * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
@@ -183,11 +240,9 @@ public abstract class Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
-        Administrateur a = new Administrateur(laConnexion);
-
         for (CommandeUnit comU : com.getListeCommandes()){
             try {
-            a.retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
+            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
             ajouteCommandeUnitBD(max,comU);
             } catch (Exception e){
                 System.err.println("vous avez demmander une commande impossible");
@@ -236,7 +291,7 @@ public abstract class Utilisateur {
         ps.setInt(1, com.getNumCom());
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix")), rs.getInt("qte"));
+            CommandeUnit cU = new CommandeUnit(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")), rs.getInt("qte"));
             res.add(cU);
         }
         rs.close();
@@ -244,6 +299,7 @@ public abstract class Utilisateur {
     }
 
     public void retireDetailCommande(int numCom) throws Exception{
+        // TODO
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("DELETE DETAILCOMMANDE " +
                                                     "FROM DETAILCOMMANDE where numcom = ?");
@@ -252,14 +308,26 @@ public abstract class Utilisateur {
         
     }
 
-    // public void getNbreAchats()
+    public int getNbreAchats(int isbn) throws Exception {
+        PreparedStatement ps = laConnexion.prepareStatement("Select * from LIVRE where isbn = ?");
+        ps.setInt(1, isbn);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return rs.getInt("nbreAchat");
+        } else {
+            throw new SQLException("le livre n'existe pas");
+        }
+        
 
-    // public void incrementeAchat(Livre l) throws Exception{
-    //     st = laConnexion.createStatement();
-    //     PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbAchat = ? where isbn = ?");
+    }
 
-
-    // }
+    public void incrementeAchat(int isbn) throws Exception{
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbAchat = ? where isbn = ?");
+        ps.setInt(1, getNbreAchats(isbn));
+        ps.setInt(2, isbn);
+        ps.executeUpdate();
+    }
 
     @Override
     public String toString() {

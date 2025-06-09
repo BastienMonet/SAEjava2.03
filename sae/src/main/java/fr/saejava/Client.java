@@ -56,21 +56,6 @@ public class Client extends Utilisateur {
         this.monnaie += montant;
     }
 
-    public void ajouteCommande(Commande com) throws Exception{
-        if (monnaie - com.prixTotCommande() > 0){
-            commandes.add(com);
-            monnaie -= com.prixTotCommande();
-            com.commander();
-        } else {
-            throw new Exception("prix de la commande trop élever");
-        }
-    }
-
-    public void retireCommande(Commande com) throws IllegalArgumentException, Exception{
-        this.monnaie += com.prixTotCommande();
-        commandes.remove(com);
-        com.renvoyer();
-    }
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
         String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
@@ -128,6 +113,7 @@ public class Client extends Utilisateur {
     }
 
     public void retireSaCommande(int numCom) throws Exception{
+        // TODO
 
         retireDetailCommande(numCom);
 

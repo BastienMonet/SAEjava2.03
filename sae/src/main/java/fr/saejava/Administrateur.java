@@ -54,12 +54,13 @@ public class Administrateur extends Utilisateur {
 
     public void ajouteLivreBD(Livre l) throws SQLException{
         st = laConnexion.createStatement();
-        PreparedStatement ps = laConnexion.prepareStatement("insert into LIVRE values (?, ?, ?, ?, ?)");
+        PreparedStatement ps = laConnexion.prepareStatement("insert into LIVRE values (?, ?, ?, ?, ?, ?)");
         ps.setInt(1, getmaxisbn());
         ps.setString(2, l.getTitre());
         ps.setInt(3, l.getNbPages());
         ps.setInt(4, l.getDatePubli());
         ps.setDouble(5, l.getPrix());
+        ps.setInt(6, 0);
         try{
         ps.executeUpdate();
         } catch (SQLException e){
@@ -217,51 +218,6 @@ public class Administrateur extends Utilisateur {
             }
         }
 
-        }
-
-
-        public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException, Exception{
-            PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
-            ps.setInt(1, m.getIdMag());
-            ps.setInt(2, l.getIsbn());
-    
-            ResultSet rs = ps.executeQuery();
-            
-    
-            if (rs.next()){
-                int qteActuel = rs.getInt("qte");
-
-                if(qteActuel > qte){
-                    PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
-                    ps2.setInt(1, qteActuel - qte);
-                    ps2.setInt(2, m.getIdMag());
-                    ps2.setInt(3, l.getIsbn());
-                    try{
-                        ps2.executeUpdate();
-                    } catch (SQLException e) {
-                        System.err.println(e.getMessage());
-                        System.err.println("erreur a la requete 2");
-                    }
-
-                } else if (qteActuel == qte){
-                    PreparedStatement ps2 = laConnexion.prepareStatement("DELETE from POSSEDER where idmag = ? and isbn = ?");
-                    ps2.setInt(1, m.getIdMag());
-                    ps2.setInt(2, l.getIsbn());
-                    try{
-                        ps2.executeUpdate();
-                    } catch (SQLException e) {
-                        System.err.println(e.getMessage());
-                        System.err.println("erreur a la requete 3");
-                    }
-
-                } else {
-                    throw new Exception("il n'y a pas assez de livre pour retirer une tel quantite");
-                }
-    
-                
-            } else {
-                throw new Exception("le livre n'est pas dans le magasin");
-            }
         }
 
         @Override

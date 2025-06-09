@@ -11,12 +11,13 @@ public class Livre {
     private double prix = 0;
     private int nbreAchats = 0;
 
-    public Livre(int isbn, String titre, int nbPages, int datePubli, double prix) {
+    public Livre(int isbn, String titre, int nbPages, int datePubli, double prix, int nbAchats) {
         this.isbn = isbn;
         this.titre = titre;
         this.nbPages = nbPages;
         this.datePubli = datePubli;
         this.prix = prix;
+        this.nbreAchats = nbAchats;
     }
 
     public int getIsbn() {
@@ -81,6 +82,6 @@ public class Livre {
 
     @Override
     public String toString() {
-        return titre + " " + datePubli + " " + prix + " " + "$";
+        return titre + " " + datePubli + " " + prix + " " + "$ " + nbreAchats; 
     }
 }
