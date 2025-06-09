@@ -112,16 +112,20 @@ public class Client extends Utilisateur {
         return res;
     }
 
-    public void retireSaCommande(int numCom) throws Exception{
-        // TODO
+    public void retireSaCommande(Commande c) throws Exception{
 
-        retireDetailCommande(numCom);
+        retireDetailCommande(c.getNumCom());
 
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("DELETE COMMANDE FROM COMMANDE where iduse = ? and numcom = ?");
         ps.setInt(1, this.idUtil);
-        ps.setInt(2, numCom);
+        ps.setInt(2, c.getNumCom());
         ps.executeUpdate();
+
+        for (CommandeUnit comU : c.getListeCommandes()){
+            ajouteLivreDansMagasin(c.getMagasin(), comU.getLivre(), comU.getQte());
+            decrementeAchat(comU.getLivre().getIsbn());
+        }
 
        
         

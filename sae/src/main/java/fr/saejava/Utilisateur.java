@@ -225,10 +225,32 @@ public abstract class Utilisateur {
         }
     }
 
+
+    public Commande getCommande(int numCom) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select * from COMMANDE join MAGASIN on COMMANDE.idmag = MAGASIN.idmag where numcom = ?");
+        ps.setInt(1, numCom);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), getMagasinBDparNom(rs.getString("nommag")));
+            getCommandeUnit(c);
+            return c;
+        } else {
+            throw new SQLException();
+        }
+    }
+
+    public void getCommandeUnit(Commande c) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("select * from DETAILCOMMANDE join LIVRE on DETAILCOMMANDE.isbn = LIVRE.isbn where numcom = ?");
+        ps.setInt(1, c.getNumCom());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            c.addCommandeUnit(new CommandeUnit(getLivreBDparTitre(rs.getString("titre")), rs.getInt("qte")));
+        }
+        
+    }
+
+
     public void ajouteCommandeBD(Commande com) throws SQLException {
-        /*
-         * ! ne pas oublier de retirer le nombre de livre commander au magasin attitrer
-         */
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
         ps.setInt(1, max);
@@ -329,6 +351,51 @@ public abstract class Utilisateur {
         ps.setInt(2, isbn);
         ps.executeUpdate();
     }
+
+    public void decrementeAchat(int isbn) throws Exception{
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbreAchat = ? where isbn = ?");
+        ps.setInt(1, getNbreAchats(isbn) - 1);
+        ps.setInt(2, isbn);
+        ps.executeUpdate();
+    }
+
+    public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException{
+        PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
+        ps.setInt(1, m.getIdMag());
+        ps.setInt(2, l.getIsbn());
+
+        ResultSet rs = ps.executeQuery();
+        
+
+        if (rs.next()){
+            int qteActuel = rs.getInt("qte");
+
+            PreparedStatement ps2 = laConnexion.prepareStatement("UPDATE POSSEDER set qte = ? where idmag = ? and isbn = ?");
+            ps2.setInt(1, qteActuel + qte);
+            ps2.setInt(2, m.getIdMag());
+            ps2.setInt(3, l.getIsbn());
+            try{
+                ps2.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 2");
+            }
+            
+        } else {
+            PreparedStatement ps3 = laConnexion.prepareStatement("insert into POSSEDER values (?, ?, ?)");
+            ps3.setInt(1, m.getIdMag());
+            ps3.setInt(2, l.getIsbn());
+            ps3.setInt(3, qte);
+            try{
+                ps3.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                System.err.println("erreur a la requete 3");
+            }
+        }
+
+        }
 
     @Override
     public String toString() {

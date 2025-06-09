@@ -85,7 +85,7 @@ public class InterfaceCLI {
                     for (CommandeUnit cmuU : lstComU){
                         System.out.println(cmuU);
                     }
-                    System.out.println("cela vous fait :" + com.prixTotCommande() + "$ pour l'instant" );
+                    System.out.println("cela vous fait :" + com.prixTotCommande() + " $ pour l'instant" );
                     System.out.println(com);
                     break;
                 case ("3"):
@@ -125,17 +125,22 @@ public class InterfaceCLI {
                     }
                     break;
                 case ("2") :
-                    System.out.println("4 - la commande est t-elle en ligne");
+                    System.out.println("4 - la commande est t-elle en ligne O/N");
                     char res6 = reader.readLine().charAt(0);
-                    System.out.println("4 - ou doit être fait la livraison");
+                    System.out.println("4 - ou doit être fait la livraison C/M");
                     char res7 = reader.readLine().charAt(0);
-                    System.out.println("4 - dans quel magasin effectuer la commande");
+                    System.out.println("4 - dans quel magasin effectuer la commande (tapper son nom)");
                     List<Magasin> lstMag = c.voirToutLesMagasin();
                     System.out.println(lstMag);
                     Magasin res8 = c.getMagasinBDparNom(reader.readLine());
-
-                    Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
-                    menuCommander(c, com);
+                    try {
+                        Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
+                        menuCommander(c, com);
+                    } catch (Exception e){
+                        System.err.println(e.getMessage());
+                        System.err.println("une erreur c'est produite");
+                    }
+                    
                     break;
 
                 case ("3") :
@@ -152,10 +157,12 @@ public class InterfaceCLI {
                     }
 
                     System.out.println("laquel voulez vous supprimer (entrer son numero)");
-                    int comSuppr = Integer.valueOf(reader.readLine());
+                    
                     
                     try {
-                        c.retireSaCommande(comSuppr);
+                        int comSuppr = Integer.valueOf(reader.readLine());
+                        Commande comm = c.getCommande(comSuppr);
+                        c.retireSaCommande(comm);
 
                         System.out.println("la commande a bien été retirer");
                     } catch (Exception e){
@@ -243,14 +250,14 @@ public class InterfaceCLI {
                     String nomMag = reader.readLine();
 
                     System.out.println("quel quantité?");
-                    int qte = Integer.valueOf(reader.readLine());
+                    String qte = reader.readLine();
 
                     System.out.println("ajouter ou retirer A/R");
                     String action = reader.readLine();
 
                     if (action.equals("A")) {
                         try {
-                            a.ajouteLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), qte);
+                            a.ajouteLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), Integer.valueOf(qte));
                             System.out.println("ajout effectif");
                         } catch (Exception e){
                             System.out.println(e.getMessage());
@@ -261,7 +268,7 @@ public class InterfaceCLI {
                     else if (action.equals("R")) {
 
                         try {
-                            a.retireLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), qte);
+                            a.retireLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), Integer.valueOf(qte));
                             System.out.println("retrait effectif");
                         } catch (Exception e){
                             System.out.println(e.getMessage());
