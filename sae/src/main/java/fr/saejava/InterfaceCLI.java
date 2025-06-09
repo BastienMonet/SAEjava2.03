@@ -47,7 +47,7 @@ public class InterfaceCLI {
                     System.out.println("quel livre souhaitez vous");
                     System.out.println("entrer le nom du livre");
 
-                    Set<Livre> lstLivre = u.onVousRecommandeDansMagasin(com.getMagasin());
+                    List<Livre> lstLivre = u.onVousRecommandeDansMagasin(com.getMagasin());
 
                     for (Livre l : lstLivre){
                         System.out.println(l);
@@ -119,7 +119,7 @@ public class InterfaceCLI {
             String res5 = reader.readLine();
             switch (res5) {
                 case ("1") :
-                    Set<Livre> lstLivre = c.onVousRecommande();
+                    List<Livre> lstLivre = c.onVousRecommande();
                     for (Livre l : lstLivre){
                         System.out.println(l);
                     }
