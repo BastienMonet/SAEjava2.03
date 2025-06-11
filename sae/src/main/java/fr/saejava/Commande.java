@@ -86,29 +86,29 @@ public class Commande {
         this.listeCommandes.add(commandeUnit);
     }
 
-    public void commander() throws IllegalArgumentException, Exception{
-        /*
-         * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasins grace au commande en plus
-         * de les retirer du stock
-         */
-        Magasin lemagasin = getMagasin();
-        for (CommandeUnit comU : listeCommandes){
-            Livre lelivre = comU.getLivre();
-            int qte = comU.getQte();
-            lelivre.incrementeAchat(qte);
-            lemagasin.retireLivre(lelivre, qte);
-        } 
-    }
+    // public void commander() throws IllegalArgumentException, Exception{
+    //     /*
+    //      * methode la plus delicate du sujet : il s'agit de modifier le nbre d'achat des magasins grace au commande en plus
+    //      * de les retirer du stock
+    //      */
+    //     Magasin lemagasin = getMagasin();
+    //     for (CommandeUnit comU : listeCommandes){
+    //         Livre lelivre = comU.getLivre();
+    //         int qte = comU.getQte();
+    //         lelivre.incrementeAchat(qte);
+    //         lemagasin.retireLivre(lelivre, qte);
+    //     } 
+    // }
 
-    public void renvoyer() throws IllegalArgumentException, Exception{
-        Magasin lemagasin = getMagasin();
-        for (CommandeUnit comU : listeCommandes){
-            Livre lelivre = comU.getLivre();
-            int qte = comU.getQte();
-            lelivre.incrementeAchat(-qte);
-            lemagasin.ajouteLivre(lelivre, qte);
-        } 
-    }
+    // public void renvoyer() throws IllegalArgumentException, Exception{
+    //     Magasin lemagasin = getMagasin();
+    //     for (CommandeUnit comU : listeCommandes){
+    //         Livre lelivre = comU.getLivre();
+    //         int qte = comU.getQte();
+    //         lelivre.incrementeAchat(-qte);
+    //         lemagasin.ajouteLivre(lelivre, qte);
+    //     } 
+    // }
 
     @Override
     public String toString() {

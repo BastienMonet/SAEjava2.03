@@ -49,23 +49,19 @@ public class Livre {
         this.nbreAchats = nbreAchats;
     }
 
-    public void incrementeAchat(int qte) throws Exception{
-        /*
-         * permet d'incrementer ou de decrementer le compteur d'achat nbre d'achat
-         * @param : int la quantite correspondant au nombre de livre acheter
-         */
-        if (nbreAchats + qte >= 0)
-            nbreAchats += qte;
-        else 
-            throw new Exception("impossible, il ne peut pas y avoir un nombre négatif d'achat");
-    }
+    // public void incrementeAchat(int qte) throws Exception{
+    //     /*
+    //      * permet d'incrementer ou de decrementer le compteur d'achat nbre d'achat
+    //      * @param : int la quantite correspondant au nombre de livre acheter
+    //      */
+    //     if (nbreAchats + qte >= 0)
+    //         nbreAchats += qte;
+    //     else 
+    //         throw new Exception("impossible, il ne peut pas y avoir un nombre négatif d'achat");
+    // }
 
 
     @Override
-    /*
-     * ! a ameliorer mais ne surtout pas mettre un equals avec nbreD'achat : c'est là
-     *   qu'est l'astuce pour conaitre le nombre de livre acheter dans un magasin
-     */
     public boolean equals(Object obj) {
         if (obj == null){return false;}
         if (obj == this){return true;}

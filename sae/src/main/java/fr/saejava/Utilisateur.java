@@ -13,9 +13,6 @@ public abstract class Utilisateur {
     protected String prenomUtil = "?";
     protected String pwd = "?";
 
-    protected Catalogue catalogue;
-    protected Set<Commande> commandes;
-
     protected ConnexionMySQL laConnexion;
     protected Statement st;
     

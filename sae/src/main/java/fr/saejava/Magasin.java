@@ -29,36 +29,36 @@ public class Magasin {
         return livres;
     }
 
-    public void ajouteLivre(Livre livre, int quantite) {
-        if (livres.containsKey(livre)) {
-            livres.put(livre, livres.get(livre) + quantite);
-        } else {
-            livres.put(livre, quantite);
-        }
-    }
+    // public void ajouteLivre(Livre livre, int quantite) {
+    //     if (livres.containsKey(livre)) {
+    //         livres.put(livre, livres.get(livre) + quantite);
+    //     } else {
+    //         livres.put(livre, quantite);
+    //     }
+    // }
 
-    public Boolean isDispo(Livre livre) {
-        return livres.containsKey(livre);
-    }
+    // public Boolean isDispo(Livre livre) {
+    //     return livres.containsKey(livre);
+    // }
 
-    public void retireLivre(Livre livre, int qte) throws IllegalArgumentException, Exception {
-        if (livre == null) {
-            throw new IllegalArgumentException("Le livre ne peut pas être nul.");
-        }
-        if (livres.containsKey(livre)) {
-            int quantite = livres.get(livre);
-            if (quantite - qte > 0) {
-                livres.put(livre, quantite - qte);
-            } else if (quantite - qte == 0){
-                livres.remove(livre);
-            } else {
-                throw new Exception("il n'y a pas assez de livre dans le magsin");
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
-        }
-    }
+    // public void retireLivre(Livre livre, int qte) throws IllegalArgumentException, Exception {
+    //     if (livre == null) {
+    //         throw new IllegalArgumentException("Le livre ne peut pas être nul.");
+    //     }
+    //     if (livres.containsKey(livre)) {
+    //         int quantite = livres.get(livre);
+    //         if (quantite - qte > 0) {
+    //             livres.put(livre, quantite - qte);
+    //         } else if (quantite - qte == 0){
+    //             livres.remove(livre);
+    //         } else {
+    //             throw new Exception("il n'y a pas assez de livre dans le magsin");
+    //         }
+    //     }
+    //     else {
+    //         throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
+    //     }
+    // }
 
     @Override
     public String toString() {
