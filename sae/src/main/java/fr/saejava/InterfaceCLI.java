@@ -89,9 +89,14 @@ public class InterfaceCLI {
                     System.out.println(com);
                     break;
                 case ("3"):
-                    u.ajouteCommandeBD(com);
-                    System.out.println("votre commande a bien été sauvegarder");
+                    if (com.getListeCommandes().size() == 0){
+                        System.out.println("vous n'avez rien commander");
+                    } else {
+                        u.ajouteCommandeBD(com);
+                        System.out.println("votre commande a bien été sauvegarder");
+                    }
                     finiCommande = true;
+                    
                     break;
                 case ("4"):
                     finiCommande = true;
