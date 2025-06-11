@@ -22,7 +22,7 @@ public class TestCommande {
         
 
         CommandeUnit commandeUnit = new CommandeUnit(new Livre(123456789, "Test Book", 100, 1, 20, 0), 2);
-        Commande commande = new Commande(1, "2023-01-01", 'a', 'L', null);
+        Commande commande = new Commande(1, "2023-01-01", 'a', 'L', null, null);
 
         commande.ajouterCommandeUnit(commandeUnit);
         assertEquals(1, commande.getListeCommandes().size());
