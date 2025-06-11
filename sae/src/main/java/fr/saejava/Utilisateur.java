@@ -13,9 +13,6 @@ public abstract class Utilisateur {
     protected String prenomUtil = "?";
     protected String pwd = "?";
 
-    protected Catalogue catalogue;
-    protected Set<Commande> commandes;
-
     protected ConnexionMySQL laConnexion;
     protected Statement st;
     
@@ -86,12 +83,12 @@ public abstract class Utilisateur {
         ResultSet rs = st.executeQuery(query);
 
         while (rs.next()){
-            lstMag.add(new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag"), null));
+            lstMag.add(new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag")));
         }
         return lstMag;
     }
 
-    public List<Livre> voirToutLesLivre() throws SQLException{
+    public List<Livre> voirToutLesLivres() throws SQLException{
         List<Livre> lstLivre = new ArrayList<>();
 
         String query = "SELECT * FROM LIVRE";
@@ -140,7 +137,7 @@ public abstract class Utilisateur {
         ps.setString(1, nommag);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag"), null);
+            return new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag"));
         } else {
             throw new Exception("ce magasin n'existe pas");
         }
@@ -180,7 +177,10 @@ public abstract class Utilisateur {
         }
     }
 
-    public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException, Exception{
+    public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws Exception{
+        if (qte <= 0 || qte > 99){
+            throw new Exception("la quantité saisie est érroné");
+        }
         PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
         ps.setInt(1, m.getIdMag());
         ps.setInt(2, l.getIsbn());
@@ -229,11 +229,11 @@ public abstract class Utilisateur {
         ps.setInt(1, numCom);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
-            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), getMagasinBDparNom(rs.getString("nommag")));
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), getMagasinBDparNom(rs.getString("nommag")), this.getUtilisateurParId(rs.getInt("iduse")));
             getCommandeUnit(c);
             return c;
         } else {
-            throw new SQLException();
+            throw new SQLException("la commande demander n'existe pas");
         }
     }
 
@@ -292,7 +292,7 @@ public abstract class Utilisateur {
         if(rs.next()){
             return rs.getInt("qte");
         } else {
-            throw new Exception("il n'y a plus de livre dans ce magasin");
+            return 0;
         }
     }
 
@@ -358,7 +358,10 @@ public abstract class Utilisateur {
         ps.executeUpdate();
     }
 
-    public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws SQLException{
+    public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws Exception{
+        if (qte <= 0 || qte > 99){
+            throw new Exception("la quantité saisie est érroné");
+        }
         PreparedStatement ps = laConnexion.prepareStatement("select qte from POSSEDER where idmag = ? and isbn = ?");
         ps.setInt(1, m.getIdMag());
         ps.setInt(2, l.getIsbn());
@@ -394,6 +397,18 @@ public abstract class Utilisateur {
         }
 
         }
+
+    public Client getUtilisateurParId(int iduse) throws SQLException{
+        PreparedStatement ps = laConnexion.prepareStatement("select * from UTILISATEUR natural join CLIENT where iduse = ?");
+        ps.setInt(1, iduse);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return new Client(rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), rs.getString("adressecli"), rs.getString("codepostal"), rs.getString("villecli"), rs.getDouble("monnaie"));
+        } else {
+            throw new SQLException("ce client n'existe pas");
+        }
+
+    }
 
     @Override
     public String toString() {

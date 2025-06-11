@@ -13,6 +13,10 @@ public class ExecutableTest {
 
         // Administrateur a = new Administrateur(co);
 
+        // Client c = new Client(co);
+
+        // c.seConnecter("a", "b", "c");
+        
         // a.ajouteAdminBD(new Administrateur("bastien", "monet", "1234"));
 
         // a.ajouteClientBD(new Client("a", "b", "c", null, null, null, 0.00));

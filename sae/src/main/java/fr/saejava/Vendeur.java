@@ -31,7 +31,7 @@ public class Vendeur extends Utilisateur {
                         "ON u.iduse = c.iduse \n" + //
                         "JOIN MAGASIN AS m ON c.idmag = m.idmag");
         while(rs.next()){
-            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")), getUtilisateurParId(rs.getInt("iduse")));
             c.setListeCommandeUnit(voirDetailCommande(c));
             res.add(c);
         }

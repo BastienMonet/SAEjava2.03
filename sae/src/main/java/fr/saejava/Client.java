@@ -104,7 +104,7 @@ public class Client extends Utilisateur {
         ps.setInt(1, this.idUtil);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")));
+            Commande c = new Commande(rs.getInt("numcom"), rs.getString("datecom"), rs.getString("enligne").charAt(0), rs.getString("livraison").charAt(0), this.getMagasinBDparNom(rs.getString("nommag")), this.getUtilisateurParId(this.idUtil));
             c.setListeCommandeUnit(voirDetailCommande(c));
             res.add(c);
         }

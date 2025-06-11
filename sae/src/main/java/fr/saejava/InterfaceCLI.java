@@ -89,9 +89,14 @@ public class InterfaceCLI {
                     System.out.println(com);
                     break;
                 case ("3"):
-                    u.ajouteCommandeBD(com);
-                    System.out.println("votre commande a bien été sauvegarder");
+                    if (com.getListeCommandes().size() == 0){
+                        System.out.println("vous n'avez rien commander");
+                    } else {
+                        u.ajouteCommandeBD(com);
+                        System.out.println("votre commande a bien été sauvegarder");
+                    }
                     finiCommande = true;
+                    
                     break;
                 case ("4"):
                     finiCommande = true;
@@ -125,16 +130,16 @@ public class InterfaceCLI {
                     }
                     break;
                 case ("2") :
-                    System.out.println("4 - la commande est t-elle en ligne O/N");
+                    System.out.println("4 - la commande est t-elle en ligne (en ligne : O) / (sur place : N)");
                     char res6 = reader.readLine().charAt(0);
-                    System.out.println("4 - ou doit être fait la livraison C/M");
+                    System.out.println("4 - ou doit être fait la livraison (livraison a domicile : C ) / (livraison en magasin M)");
                     char res7 = reader.readLine().charAt(0);
                     System.out.println("4 - dans quel magasin effectuer la commande (tapper son nom)");
                     List<Magasin> lstMag = c.voirToutLesMagasin();
                     System.out.println(lstMag);
-                    Magasin res8 = c.getMagasinBDparNom(reader.readLine());
                     try {
-                        Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8);
+                        Magasin res8 = c.getMagasinBDparNom(reader.readLine());
+                        Commande com = new Commande(0, LocalDate.now().toString(), res6, res7, res8, c.getUtilisateurParId(c.idUtil));
                         menuCommander(c, com);
                     } catch (Exception e){
                         System.err.println(e.getMessage());
@@ -184,8 +189,6 @@ public class InterfaceCLI {
 
 
     public static void menuAdmin(Administrateur a) throws SQLException, Exception{
-        System.out.println("WIP");
-
         boolean finiAdmin = false;
         System.out.println("connection reussi");
         System.out.println("bienvenue " + a );
@@ -194,7 +197,7 @@ public class InterfaceCLI {
             System.out.println("que souhaitez vous faire");
             System.out.println("1 - ajouter un magasin");
             System.out.println("2 - ajouter une livre");
-            System.out.println("3 - ajouter un livre dans un magasin");
+            System.out.println("3 - ajouter / retirer un livre dans un magasin");
             System.out.println("4 - quitter");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
@@ -210,7 +213,7 @@ public class InterfaceCLI {
                     String nomville = reader.readLine();
 
                     try {
-                        a.ajouteMagasinBD(new Magasin(0, nom, nomville, null));
+                        a.ajouteMagasinBD(new Magasin(0, nom, nomville));
 
                         System.out.println("ajout réussi");
                     } catch (Exception e){
@@ -220,7 +223,7 @@ public class InterfaceCLI {
                     break;
                 case ("2"):
                     System.out.println("la base de donnée comporte ces livres");
-                    System.out.println(a.voirToutLesLivre());
+                    System.out.println(a.voirToutLesLivres());
 
                     System.out.println("entrer le titre du livre");
                     String noml = reader.readLine();
@@ -242,39 +245,41 @@ public class InterfaceCLI {
                     break;
                 case ("3"):
                     System.out.println("quel livre? entrer son nom");
-                    System.out.println(a.voirToutLesLivre());
+                    System.out.println(a.voirToutLesLivres());
                     String nomlivre = reader.readLine();
 
                     System.out.println("dans quel magasin? enter son nom");
                     System.out.println(a.voirToutLesMagasin());
                     String nomMag = reader.readLine();
 
-                    System.out.println("quel quantité?");
-                    String qte = reader.readLine();
 
-                    System.out.println("ajouter ou retirer A/R");
-                    String action = reader.readLine();
+                    try {
 
-                    if (action.equals("A")) {
-                        try {
+                        System.out.println("il y a actuellement " + a.qteDansMagasin(a.getLivreBDparTitre(nomlivre), a.getMagasinBDparNom(nomMag)) + " fois l'exemplaire dans ce magasin");
+                        System.out.println("quel quantité voulez vous?");
+                        String qte = reader.readLine();
+
+                        System.out.println("ajouter ou retirer A/R");
+                        String action = reader.readLine();
+
+                        if (action.equals("A")) {
+                            
                             a.ajouteLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), Integer.valueOf(qte));
                             System.out.println("ajout effectif");
-                        } catch (Exception e){
-                            System.out.println(e.getMessage());
-                            System.out.println("une erreur c'est produite");
+                            
                         }
-                    }
-
-                    else if (action.equals("R")) {
-
-                        try {
+                        else if (action.equals("R")) {
                             a.retireLivreDansMagasin(a.getMagasinBDparNom(nomMag), a.getLivreBDparTitre(nomlivre), Integer.valueOf(qte));
                             System.out.println("retrait effectif");
-                        } catch (Exception e){
-                            System.out.println(e.getMessage());
-                            System.out.println("une erreur c'est produite");
                         }
+                        else {
+                            System.out.println("votre demmande est éronner, séléctionné A pour ajouter ou R pour retirer");
+                        } 
+                    } catch (Exception e){
+                        System.err.println(e.getMessage());
+                        System.err.println("une erreur c'est produite");
                     }
+                    
                     break;
                 case ("4"):
                     finiAdmin = true;
