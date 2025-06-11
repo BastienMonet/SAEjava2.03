@@ -130,9 +130,9 @@ public class InterfaceCLI {
                     }
                     break;
                 case ("2") :
-                    System.out.println("4 - la commande est t-elle en ligne O/N");
+                    System.out.println("4 - la commande est t-elle en ligne (en ligne : O) / (sur place : N)");
                     char res6 = reader.readLine().charAt(0);
-                    System.out.println("4 - ou doit être fait la livraison C/M");
+                    System.out.println("4 - ou doit être fait la livraison (livraison a domicile : C ) / (livraison en magasin M)");
                     char res7 = reader.readLine().charAt(0);
                     System.out.println("4 - dans quel magasin effectuer la commande (tapper son nom)");
                     List<Magasin> lstMag = c.voirToutLesMagasin();

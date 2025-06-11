@@ -9,15 +9,17 @@ public class Commande {
     private Character enligne;
     private Character livraison;
     private List<CommandeUnit> listeCommandes;
-    private Magasin mag; 
+    private Magasin mag;
+    private Client client;
 
-    public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag, Utilisateur u) {
+    public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag, Client c) {
         this.numCom = numCom;
         this.dateCom = dateCom;
         this.enligne = enligne;
         this.livraison = livraison;
         this.listeCommandes = new ArrayList<>();
         this.mag = mag;
+        this.client = c;
     }
 
     public int getNumCom() {
@@ -112,6 +114,18 @@ public class Commande {
 
     @Override
     public String toString() {
-        return "la commande " + numCom + " de " + mag.getNomMag()  + " : " + " contient : " + listeCommandes;
+        String res = "la commande " + this.numCom;
+
+        if (enligne == 'O'){
+            res += " en ligne ";
+        } else {
+            res += " en magasin ";
+        }
+        if (livraison == 'C')
+            res += "livré à " + client.getAdresseUtil();
+        else 
+            res += "livré sur place";
+
+        return res + " de " + mag.getNomMag()  + " : " + " contient : " + listeCommandes;
     }
 }
