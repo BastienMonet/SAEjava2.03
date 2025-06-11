@@ -11,7 +11,7 @@ public class Commande {
     private List<CommandeUnit> listeCommandes;
     private Magasin mag; 
 
-    public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag) {
+    public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag, Utilisateur u) {
         this.numCom = numCom;
         this.dateCom = dateCom;
         this.enligne = enligne;
