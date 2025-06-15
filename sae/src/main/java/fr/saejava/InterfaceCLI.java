@@ -19,18 +19,17 @@ public class InterfaceCLI {
     private ConnexionMySQL co;
 
 
-    public InterfaceCLI() throws Exception{
-        co = new ConnexionMySQL();
-        // co.connecter(null, "DBmonet", "monet", "monet");
-        co.connecter(null, "DBmonet", "root", "4dameorc");
+    public InterfaceCLI(ConnexionMySQL co) throws Exception{
+        this.co = co;
         cli = new Client(co);
         vend = new Vendeur(co);
         adm = new Administrateur(co);
     }
 
-
-
-
+    public void close() throws SQLException {
+        co.close();
+    }
+    
     public static void menuCommander(Utilisateur u, Commande com) throws Exception{
         boolean finiCommande = false;
         while (! finiCommande){
@@ -345,9 +344,5 @@ public class InterfaceCLI {
             }
 
             }
-
-        System.out.println("ça marche");
-        
-         
     }
 }

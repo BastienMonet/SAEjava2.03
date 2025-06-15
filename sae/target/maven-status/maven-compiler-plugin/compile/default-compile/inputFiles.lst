@@ -1,12 +1,12 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Administrateur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Auteur.java
-/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Catalogue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Classification.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Client.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Commande.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/CommandeUnit.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/ConnexionMySQL.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Editeur.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/ExecutablePreTest.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/ExecutableTest.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/InterfaceCLI.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/Livre.java
