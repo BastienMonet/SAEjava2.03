@@ -30,7 +30,7 @@ public class ExecutablePreTest {
             
             a.ajouteAdminBD(new Administrateur("a", "b", "c"));
 
-            a.ajouteClientBD(new Client("d", "e", "f", "quelque part", "012345", null, 0.00));
+            a.ajouteClientBD(new Client("d", "e", "f", "ici", "012", null, 0.00));
             
             boolean res = a.seConnecter("john", "vincent", "1234");
 

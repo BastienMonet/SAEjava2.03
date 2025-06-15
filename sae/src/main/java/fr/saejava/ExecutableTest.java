@@ -29,6 +29,7 @@ public class ExecutableTest {
             System.out.println("problème de connection avec la base, assurer vous bien\n d'avoir le bon driver jdbc:mysql://servinfo-maria:3306/ et changer le dans ConnexionMySQL.java");
             System.err.println(e.getMessage());
         }
+        System.out.println("vous pouvez desormais quitter le script");
         
 
         
