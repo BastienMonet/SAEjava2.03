@@ -261,7 +261,7 @@ public abstract class Utilisateur {
 
         for (CommandeUnit comU : com.getListeCommandes()){
             try {
-            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());;
+            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());
             ajouteCommandeUnitBD(max,comU);
             incrementeAchat(comU.getLivre().getIsbn());
             } catch (Exception e){
