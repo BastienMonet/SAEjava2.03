@@ -1,4 +1,7 @@
-package fr.saejava;
+package fr.saejava.modele;
+
+import fr.saejava.modele.*;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;

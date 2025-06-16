@@ -1,4 +1,4 @@
-package fr.saejava;
+package fr.saejava.vue;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -1,4 +1,8 @@
-package fr.saejava;
+package fr.saejava.modele;
+
+
+import fr.saejava.modele.*;
+
 
 import java.sql.SQLException;
 import java.time.LocalDate;

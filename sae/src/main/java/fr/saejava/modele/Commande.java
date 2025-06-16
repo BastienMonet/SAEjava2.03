@@ -1,4 +1,6 @@
-package fr.saejava;
+package fr.saejava.modele;
+
+import fr.saejava.modele.*;
 
 import java.util.List;
 import java.util.ArrayList;
