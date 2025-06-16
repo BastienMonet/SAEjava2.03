@@ -13,13 +13,23 @@ public class App extends Application {
         this.primaryStage.setScene(connexionVue.getSceneConnexion());
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        this.primaryStage = stage;
-        showConnexion();
-        primaryStage.setTitle("SAE java");
-        primaryStage.show();
+    private Stage stage; 
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        this.stage = primaryStage;
+
+        this.setSceneCreerCompte();
+
+        stage.setTitle("SAE java");
+        stage.show();
+
+    }
+
+    public void setSceneCreerCompte(){
+        CompteClient vue = new CompteClient(this);
+        stage.setScene(vue.getScene());
     }
 
     public static void main(String[] args) {

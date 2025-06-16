@@ -1,5 +1,5 @@
 package fr.saejava;
-import fr.saejava.Livre;
+import fr.saejava.modele.*;
 
 import static org.junit.Assert.assertTrue;
 
