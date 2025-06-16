@@ -7,20 +7,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
-   
-
-    public App(ConnexionMySQL co){
-
-    }
 
     private Stage stage; 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
+        this.stage = stage;
 
-        this.stage = primaryStage;
-
-        this.setSceneCreerCompte();
+        this.showConnexion();
 
         stage.setTitle("SAE java");
         stage.show();
