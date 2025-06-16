@@ -31,7 +31,8 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
+        this.stage = stage;
 
         this.stage = primaryStage;
 
