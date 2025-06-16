@@ -22,7 +22,7 @@ public class App extends Application {
     }
 
     public void setSceneCreerCompte(){
-        CreerUnCompte vue = new CreerUnCompte(this);
+        CompteClient vue = new CompteClient(this);
         stage.setScene(vue.getScene());
     }
 

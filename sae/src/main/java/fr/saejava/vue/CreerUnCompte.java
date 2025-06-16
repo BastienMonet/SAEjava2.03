@@ -38,7 +38,7 @@ public class CreerUnCompte {
         HBox hb4 = new HBox(new Text("Code Postal :"), codePostal);
         HBox hb5 = new HBox(new Text("Ville de résidence:"), ville);
         HBox hb6 = new HBox(new Text("Mot de passe :"), motDePasse);
-        HBox hb7 = new HBox(new Text("Confirmation du mot de passe :"), motDePasse);
+        HBox hb7 = new HBox(new Text("Confirmation du mot de passe :"), confirmPwd);
 
         VBox vb = new VBox(hb1, hb2, hb3, hb4, hb5, hb6, hb7);
 
