@@ -1,10 +1,10 @@
 package fr.saejava.modele;
 
-import fr.saejava.modele.*;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import fr.saejava.exception.CompteDejaPrisException;
 
 public class Administrateur extends Utilisateur {
     
@@ -94,28 +94,40 @@ public class Administrateur extends Utilisateur {
     }
 
 
-    public void ajouteClientBD(Client c) throws SQLException{
-        st = laConnexion.createStatement();
-        PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
-        int max = getMaxIdUtil();
-        ps1.setInt(1, max);
-        ps1.setString(2, c.getNomUtil());
-        ps1.setString(3, c.getPrenomUtil());
-        ps1.setString(4, c.getPwd());
+    public void ajouteClientBD(Client c) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * from CLIENT natural join UTILISATEUR where " + 
+                                        "nomcli = ? and prenomcli = ?");
+        ps.setString(1, c.getNomUtil());
+        ps.setString(2, c.getPrenomUtil());
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            throw new CompteDejaPrisException("Un utilisateur avec ces informations existe déjà.");
+        } else {
+            st = laConnexion.createStatement();
+            PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
+            int max = getMaxIdUtil();
+            ps1.setInt(1, max);
+            ps1.setString(2, c.getNomUtil());
+            ps1.setString(3, c.getPrenomUtil());
+            ps1.setString(4, c.getPwd());
 
 
-        PreparedStatement ps2 = laConnexion.prepareStatement("insert into CLIENT values (?, ?, ?, ?, ?)");
-        ps2.setInt(1, max);
-        ps2.setString(2, c.getAdresseUtil());
-        ps2.setString(3, c.getCodePostal());
-        ps2.setString(4, c.getVilleUtil());
-        ps2.setDouble(5, c.getMonnaie());
-        try{
-        ps1.executeUpdate();
-        ps2.executeUpdate();
-        } catch (SQLException e){
-            System.err.println(e.getMessage());
+            PreparedStatement ps2 = laConnexion.prepareStatement("insert into CLIENT values (?, ?, ?, ?, ?)");
+            ps2.setInt(1, max);
+            ps2.setString(2, c.getAdresseUtil());
+            ps2.setString(3, c.getCodePostal());
+            ps2.setString(4, c.getVilleUtil());
+            ps2.setDouble(5, c.getMonnaie());
+            try{
+            ps1.executeUpdate();
+            ps2.executeUpdate();
+            } catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+
         }
+
+        
         
     }
 

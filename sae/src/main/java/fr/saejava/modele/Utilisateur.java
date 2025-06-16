@@ -107,9 +107,9 @@ public abstract class Utilisateur {
     public List<Livre> onVousRecommande() throws SQLException{
         List<Livre> res = new ArrayList<>();
 
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT distinct isbn, titre, nbpages, datepubli, prix, nbreAchat " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn ORDER BY nbreAchat DESC");
+                                                            "natural join POSSEDER ORDER BY nbreAchat DESC");
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));

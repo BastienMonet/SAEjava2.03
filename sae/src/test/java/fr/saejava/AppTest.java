@@ -1,6 +1,6 @@
 package fr.saejava;
 
-import fr.saejava.modele.Magasin;
+import fr.saejava.modele.*;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
