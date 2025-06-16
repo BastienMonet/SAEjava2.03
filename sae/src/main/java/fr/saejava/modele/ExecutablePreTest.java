@@ -1,4 +1,7 @@
-package fr.saejava;
+package fr.saejava.modele;
+
+
+import fr.saejava.modele.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

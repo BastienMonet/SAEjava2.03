@@ -1,5 +1,5 @@
-package fr.saejava;
-
+package fr.saejava.modele;
+import fr.saejava.modele.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;

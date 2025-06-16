@@ -1,6 +1,6 @@
-package fr.saejava;
+package fr.saejava.modele;
 
-
+import fr.saejava.modele.*;
 public class Classification {
     private int ideway;
     private String nomClass;

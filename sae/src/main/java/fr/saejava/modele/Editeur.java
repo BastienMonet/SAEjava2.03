@@ -1,5 +1,7 @@
-package fr.saejava;
+package fr.saejava.modele;
 
+
+import fr.saejava.modele.*;
 
 public class Editeur {
     private int idEdit;
