@@ -55,7 +55,7 @@ public class VendeurVue {
 
         VBox vueGereBox = new VBox(40, messageInfo, nomMagasinBox, livreBox, qteBox, deconnexion);
         vueGereBox.setStyle("-fx-padding: 20; -fx-alignment: center;");
-        sceneGereBox = new Scene(vueGereBox, 500, 500);
+        sceneVendeurBox = new Scene(vueGereBox, 500, 500);
     }
 
     public Scene getSceneVendeur() {
