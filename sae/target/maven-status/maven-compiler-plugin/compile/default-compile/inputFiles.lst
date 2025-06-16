@@ -1,3 +1,8 @@
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteClient.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionBD.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionUtil.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerCompte.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/exception/CompteDejaPrisException.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Administrateur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Auteur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Classification.java
@@ -15,4 +20,6 @@
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Vendeur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/App.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CompteClient.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/ConnexionBD.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/ConnexionVue.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CreerUnCompte.java

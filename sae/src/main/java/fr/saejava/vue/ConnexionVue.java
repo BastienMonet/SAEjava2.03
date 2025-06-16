@@ -1,4 +1,5 @@
 package fr.saejava.vue;
+import fr.saejava.controlleur.ControlleurConnexionUtil;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -16,6 +17,11 @@ import javafx.scene.control.ToggleGroup;
 public class ConnexionVue {
     Scene sceneConnexion;
 
+    private TextField nomText;
+    private TextField prenomText;
+    private PasswordField mdpText;
+    private ToggleGroup groupe;
+
     public ConnexionVue(App app) {
         Text messBienvenue = new Text("Salutation !\nVeuillez vous connecter.");
         messBienvenue.setTextAlignment(TextAlignment.CENTER);
@@ -24,9 +30,9 @@ public class ConnexionVue {
         Text nom = new Text("Nom:");
         Text prenom = new Text("Prénom:");
         Text mdp = new Text("Mot de passe:");
-        TextField nomText = new TextField("");
-        TextField prenomText = new TextField();
-        PasswordField mdpText = new PasswordField();
+        nomText = new TextField("");
+        prenomText = new TextField();
+        mdpText = new PasswordField();
         GridPane infoConnextion = new GridPane();
         infoConnextion.add(nom, 0, 0);
         infoConnextion.add(nomText, 1, 0);
@@ -41,7 +47,8 @@ public class ConnexionVue {
         RadioButton radioCli = new RadioButton("client");
         RadioButton radiovend = new RadioButton("vendeur");
         RadioButton radioAdmin = new RadioButton("administrateur");
-        ToggleGroup groupe = new ToggleGroup();
+        radioCli.setSelected(true);
+        groupe = new ToggleGroup();
         radioCli.setToggleGroup(groupe);
         radiovend.setToggleGroup(groupe);
         radioAdmin.setToggleGroup(groupe);
@@ -50,14 +57,17 @@ public class ConnexionVue {
         radio.setSpacing(10);
 
         Button connexion = new Button("Connexion");
+        connexion.setOnAction(new ControlleurConnexionUtil(app, this));
         connexion.setMinWidth(80);
         Button quitter = new Button("Quitter");
+        quitter.setOnAction(new ControlleurConnexionUtil(app, this));
         quitter.setMinWidth(80);
         HBox boutonsAction = new HBox(connexion, quitter);
         boutonsAction.setAlignment(Pos.CENTER);
         boutonsAction.setSpacing(100);
 
         Button inscription = new Button("Pas de compte ?");
+        inscription.setOnAction(new ControlleurConnexionUtil(app, this));
         inscription.setAlignment(Pos.CENTER);
 
 
@@ -68,7 +78,23 @@ public class ConnexionVue {
         this.sceneConnexion = new Scene(fin, 400, 400);
     }
 
-    public Scene getSceneConnexion() {
+    public String getNom() {
+        return nomText.getText();
+    }
+
+    public String getPrenom() {
+        return prenomText.getText();
+    }
+
+    public String getMdp() {
+        return mdpText.getText();
+    }
+
+    public Toggle getGroupe() {
+        return groupe.getSelectedToggle();
+    }
+
+    public Scene getScene() {
         return sceneConnexion;
     }
 }

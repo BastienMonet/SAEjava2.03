@@ -1,5 +1,6 @@
 package fr.saejava.vue;
 
+import fr.saejava.controlleur.ControlleurCreerCompte;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -44,15 +45,47 @@ public class CreerUnCompte {
 
         Text bienvenue = new Text("Création du compte");
 
+
         Button btncreerCompte = new Button("Créer un compte");
+        Button btnAnnuler = new Button("Annuler");
+
+        btnAnnuler.setOnAction(new ControlleurCreerCompte(app, this));
+        btncreerCompte.setOnAction(new ControlleurCreerCompte(app, this));
+
+
+        HBox hbbutton = new HBox(btncreerCompte, btnAnnuler);
+
+        
 
         root.setTop(bienvenue);
         root.setCenter(vb);
-        root.setBottom(btncreerCompte);
+        root.setBottom(hbbutton);
 
         Scene scene = new Scene(root);
 
         this.scene = scene;
+    }
+
+    public String getNom() {
+        return nom.getText();
+    }
+    public String getPrenom() {
+        return prenom.getText();
+    }
+    public String getAddresse() {
+        return addresse.getText();
+    }
+    public String getCodePostal() {
+        return codePostal.getText();
+    }
+    public String getVille() {
+        return ville.getText();
+    }
+    public String getMotDePasse() {
+        return motDePasse.getText();
+    }
+    public String getConfirmPwd() {
+        return confirmPwd.getText();
     }
 
     public Scene getScene(){

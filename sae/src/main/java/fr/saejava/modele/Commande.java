@@ -128,6 +128,6 @@ public class Commande {
         else 
             res += "livré sur place";
 
-        return res + " de " + mag.getNomMag()  + " : " + " contient : " + listeCommandes;
+        return res + " de " + mag.getNomMag();
     }
 }
