@@ -12,6 +12,8 @@ public class App extends Application {
         BorderPane root = new BorderPane();
         
         Scene scene = new Scene(root);
+        CreerVendeurVue creerVendeurVue = new CreerVendeurVue(this);
+        scene = creerVendeurVue.getSceneCreationVendeur();
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("SAE java");
