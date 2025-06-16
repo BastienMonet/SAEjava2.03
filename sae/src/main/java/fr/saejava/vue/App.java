@@ -1,16 +1,16 @@
 package fr.saejava.vue;
 
+import fr.saejava.modele.ConnexionMySQL;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    private Stage primaryStage;
+   
 
-    public void showConnexion(){
-        ConnexionVue connexionVue = new ConnexionVue(this);
-        this.primaryStage.setScene(connexionVue.getSceneConnexion());
+    public App(ConnexionMySQL co){
+
     }
 
     private Stage stage; 
@@ -30,6 +30,11 @@ public class App extends Application {
     public void setSceneCreerCompte(){
         CompteClient vue = new CompteClient(this);
         stage.setScene(vue.getScene());
+    }
+
+    public void showConnexion(){
+        ConnexionVue connexionVue = new ConnexionVue(this);
+        this.stage.setScene(connexionVue.getSceneConnexion());
     }
 
     public static void main(String[] args) {
