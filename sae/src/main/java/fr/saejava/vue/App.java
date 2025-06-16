@@ -7,16 +7,23 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private Stage stage; 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BorderPane root = new BorderPane();
-        
-        Scene scene = new Scene(root);
 
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("SAE java");
-        primaryStage.show();
+        this.stage = primaryStage;
 
+        this.setSceneCreerCompte();
+
+        stage.setTitle("SAE java");
+        stage.show();
+
+    }
+
+    public void setSceneCreerCompte(){
+        CreerUnCompte vue = new CreerUnCompte(this);
+        stage.setScene(vue.getScene());
     }
 
     public static void main(String[] args) {
