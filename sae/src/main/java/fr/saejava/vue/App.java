@@ -92,9 +92,9 @@ public class App extends Application {
         this.stage.setScene(livreVue.getScene());
     }
 
-    public void setSceneVoirCommande(){
-        VoirCommandeVue voirCommandeVue = new VoirCommandeVue(this);
-        this.stage.setScene(voirCommandeVue.getSceneVoirCommandeVue());
+    public void setSceneVoirCommande(Commande commande) {
+        VoirCommandeVue voirCommandeVue = new VoirCommandeVue(this, commande);
+        voirCommandeVue.getFenetreVoirCommandeVue();
     }
 
     public void setSceneAjouteLivre() {

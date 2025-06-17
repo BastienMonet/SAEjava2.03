@@ -68,6 +68,7 @@ public class ControlleurCompteClient implements EventHandler<ActionEvent> {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     app.getClient().retireSaCommande(app.getClient().getCommande(numCom));
                     compteClient.majLesCommandes();
+                    compteClient.majRecomandation();
                     System.out.println("Suppression de la commande");
                 } 
             } catch (Exception e) {

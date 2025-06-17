@@ -126,7 +126,7 @@ public class GereStocksGlobauxVue {
             
         } catch (Exception e) {
             texteQTElivreDansMagasin.setText("il y a ? fois le livre dans ce magasin");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
         
     }

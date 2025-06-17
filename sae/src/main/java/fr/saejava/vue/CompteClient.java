@@ -113,6 +113,11 @@ public class CompteClient {
         for (Commande commande : c.voirSesCommande()) {
             String res = commande.toString();
             Button btndetail = new Button("détails");
+            btndetail.setId(String.valueOf(commande.getNumCom()));
+            btndetail.setOnAction(event -> {
+                app.setSceneVoirCommande(commande);
+            });
+
             Button btnsupprimer = new Button("X");
             btnsupprimer.setId(String.valueOf(commande.getNumCom()));
             btnsupprimer.setOnAction(new ControlleurCompteClient(app, this));

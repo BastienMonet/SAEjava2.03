@@ -132,7 +132,7 @@ public class Commande {
         if (livraison == 'C')
             res += "livré à " + client.getAdresseUtil();
         else 
-            res += "livré sur place";
+            res += "livré au magasin " + mag.getNomMag();
 
         return res + " de " + mag.getNomMag();
     }

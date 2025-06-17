@@ -1,5 +1,7 @@
 package fr.saejava.vue;
 
+import fr.saejava.modele.Commande;
+import fr.saejava.modele.CommandeUnit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,43 +12,76 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class VoirCommandeVue {
-    Scene sceneVoirCommandeVue;
+    private Stage stage;
 
-    public VoirCommandeVue(App app) {
-        Text titre = new Text("[la commande]");
+    private VBox lesDetail;
+
+    private Commande commande;
+
+    public VoirCommandeVue(App app, Commande commande) {
+
+        Stage stage = new Stage();
+        this.stage = stage;
+        this.commande = commande;
+
+
+        Text titre = new Text("la commande");
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
         HBox titreCont = new HBox(titre);
         titreCont.setAlignment(Pos.CENTER);
 
-        Text date = new Text("[date]");
+        Text date = new Text(commande.getDateCom());
         date.setStyle("-fx-font-size: 20;");
-        Text enLigne = new Text("[en ligne ?]");
+        String enligne = "";
+
+        if (commande.enligne() == 'O') {
+            enligne = "commandé en ligne";
+        } else {
+            enligne = "commandé sur place";
+        }
+
+        String livraison = "";
+        if (commande.getLivraison() == 'C') {
+            livraison = "livré à " + commande.getClient().getAdresseUtil() + " " + commande.getClient().getVilleUtil();
+        } else {
+            livraison = "livré au magasin ";
+        }
+        Text enLigne = new Text(enligne);
         enLigne.setStyle("-fx-font-size: 20;");
-        Text livraison = new Text("[livraison]");
-        livraison.setStyle("-fx-font-size: 20;");
-        Text mag = new Text("[le magasin]");
+        Text Textlivraison = new Text(livraison);
+        Textlivraison.setStyle("-fx-font-size: 20;");
+        Text mag = new Text(commande.getMagasin().getNomMag());
         mag.setStyle("-fx-font-size: 20;");
-        Text destinataire = new Text("[le destinataire]");
+        Text destinataire = new Text(commande.getClient().getNomUtil() + " " + commande.getClient().getPrenomUtil());
         destinataire.setStyle("-fx-font-size: 20;");
-        Text prixTotal = new Text("[le prix total]");
+        Text prixTotal = new Text(commande.prixTotCommande() + " €");
         prixTotal.setStyle("-fx-font-size: 20;");
 
-        VBox infosCom = new VBox(date, enLigne, livraison, mag, destinataire, prixTotal);
+        VBox infosCom = new VBox(date, enLigne, Textlivraison, mag, destinataire, prixTotal);
         infosCom.setAlignment(Pos.CENTER);
         infosCom.setSpacing(10);
 
-        // remplacer par une boucle pour afficher les livres
-        HBox L1 = this.afficheLivre("Livre 1", 1, 50);
-        HBox L2 = this.afficheLivre("Livre 2", 50, 1);
-        HBox L3 = this.afficheLivre("Livre 3", 8, 70);
-        VBox livres = new VBox(L1, L2, L3);
-        livres.setAlignment(Pos.CENTER);
-        livres.setSpacing(10);
-        BorderPane.setMargin(livres, new Insets(0, 0, 0, 50));
+        lesDetail = new VBox();
 
-        Button retour = new Button("retour");
+        this.livreDansCommande();
+
+        // // remplacer par une boucle pour afficher les livres
+        // HBox L1 = this.afficheLivre("Livre 1", 1, 50);
+        // HBox L2 = this.afficheLivre("Livre 2", 50, 1);
+        // HBox L3 = this.afficheLivre("Livre 3", 8, 70);
+        // VBox livres = new VBox(L1, L2, L3);
+        // livres.setAlignment(Pos.CENTER);
+        // livres.setSpacing(10);
+        // BorderPane.setMargin(livres, new Insets(0, 0, 0, 50));
+
+        Button retour = new Button("quitter");
+
+        retour.setOnAction(event -> {
+            this.closeFenetreVoirCommandeVue();
+        });
         retour.setMinWidth(200);
         HBox retourCont = new HBox(retour);
         retourCont.setAlignment(Pos.CENTER_RIGHT);
@@ -55,10 +90,14 @@ public class VoirCommandeVue {
         BorderPane fin = new BorderPane();
         fin.setTop(titreCont);
         fin.setLeft(infosCom);
-        fin.setCenter(livres);
+        fin.setRight(lesDetail);
         fin.setBottom(retourCont);
 
-        this.sceneVoirCommandeVue = new Scene(fin, 650, 500);
+        Scene root = new Scene(fin, 850, 700);
+
+        stage.setScene(root);
+        stage.setHeight(1000);
+        stage.setWidth(1000);
     }
 
     private HBox afficheLivre(String titre, int qte, double prix){
@@ -85,7 +124,25 @@ public class VoirCommandeVue {
         return fin;
     }
 
-    public Scene getSceneVoirCommandeVue() {
-        return sceneVoirCommandeVue;
+
+
+    public void livreDansCommande() {
+        lesDetail.getChildren().clear();
+        for (CommandeUnit commandeUnit : commande.getListeCommandes()) {
+            String res = commandeUnit.toString();
+            Button detail = new Button("détails");
+            HBox hb = new HBox(new Text(res), detail);
+            lesDetail.getChildren().add(hb);
+
+        }
+    }
+
+
+    public void getFenetreVoirCommandeVue() {
+        this.stage.show();
+    }
+
+    public void closeFenetreVoirCommandeVue() {
+        this.stage.close();
     }
 }
