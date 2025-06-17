@@ -18,11 +18,11 @@ public class AdministrateurVue {
         Button ajouteLibrairie = new Button("Ajouter une nouvelle librairie");
         ajouteLibrairie.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
+        Button ajouteLivre = new Button("Ajouter un nouveau livre");
+        ajouteLivre.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+
         Button gereStocks = new Button("Gérer les stocks globaux");
         gereStocks.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
-
-        Button statsVentes = new Button("Consulter les statistiques de vente");
-        statsVentes.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
         Button deconnexion = new Button("Déconnexion");
         deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
@@ -30,9 +30,10 @@ public class AdministrateurVue {
         creerVendeur.setOnAction(event -> app.setSceneCreerVendeur());
         ajouteLibrairie.setOnAction(event -> app.setAjouterLibrairie());
         deconnexion.setOnAction(event -> app.setSceneConnexionUtil());
+        ajouteLivre.setOnAction(event -> app.setSceneAjouteLivre());
 
 
-        VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, gereStocks, statsVentes, deconnexion);
+        VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, ajouteLivre , gereStocks, deconnexion);
         vueAdmin.setStyle("-fx-padding: 20; -fx-alignment: center;");
         sceneAdmin = new Scene(vueAdmin, 500, 500);
     }

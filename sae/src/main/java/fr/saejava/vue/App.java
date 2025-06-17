@@ -97,6 +97,11 @@ public class App extends Application {
         this.stage.setScene(voirCommandeVue.getSceneVoirCommandeVue());
     }
 
+    public void setSceneAjouteLivre() {
+        AjouteLivreVue ajouteLivreVue = new AjouteLivreVue(this);
+        this.stage.setScene(ajouteLivreVue.getScene());
+    }
+
     public ConnexionMySQL getConnexionMySQL() {
         return connexionMySQL;
     }

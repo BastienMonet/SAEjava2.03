@@ -36,7 +36,8 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textNomVendeurPane, javafx.geometry.Pos.CENTER);
         textNomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        nomVendeur = new TextField("Entrez le nom du vendeur");
+        nomVendeur = new TextField();
+        nomVendeur.setPromptText("Entrez le nom du vendeur");
         BorderPane nomVendeurPane = new BorderPane(nomVendeur);
         BorderPane.setAlignment(nomVendeurPane, javafx.geometry.Pos.CENTER);
         nomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");
@@ -48,7 +49,8 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textPrenomVendeurPane, javafx.geometry.Pos.CENTER);
         textPrenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        prenomVendeur = new TextField("Entrez le prénom du vendeur");
+        prenomVendeur = new TextField();
+        prenomVendeur.setPromptText("Entrez le prénom du vendeur");
         BorderPane prenomVendeurPane = new BorderPane(prenomVendeur);
         BorderPane.setAlignment(prenomVendeurPane, javafx.geometry.Pos.CENTER);
         prenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");
@@ -60,7 +62,8 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textMDPVendeurPane, javafx.geometry.Pos.CENTER);
         textMDPVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        mdpVendeur = new TextField("Entrez le mot de passe du vendeur");
+        mdpVendeur = new TextField();
+        mdpVendeur.setPromptText("Entrez le mot de passe du vendeur");
         BorderPane mdpVendeurPane = new BorderPane(mdpVendeur);
         BorderPane.setAlignment(mdpVendeurPane, javafx.geometry.Pos.CENTER);
         mdpVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");

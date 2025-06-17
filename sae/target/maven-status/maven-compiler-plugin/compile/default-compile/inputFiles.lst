@@ -23,6 +23,7 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Vendeur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AdministrateurVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouteLibVue.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouteLivreVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouterCommandeVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/App.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CompteClient.java
