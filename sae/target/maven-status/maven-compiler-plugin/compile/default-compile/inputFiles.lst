@@ -1,10 +1,12 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjoutNouvelleLib.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteCommande.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteNouveauLivre.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteClient.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionBD.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionUtil.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerCompte.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerVendeur.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurGererStock.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/exception/CompteDejaPrisException.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Administrateur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Auteur.java

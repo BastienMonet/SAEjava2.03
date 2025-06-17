@@ -31,6 +31,15 @@ public class AdministrateurVue {
         ajouteLibrairie.setOnAction(event -> app.setAjouterLibrairie());
         deconnexion.setOnAction(event -> app.setSceneConnexionUtil());
         ajouteLivre.setOnAction(event -> app.setSceneAjouteLivre());
+        gereStocks.setOnAction(event -> {
+            try {
+            app.setStocksGlobauxVue();
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
+        });
+
+        
 
 
         VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, ajouteLivre , gereStocks, deconnexion);

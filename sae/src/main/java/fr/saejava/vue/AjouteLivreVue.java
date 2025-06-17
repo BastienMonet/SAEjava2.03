@@ -1,6 +1,7 @@
 package fr.saejava.vue;
 
 import fr.saejava.controlleur.ControlleurAjoutNouvelleLib;
+import fr.saejava.controlleur.ControlleurAjouteNouveauLivre;
 import fr.saejava.controlleur.ControlleurAjoutNouvelleLib;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -69,6 +70,7 @@ public class AjouteLivreVue {
         Button annuler = new Button("Annuler");
 
 
+        ajoute.setOnAction(new ControlleurAjouteNouveauLivre(app, this));
         annuler.setOnAction(event -> {
             app.setSceneAdmin();
         });
@@ -79,11 +81,24 @@ public class AjouteLivreVue {
         fin.setAlignment(Pos.CENTER);
         fin.setSpacing(20);
 
-        this.sceneAjouteLivre = new Scene(fin, 400, 300);
+        this.sceneAjouteLivre = new Scene(fin, 400, 500);
     }
 
     public Scene getScene(){
         return this.sceneAjouteLivre;
     }
 
+
+    public String getTitreLivre() {
+        return titreLivre.getText();
+    }
+    public String getNbPages() {
+        return nbpages.getText();
+    }
+    public String getDatePublic() {
+        return datePublic.getText();
+    }
+    public String getPrix() {
+        return prix.getText();
+    }
 }

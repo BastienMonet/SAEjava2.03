@@ -42,7 +42,7 @@ public class App extends Application {
 
     }
 
-    public void setStocksGlobauxVue() {
+    public void setStocksGlobauxVue() throws Exception {
         GereStocksGlobauxVue vue = new GereStocksGlobauxVue(this);
         this.stage.setScene(vue.getSceneStocksGlobaux());
     }
