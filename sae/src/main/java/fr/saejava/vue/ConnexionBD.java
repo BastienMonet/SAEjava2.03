@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,7 +23,13 @@ public class ConnexionBD {
 
     public ConnexionBD(App app) {
 
+
+        Text nom = new Text("Nom BD:");
+        Text log = new Text("Login:");
+        Text mdp = new Text("Mot de passe:");
+
         // Création des champs de saisie
+
         nomBD = new TextField();
         nomBD.setPromptText("Base de données");
         login = new TextField();
@@ -40,6 +47,7 @@ public class ConnexionBD {
         // Création des boutons
         Button btnConnexion = new Button("Se Connecter");
         btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
         Button btnQuitter = new Button("Quitter");
         btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
 
@@ -69,10 +77,12 @@ public class ConnexionBD {
             }
         }
 
+
         BorderPane root = new BorderPane();
         root.setTop(titre);
         BorderPane.setAlignment(titre, javafx.geometry.Pos.CENTER);
         root.setCenter(champs);
+
 
         this.scene = new Scene(root, 600, 400);
     }
