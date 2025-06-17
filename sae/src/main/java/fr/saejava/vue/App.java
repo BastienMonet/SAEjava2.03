@@ -39,6 +39,26 @@ public class App extends Application {
 
     }
 
+    public void setStocksGlobauxVue() {
+        GereStocksGlobauxVue vue = new GereStocksGlobauxVue(this);
+        this.stage.setScene(vue.getSceneStocksGlobaux());
+    }
+
+    public void setSceneAdmin() {
+        AdministrateurVue administrateurVue = new AdministrateurVue(this);
+        this.stage.setScene(administrateurVue.getSceneAdmin());
+    }
+
+    public void setSceneCreerVendeur() {
+        CreerVendeurVue vue = new CreerVendeurVue(this);
+        this.stage.setScene(vue.getSceneCreationVendeur());
+    }
+
+    public void setAjouterLibrairie() {
+        AjouteLibVue vue = new AjouteLibVue(this);
+        this.stage.setScene(vue.getSceneAjouteLib());
+    }
+
     public void setSceneCreerCompte(){
         CreerUnCompte vue = new CreerUnCompte(this);
         stage.setScene(vue.getScene());
