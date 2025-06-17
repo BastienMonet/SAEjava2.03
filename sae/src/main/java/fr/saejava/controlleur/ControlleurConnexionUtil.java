@@ -1,7 +1,5 @@
 package fr.saejava.controlleur;
 
-import org.checkerframework.checker.units.qual.s;
-
 import fr.saejava.vue.App;
 import fr.saejava.vue.ConnexionVue;
 import javafx.event.ActionEvent;

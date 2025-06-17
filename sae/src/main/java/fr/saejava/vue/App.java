@@ -2,6 +2,7 @@ package fr.saejava.vue;
 
 import fr.saejava.modele.Administrateur;
 import fr.saejava.modele.Client;
+import fr.saejava.modele.Commande;
 import fr.saejava.modele.ConnexionMySQL;
 import fr.saejava.modele.Vendeur;
 import javafx.application.Application;
@@ -80,6 +81,11 @@ public class App extends Application {
     public void setSceneCompteClient() throws Exception{
         CompteClient compteClient = new CompteClient(this, client);
         this.stage.setScene(compteClient.getScene());
+    }
+
+    public void setSceneAjouterCommandeVue(Commande commande) throws Exception {
+        AjouterCommandeVue AjoutercommandeVue = new AjouterCommandeVue(this, commande);
+        this.stage.setScene(AjoutercommandeVue.getScene());
     }
 
     public void setSceneLivreVue(){
@@ -164,6 +170,13 @@ public class App extends Application {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Champs vides");
         alert.setHeaderText("Veuillez remplir tous les champs.");
+        alert.showAndWait();
+    }
+
+    public void alertErreur() {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText("Une erreur est survenue.");
         alert.showAndWait();
     }
 
