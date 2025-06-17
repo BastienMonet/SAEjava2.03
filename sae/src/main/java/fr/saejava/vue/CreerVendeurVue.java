@@ -1,17 +1,34 @@
 package fr.saejava.vue;
 
+import javax.sound.sampled.Control;
+
+import fr.saejava.controlleur.ControlleurCreerVendeur;
 import fr.saejava.modele.Administrateur;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class CreerVendeurVue {
-    Scene sceneCreationVendeur;
+
+
+    private Scene sceneCreationVendeur;
+
+    private App app;
+
+    private TextField prenomVendeur;
+
+    private TextField nomVendeur;
+    private TextField mdpVendeur;
     
     public CreerVendeurVue(App app) {
+
+        this.app = app;
+
+
         Text messageInfo = new Text("Créez un compte vendeur");
 
         Text texteNomVendeur = new Text("Nom du vendeur");
@@ -19,7 +36,7 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textNomVendeurPane, javafx.geometry.Pos.CENTER);
         textNomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        TextField nomVendeur = new TextField("Entrez le nom du vendeur");
+        nomVendeur = new TextField("Entrez le nom du vendeur");
         BorderPane nomVendeurPane = new BorderPane(nomVendeur);
         BorderPane.setAlignment(nomVendeurPane, javafx.geometry.Pos.CENTER);
         nomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");
@@ -31,7 +48,7 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textPrenomVendeurPane, javafx.geometry.Pos.CENTER);
         textPrenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        TextField prenomVendeur = new TextField("Entrez le prénom du vendeur");
+        prenomVendeur = new TextField("Entrez le prénom du vendeur");
         BorderPane prenomVendeurPane = new BorderPane(prenomVendeur);
         BorderPane.setAlignment(prenomVendeurPane, javafx.geometry.Pos.CENTER);
         prenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");
@@ -43,22 +60,41 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textMDPVendeurPane, javafx.geometry.Pos.CENTER);
         textMDPVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        TextField mdpVendeur = new TextField("Entrez le mot de passe du vendeur");
+        mdpVendeur = new TextField("Entrez le mot de passe du vendeur");
         BorderPane mdpVendeurPane = new BorderPane(mdpVendeur);
         BorderPane.setAlignment(mdpVendeurPane, javafx.geometry.Pos.CENTER);
         mdpVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 0px; -fx-background-color: #ffffff; -fx-text-fill: black;");
 
         VBox mdpVendeurBox = new VBox(0, textMDPVendeurPane, mdpVendeurPane);
 
+        Button creerVendeur = new Button("Créer le compte vendeur");
+        creerVendeur.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
+
         Button deconnexion = new Button("Annuler");
         deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
-        VBox vueCreationVendeur = new VBox(40, messageInfo, nomVendeurBox, prenomVendeurBox, mdpVendeurBox, deconnexion);
+        deconnexion.setOnAction(event -> app.setSceneAdmin());
+        creerVendeur.setOnAction(new ControlleurCreerVendeur(app ,this));
+
+
+        HBox creerVendeurBox = new HBox(creerVendeur, deconnexion);
+
+        VBox vueCreationVendeur = new VBox(40, messageInfo, nomVendeurBox, prenomVendeurBox, mdpVendeurBox, creerVendeurBox);
         vueCreationVendeur.setStyle("-fx-padding: 20; -fx-alignment: center;");
         sceneCreationVendeur = new Scene(vueCreationVendeur, 500, 500);
     }
 
     public Scene getSceneCreationVendeur() {
         return sceneCreationVendeur;
+    }
+
+    public String getNomVendeur() {
+        return nomVendeur.getText();
+    }
+    public String getPrenomVendeur() {
+        return prenomVendeur.getText();
+    }
+    public String getMdpVendeur() {
+        return mdpVendeur.getText();
     }
 }

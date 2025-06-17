@@ -3,6 +3,7 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionBD.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionUtil.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerCompte.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerVendeur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/exception/CompteDejaPrisException.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Administrateur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Auteur.java
@@ -20,6 +21,7 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Utilisateur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/modele/Vendeur.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AdministrateurVue.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouteLibVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouterCommandeVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/App.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CompteClient.java
@@ -28,5 +30,7 @@
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CreerUnCompte.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CreerVendeurVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/GereStocksGlobauxVue.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/LivreVue.java
 /home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/StatistiqueVue.java
-/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/ajouteLibVue.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/VendeurVue.java
+/home/bastien/Documents/SAE/SAEjava2.03/sae/src/main/java/fr/saejava/vue/VoirCommandeVue.java

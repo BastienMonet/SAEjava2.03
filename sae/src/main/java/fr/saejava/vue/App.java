@@ -36,7 +36,7 @@ public class App extends Application {
         this.stage = stage;
 
 
-        this.setSceneVoirCommande();
+        this.setSceneConnexionBD();
 
         stage.setTitle("SAE java");
         stage.show();
