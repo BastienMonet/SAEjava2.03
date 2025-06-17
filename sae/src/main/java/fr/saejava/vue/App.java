@@ -34,9 +34,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
 
-        this.stage = primaryStage;
-
-        this.setSceneConnexionBD();
+        this.setSceneLivreVue();
 
         stage.setTitle("SAE java");
         stage.show();
@@ -61,6 +59,11 @@ public class App extends Application {
     public void setSceneCompteClient() throws Exception{
         CompteClient compteClient = new CompteClient(this, client);
         this.stage.setScene(compteClient.getScene());
+    }
+
+    public void setSceneLivreVue(){
+        LivreVue livreVue = new LivreVue(this);
+        this.stage.setScene(livreVue.getScene());
     }
 
     public ConnexionMySQL getConnexionMySQL() {
