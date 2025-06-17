@@ -59,6 +59,11 @@ public class App extends Application {
         this.stage.setScene(compteClient.getScene());
     }
 
+    public void setSceneLivreVue(){
+        LivreVue livreVue = new LivreVue(this);
+        this.stage.setScene(livreVue.getScene());
+    }
+
     public ConnexionMySQL getConnexionMySQL() {
         return connexionMySQL;
     }
