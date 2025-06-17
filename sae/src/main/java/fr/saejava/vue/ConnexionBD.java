@@ -18,42 +18,67 @@ public class ConnexionBD {
 
     TextField nomBD, login, motDePasse;
 
-    public ConnexionBD(App app){
+    public ConnexionBD(App app) {
+
 
         Text nom = new Text("Nom BD:");
         Text log = new Text("Login:");
         Text mdp = new Text("Mot de passe:");
+
+        // Création des champs de saisie
+
         nomBD = new TextField();
+        nomBD.setPromptText("Base de données");
         login = new TextField();
+        login.setPromptText("Login");
         motDePasse = new TextField();
 
-        GridPane infos = new GridPane();
-        infos.add(nom, 0, 0);
-        infos.add(nomBD, 1, 0);
-        infos.add(log, 0, 1);
-        infos.add(login, 1, 1);
-        infos.add(mdp, 0, 2);
-        infos.add(motDePasse, 1, 2);
-        infos.setHgap(10);
-        infos.setVgap(10);
+        motDePasse.setPromptText("Mot de passe");
+
+        // Création des labels
+        Text titre = new Text("Connectez-vous à la base de données");
+        titre.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+        Text labelNomBD = new Text("Base de données :");
+        Text labelLogin = new Text("Login :");
+        Text labelMotDePasse = new Text("Mot de passe :");
+
+        // Création des boutons
+        Button btnConnexion = new Button("Se Connecter");
+        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
+        Button btnQuitter = new Button("Quitter");
+        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
+        // Mise en page des champs et labels
+        VBox champs = new VBox(15,
+            new VBox(10,
+                new javafx.scene.layout.HBox(20, labelNomBD, nomBD),
+                new javafx.scene.layout.HBox(20, labelLogin, login),
+                new javafx.scene.layout.HBox(20, labelMotDePasse, motDePasse)
+            ),
+            new javafx.scene.layout.HBox(60, btnConnexion, btnQuitter)
+        );
+        champs.setStyle("-fx-alignment: center;");
+        champs.setPrefWidth(500);
+
+        // Centrer les éléments dans les HBox et VBox
+        ((VBox)champs.getChildren().get(0)).setStyle("-fx-alignment: center;");
+        ((javafx.scene.layout.HBox)champs.getChildren().get(1)).setStyle("-fx-alignment: center;");
+
+        for (javafx.scene.Node node : ((VBox)champs.getChildren().get(0)).getChildren()) {
+            if (node instanceof javafx.scene.layout.HBox) {
+                ((javafx.scene.layout.HBox)node).setStyle("-fx-alignment: center;");
+            }
+        }
+
 
         BorderPane root = new BorderPane();
+        root.setTop(titre);
+        BorderPane.setAlignment(titre, javafx.geometry.Pos.CENTER);
+        root.setCenter(champs);
 
-        Text bienvenue = new Text("Bienvenue dans la base de données !");
 
-
-        Button btnConnexion = new Button("Se connecter");
-
-        btnConnexion.setOnAction(new ControlleurConnexionBD(app, this));
-        Button btnQuitter = new Button("Quitter");
-
-        VBox vbox = new VBox(bienvenue, infos, btnConnexion, btnQuitter);
-
-        root.setCenter(vbox);
-
-        Scene scene = new Scene(root, 400, 300);
-
-        this.scene = scene;
+        this.scene = new Scene(root, 600, 400);
     }
 
     public Scene getScene() {

@@ -152,7 +152,15 @@ public class Administrateur extends Utilisateur {
         
     }
 
-    public void ajouteVendeurBD(Vendeur v) throws SQLException{
+    public void ajouteVendeurBD(Vendeur v) throws Exception{
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * from VENDEUR natural join UTILISATEUR where " + 
+                                        "nomcli = ? and prenomcli = ?");
+        ps.setString(1, v.getNomUtil());
+        ps.setString(2, v.getPrenomUtil());
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            throw new CompteDejaPrisException("Un utilisateur avec ces informations existe déjà.");
+        } else {
         st = laConnexion.createStatement();
         PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
         int max = getMaxIdUtil();
@@ -170,6 +178,7 @@ public class Administrateur extends Utilisateur {
         } catch (SQLException e){
             System.err.println(e.getMessage());
         }
+    }
         
     }
 

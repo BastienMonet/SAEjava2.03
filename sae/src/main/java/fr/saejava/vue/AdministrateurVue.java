@@ -27,6 +27,11 @@ public class AdministrateurVue {
         Button deconnexion = new Button("Déconnexion");
         deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
+        creerVendeur.setOnAction(event -> app.setSceneCreerVendeur());
+        ajouteLibrairie.setOnAction(event -> app.setAjouterLibrairie());
+        deconnexion.setOnAction(event -> app.setSceneConnexionUtil());
+
+
         VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, gereStocks, statsVentes, deconnexion);
         vueAdmin.setStyle("-fx-padding: 20; -fx-alignment: center;");
         sceneAdmin = new Scene(vueAdmin, 500, 500);
