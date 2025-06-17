@@ -35,8 +35,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
 
-
-        this.setSceneVoirCommande();
+        this.setSceneConnexionBD();
 
         stage.setTitle("SAE java");
         stage.show();
