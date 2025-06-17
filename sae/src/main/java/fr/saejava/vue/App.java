@@ -42,6 +42,26 @@ public class App extends Application {
 
     }
 
+    public void setStocksGlobauxVue() {
+        GereStocksGlobauxVue vue = new GereStocksGlobauxVue(this);
+        this.stage.setScene(vue.getSceneStocksGlobaux());
+    }
+
+    public void setSceneAdmin() {
+        AdministrateurVue administrateurVue = new AdministrateurVue(this);
+        this.stage.setScene(administrateurVue.getSceneAdmin());
+    }
+
+    public void setSceneCreerVendeur() {
+        CreerVendeurVue vue = new CreerVendeurVue(this);
+        this.stage.setScene(vue.getSceneCreationVendeur());
+    }
+
+    public void setAjouterLibrairie() {
+        AjouteLibVue vue = new AjouteLibVue(this);
+        this.stage.setScene(vue.getSceneAjouteLib());
+    }
+
     public void setSceneCreerCompte(){
         CreerUnCompte vue = new CreerUnCompte(this);
         stage.setScene(vue.getScene());
@@ -113,8 +133,8 @@ public class App extends Application {
 
     public void alertConnexionEchoue(){
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("erreur de connexion");
-        alert.setHeaderText("identifiant ou mot de passe incorrecte");
+        alert.setTitle("Erreur de connexion");
+        alert.setHeaderText("Identifiant ou mot de passe incorrect");
         alert.showAndWait();
     }
 
@@ -129,7 +149,7 @@ public class App extends Application {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Compte déjà pris");
         alert.setHeaderText("Un compte avec ces identifiants existe déjà.");
-        alert.setContentText("Veuillez choisir un autre nom d'utilisateur ou prenom.");
+        alert.setContentText("Veuillez choisir un autre nom d'utilisateur ou prénom.");
         alert.showAndWait();
     }
 

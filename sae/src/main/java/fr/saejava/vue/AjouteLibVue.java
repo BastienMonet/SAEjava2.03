@@ -8,10 +8,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class ajouteLibVue {
+public class AjouteLibVue {
     Scene sceneAjouteLib;
 
-    public ajouteLibVue(App app) {
+    public AjouteLibVue(App app) {
         Text titre = new Text("Ajouter une librairie");
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
 
