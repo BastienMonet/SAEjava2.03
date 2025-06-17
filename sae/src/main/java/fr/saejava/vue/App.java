@@ -34,6 +34,9 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
 
+
+        this.setSceneVoirCommande();
+
         stage.setTitle("SAE java");
         stage.show();
 
@@ -62,6 +65,11 @@ public class App extends Application {
     public void setSceneLivreVue(){
         LivreVue livreVue = new LivreVue(this);
         this.stage.setScene(livreVue.getScene());
+    }
+
+    public void setSceneVoirCommande(){
+        VoirCommandeVue voirCommandeVue = new VoirCommandeVue(this);
+        this.stage.setScene(voirCommandeVue.getSceneVoirCommandeVue());
     }
 
     public ConnexionMySQL getConnexionMySQL() {
