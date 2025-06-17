@@ -69,11 +69,13 @@ public class AjouterCommandeVue {
 
         Button retour = new Button("retour");
 
-        retour.setOnAction(new ControlleurAjouteCommande(app, this));
-        valider.setOnAction(new ControlleurAjouteCommande(app, this));
-
         Button finaliser = new Button("finaliser la commande");
 
+        retour.setOnAction(new ControlleurAjouteCommande(app, this));
+        valider.setOnAction(new ControlleurAjouteCommande(app, this));
+        finaliser.setOnAction(new ControlleurAjouteCommande(app, this));
+
+        
         HBox menu = new HBox(retour, finaliser);
 
         VboxCommande = new VBox();

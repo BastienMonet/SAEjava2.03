@@ -3,6 +3,8 @@ package fr.saejava.vue;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sound.sampled.Control;
+
 import fr.saejava.controlleur.ControlleurCompteClient;
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
@@ -29,8 +31,15 @@ public class CompteClient {
     private ComboBox<String> enligneChoix;
     private ComboBox<String> livraisonChoix;
 
+    private Client c;
+
+    private App app;
+
 
     public CompteClient(App app, Client c) throws Exception {
+
+        this.c = app.getClient();
+        this.app = app;
 
         BorderPane root = new BorderPane();
 
@@ -39,7 +48,7 @@ public class CompteClient {
         ScrollPane scrollPanecommande = new ScrollPane(lesCommandes);
         scrollPanecommande.setFitToWidth(true);
 
-        majLesCommandes(c);
+        
         Text bienvenue = new Text("Bienvenue chère " + c.getNomUtil() + " !");
         
        
@@ -78,7 +87,8 @@ public class CompteClient {
         ScrollPane scrollPanelivre = new ScrollPane(lesLivres);
         scrollPanelivre.setFitToWidth(true);
 
-        majRecomandation(c);
+        majRecomandation();
+        majLesCommandes();
 
         VBox vbdroite = new VBox(onVousRecomande, scrollPanelivre);
 
@@ -98,19 +108,21 @@ public class CompteClient {
     }
 
 
-    public void majLesCommandes(Client c) throws Exception {
+    public void majLesCommandes() throws Exception {
         lesCommandes.getChildren().clear();
         for (Commande commande : c.voirSesCommande()) {
             String res = commande.toString();
             Button btndetail = new Button("détails");
             Button btnsupprimer = new Button("X");
+            btnsupprimer.setId(String.valueOf(commande.getNumCom()));
+            btnsupprimer.setOnAction(new ControlleurCompteClient(app, this));
             btnsupprimer.setStyle("-fx-background-color: red; -fx-text-fill: white;");
             HBox hb = new HBox(new Text(res), btndetail, btnsupprimer);
             lesCommandes.getChildren().add(hb);
         }
     }
 
-    public void majRecomandation(Client c) throws Exception {
+    public void majRecomandation() throws Exception {
         lesLivres.getChildren().clear();
         for (Livre Livre : c.onVousRecommande()) {
             String res = Livre.toString();

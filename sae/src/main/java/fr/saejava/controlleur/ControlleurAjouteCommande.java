@@ -1,11 +1,16 @@
 package fr.saejava.controlleur;
 
+import java.util.Optional;
+
 import fr.saejava.modele.CommandeUnit;
 import fr.saejava.vue.AjouterCommandeVue;
 import fr.saejava.vue.App;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
 
@@ -38,6 +43,31 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                     ajouterCommandeVue.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getClient().getLivreBDparTitre(livreTitre), qte));
                     ajouterCommandeVue.majLivreDansCommande();
                 }
+            } catch (Exception e) {
+                app.alertErreur();
+                e.printStackTrace();
+            }
+        } else if(btn.getText().equals("finaliser la commande")) {
+
+            try {
+                if ( ! ajouterCommandeVue.getCommande().getListeCommandes().isEmpty()) {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Êtes-vous sûr de sauvegarder cette commande ?");
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        app.getClient().ajouteCommandeBD((ajouterCommandeVue.getCommande()));
+                        app.setSceneCompteClient();
+                    }
+
+
+                    
+                } else {
+                    app.setSceneCompteClient();
+                }
+            
             } catch (Exception e) {
                 app.alertErreur();
                 e.printStackTrace();

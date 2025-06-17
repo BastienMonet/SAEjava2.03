@@ -1,6 +1,7 @@
 package fr.saejava.controlleur;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
@@ -8,7 +9,10 @@ import fr.saejava.vue.App;
 import fr.saejava.vue.CompteClient;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class ControlleurCompteClient implements EventHandler<ActionEvent> {
 
@@ -51,6 +55,23 @@ public class ControlleurCompteClient implements EventHandler<ActionEvent> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        } else if (btn.getText().equals("X")){
+            int numCom = Integer.valueOf(btn.getId());
+            try {
+
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation");
+                alert.setHeaderText("Voulez vous vraiment supprimer cette commande?");
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    app.getClient().retireSaCommande(app.getClient().getCommande(numCom));
+                    compteClient.majLesCommandes();
+                    System.out.println("Suppression de la commande");
+                } 
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
