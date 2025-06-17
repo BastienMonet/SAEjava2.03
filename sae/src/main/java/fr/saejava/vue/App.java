@@ -179,7 +179,12 @@ public class App extends Application {
         alert.showAndWait();
     }
 
-
+    public void alertAjoutSucces() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Ajout réussi");
+        alert.setHeaderText("L'élément a été ajouté avec succès.");
+        alert.showAndWait();
+    }
 
     public static void main(String[] args) {
         App.launch(args);

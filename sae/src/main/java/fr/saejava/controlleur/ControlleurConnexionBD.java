@@ -28,7 +28,7 @@ public class ControlleurConnexionBD implements EventHandler<ActionEvent> {
         if (btn.getText().equals("Quitter")) {
             System.out.println("Fermeture de l'application...");
             app.close();
-        } else if (btn.getText().equals("Se connecter")) {
+        } else if (btn.getText().equals("Se Connecter")) {
             handleConnexion();
         }
 

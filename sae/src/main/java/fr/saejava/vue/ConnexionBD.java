@@ -4,6 +4,7 @@ import fr.saejava.controlleur.ControlleurConnexionBD;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -15,7 +16,9 @@ public class ConnexionBD {
 
     private Scene scene;
 
-    TextField nomBD, login, motDePasse;
+    TextField nomBD, login;
+
+    PasswordField motDePasse;
 
     public ConnexionBD(App app) {
 
@@ -24,7 +27,7 @@ public class ConnexionBD {
         nomBD.setPromptText("Base de données");
         login = new TextField();
         login.setPromptText("Login");
-        motDePasse = new TextField();
+        motDePasse = new PasswordField();
         motDePasse.setPromptText("Mot de passe");
 
         // Création des labels
@@ -49,6 +52,10 @@ public class ConnexionBD {
             ),
             new javafx.scene.layout.HBox(60, btnConnexion, btnQuitter)
         );
+
+        btnConnexion.setOnAction(new ControlleurConnexionBD(app, this));
+        btnQuitter.setOnAction(new ControlleurConnexionBD(app, this));
+
         champs.setStyle("-fx-alignment: center;");
         champs.setPrefWidth(500);
 
