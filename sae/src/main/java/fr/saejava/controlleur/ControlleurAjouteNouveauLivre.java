@@ -43,7 +43,7 @@ public class ControlleurAjouteNouveauLivre implements EventHandler<ActionEvent> 
                 app.setSceneAdmin();
                 app.alertAjoutSucces();
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 System.err.println(e.getMessage());
             }
         }

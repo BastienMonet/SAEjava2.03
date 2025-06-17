@@ -48,7 +48,7 @@ public class ControlleurCreerVendeur implements EventHandler<ActionEvent> {
             } catch (CompteDejaPrisException e) {
                 app.alertCompteDejaPris();
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 System.err.println(e.getMessage());
             }
         }

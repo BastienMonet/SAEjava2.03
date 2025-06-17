@@ -177,10 +177,11 @@ public class App extends Application {
         alert.showAndWait();
     }
 
-    public void alertErreur() {
+    public void alertErreur(Exception e) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText("Une erreur est survenue.");
+        alert.setContentText(e.getMessage());
         alert.showAndWait();
     }
 
@@ -188,6 +189,14 @@ public class App extends Application {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Ajout réussi");
         alert.setHeaderText("L'élément a été ajouté avec succès.");
+        alert.showAndWait();
+    }
+
+    public void alertQte() {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Quantité invalide");
+        alert.setHeaderText("La quantité saisie est invalide.");
+        alert.setContentText("Veuillez saisir une quantité positive et inférieure ou égale à la quantité disponible.");
         alert.showAndWait();
     }
 

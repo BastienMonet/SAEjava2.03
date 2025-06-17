@@ -19,6 +19,7 @@ public class GereStocksGlobauxVue {
     private ComboBox<String> nomMagasin;
     private ComboBox<String> nomLivre;
     private TextField qte;
+    private Text texteQTElivreDansMagasin;
     
     public GereStocksGlobauxVue(App app) throws Exception {
 
@@ -50,12 +51,23 @@ public class GereStocksGlobauxVue {
             nomLivre.getItems().add(livre.getTitre());
         }
 
+        nomMagasin.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexteQteLivreDansMagasin();
+           
+        });
+
+        nomLivre.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexteQteLivreDansMagasin();
+        });
+
         VBox livreBox = new VBox(0, texteLivrePane, nomLivre);
 
         Text texteQTE = new Text("Quantité");
         BorderPane texteQTEPane = new BorderPane(texteLivre);
         BorderPane.setAlignment(texteQTEPane, javafx.geometry.Pos.CENTER);
         texteQTEPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+
+        texteQTElivreDansMagasin = new Text("il y a ? fois le livre dans ce magasin");
 
         qte = new TextField();
 
@@ -79,7 +91,7 @@ public class GereStocksGlobauxVue {
 
         HBox selection = new HBox(ajouter, retirer, retour);
 
-        VBox vueGereBox = new VBox(40, messageInfo, nomMagasinBox, livreBox, qteBox, selection);
+        VBox vueGereBox = new VBox(40, messageInfo, nomMagasinBox, livreBox, texteQTElivreDansMagasin ,qteBox, selection);
         vueGereBox.setStyle("-fx-padding: 20; -fx-alignment: center;");
         sceneGereBox = new Scene(vueGereBox, 500, 500);
     }
@@ -96,5 +108,26 @@ public class GereStocksGlobauxVue {
     }
     public String getQte() {
         return qte.getText();
+    }
+
+    public void updateTexteQteLivreDansMagasin() {
+        String nomMag = getNomMagasin();
+        String nomLiv = getNomLivre();
+        try {
+            Magasin mag = administrateur.getMagasinBDparNom(nomMag);
+            Livre livre = administrateur.getLivreBDparTitre(nomLiv);
+
+            if (nomMag == null || nomLiv == null) {
+                texteQTElivreDansMagasin.setText("il y a : fois le livre dans ce magasin");
+            } else {
+                int qteLivre = administrateur.qteDansMagasin(livre, mag);
+                texteQTElivreDansMagasin.setText("il y a : " + qteLivre + " fois le livre dans ce magasin");
+            }
+            
+        } catch (Exception e) {
+            texteQTElivreDansMagasin.setText("il y a ? fois le livre dans ce magasin");
+            e.printStackTrace();
+        }
+        
     }
 }

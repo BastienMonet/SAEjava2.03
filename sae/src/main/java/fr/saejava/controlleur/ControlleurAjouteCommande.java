@@ -38,13 +38,13 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                 String livreTitre = ajouterCommandeVue.getCblivre();
             
                 if (qte <= 0 || qte > app.getClient().qteDansMagasin(app.getClient().getLivreBDparTitre(livreTitre), ajouterCommandeVue.getCommande().getMagasin())) {
-                    app.alertErreur();
+                    app.alertQte();
                 } else {
                     ajouterCommandeVue.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getClient().getLivreBDparTitre(livreTitre), qte));
                     ajouterCommandeVue.majLivreDansCommande();
                 }
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 e.printStackTrace();
             }
         } else if(btn.getText().equals("finaliser la commande")) {
@@ -69,7 +69,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                 }
             
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 e.printStackTrace();
             }
         }

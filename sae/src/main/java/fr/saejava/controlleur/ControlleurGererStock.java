@@ -38,7 +38,7 @@ public class ControlleurGererStock implements EventHandler<ActionEvent> {
                     app.setSceneAdmin();
                 }
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 e.printStackTrace();
             }
         } else if (btn.getText().equals("Retirer")) {
@@ -54,7 +54,7 @@ public class ControlleurGererStock implements EventHandler<ActionEvent> {
                     app.setSceneAdmin();
                 }
             } catch (Exception e) {
-                app.alertErreur();
+                app.alertErreur(e);
                 e.printStackTrace();
             }
             
