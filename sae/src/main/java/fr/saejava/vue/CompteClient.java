@@ -3,11 +3,14 @@ package fr.saejava.vue;
 import java.sql.SQLException;
 import java.util.List;
 
+import fr.saejava.controlleur.ControlleurCompteClient;
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.Livre;
+import fr.saejava.modele.Magasin;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -22,6 +25,11 @@ public class CompteClient {
 
     private VBox lesLivres;
 
+    private ComboBox<String> choixmag;
+    private ComboBox<String> enligneChoix;
+    private ComboBox<String> livraisonChoix;
+
+
     public CompteClient(App app, Client c) throws Exception {
 
         BorderPane root = new BorderPane();
@@ -32,9 +40,36 @@ public class CompteClient {
         scrollPanecommande.setFitToWidth(true);
 
         majLesCommandes(c);
-        Text bienvenue = new Text("Bienvenue chère " + c.getNomUtil() + " !"); 
-        Button ajouteCommande = new Button("ajouter une commande");
-        VBox vbgauche = new VBox(bienvenue, scrollPanecommande, ajouteCommande);
+        Text bienvenue = new Text("Bienvenue chère " + c.getNomUtil() + " !");
+        
+       
+        choixmag = new ComboBox<>();
+
+        for (Magasin m : c.voirToutLesMagasin()) {
+            choixmag.getItems().add(m.getNomMag());
+        }
+        choixmag.setValue("Choisissez un magasin");
+
+        Text enligne = new Text("En ligne?");
+
+        enligneChoix = new ComboBox<>();
+        enligneChoix.getItems().addAll("oui", "non");
+        enligneChoix.setValue("oui");
+
+        Text livraison = new Text("Livraison?");
+
+        livraisonChoix = new ComboBox<>();
+        livraisonChoix.getItems().addAll("en magasin", "a domicile");
+        livraisonChoix.setValue("en magasin");
+       
+       
+        HBox ajouteCommande = new HBox(choixmag, enligne, enligneChoix, livraison, livraisonChoix);
+
+        Button btnajoute = new Button("ajouter une commande");
+
+        btnajoute.setOnAction(new ControlleurCompteClient(app, this));
+        
+        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande,ajouteCommande ,btnajoute);
 
         Text onVousRecomande = new Text("on Vous Recommandes");
         
@@ -90,5 +125,21 @@ public class CompteClient {
     public Scene getScene(){
         return scene;
     }
+
+
+    public String getChoixmag() {
+        return choixmag.getValue();
+    }
+
+
+    public String getEnligneChoix() {
+        return enligneChoix.getValue();
+    }
+
+
+    public String getLivraisonChoix() {
+        return livraisonChoix.getValue();
+    }
+
 
 }

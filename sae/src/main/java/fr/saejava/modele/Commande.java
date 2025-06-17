@@ -14,6 +14,8 @@ public class Commande {
     private Magasin mag;
     private Client client;
 
+
+
     public Commande(int numCom, String dateCom, Character enligne, Character livraison, Magasin mag, Client c) {
         this.numCom = numCom;
         this.dateCom = dateCom;
@@ -42,6 +44,10 @@ public class Commande {
 
     public List<CommandeUnit> getListeCommandes() {
         return listeCommandes;
+    }
+
+    public Client getClient() {
+        return client;
     }
 
 
