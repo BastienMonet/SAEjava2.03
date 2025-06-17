@@ -4,6 +4,8 @@ import fr.saejava.modele.Livre;
 import fr.saejava.controlleur.ControlleurAjouteCommande;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.CommandeUnit;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -38,15 +40,29 @@ public class AjouterCommandeVue {
         this.commande = commande;
 
         BorderPane root = new BorderPane();
+        root.setPadding(new Insets(10, 10, 10, 10));
+
+        Text title = new Text("Ajouter une commande");
+        title.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
+        HBox titreCont = new HBox(title);
+        titreCont.setAlignment(Pos.CENTER);
+        titreCont.setPadding(new Insets(10, 0, 10, 0));
         
         Text dateCom = new Text("date de la commande : " + commande.getDateCom());
+        dateCom.setStyle("-fx-font-size: 20;");
         Text enligne = new Text("en ligne : " + commande.enligne());
+        enligne.setStyle("-fx-font-size: 20;");
         Text livraison = new Text("livraison : " + commande.getLivraison());
+        livraison.setStyle("-fx-font-size: 20;");
         Text magasin = new Text("magasin : " + commande.getMagasin().getNomMag());
+        magasin.setStyle("-fx-font-size: 20;");
         Text destinataire = new Text("destinataire : " + commande.getClient().getNomUtil());
+        destinataire.setStyle("-fx-font-size: 20;");
         Text prixTotal = new Text("prix total : " + commande.prixTotCommande());
+        prixTotal.setStyle("-fx-font-size: 20;");
 
         VBox vb = new VBox(dateCom, enligne, livraison, magasin, destinataire, prixTotal);
+        vb.setSpacing(10);
 
 
         cblivre = new ComboBox();
@@ -65,6 +81,7 @@ public class AjouterCommandeVue {
 
 
         HBox hbAjoute = new HBox(textQte, qte, cblivre, valider);
+        hbAjoute.setSpacing(10);
 
 
         Button retour = new Button("retour");
@@ -77,17 +94,23 @@ public class AjouterCommandeVue {
 
         
         HBox menu = new HBox(retour, finaliser);
+        menu.setSpacing(10);
 
         VboxCommande = new VBox();
         VBoxLivresDansMagasin = new VBox();
 
         ScrollPane scrollPaneCommande = new ScrollPane(VboxCommande);
+        scrollPaneCommande.setMaxWidth(477);
 
         ScrollPane scrollPanelivreDansMagasin = new ScrollPane(VBoxLivresDansMagasin);
+        scrollPanelivreDansMagasin.setMaxWidth(477);
 
         VBox vbcenter = new VBox(new Text("les livres dans le magasin"), scrollPanelivreDansMagasin, new Text("la commande acctuel") , scrollPaneCommande, hbAjoute, menu);
+        vbcenter.setSpacing(10);
 
+        BorderPane.setMargin(vbcenter, new Insets(0, 0, 0, 50));
 
+        root.setTop(titreCont);
         root.setLeft(vb);
         root.setCenter(vbcenter);
 
@@ -99,7 +122,7 @@ public class AjouterCommandeVue {
         
 
         
-        this.scene = new Scene(root, 800, 400);
+        this.scene = new Scene(root, 870, 400);
     }
 
     public Scene getScene() {
