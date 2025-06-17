@@ -105,8 +105,8 @@ public class App extends Application {
 
     public void alertConnexionEchoue(){
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("erreur de connexion");
-        alert.setHeaderText("identifiant ou mot de passe incorrecte");
+        alert.setTitle("Erreur de connexion");
+        alert.setHeaderText("Identifiant ou mot de passe incorrect");
         alert.showAndWait();
     }
 
@@ -121,7 +121,7 @@ public class App extends Application {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Compte déjà pris");
         alert.setHeaderText("Un compte avec ces identifiants existe déjà.");
-        alert.setContentText("Veuillez choisir un autre nom d'utilisateur ou prenom.");
+        alert.setContentText("Veuillez choisir un autre nom d'utilisateur ou prénom.");
         alert.showAndWait();
     }
 
