@@ -78,7 +78,7 @@ public class CompteClient {
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
-        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande,ajouteCommande ,btnajoute);
+        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande, ajouteCommande, btnajoute);
 
         Text onVousRecomande = new Text("On Vous Recommande");
         
