@@ -116,6 +116,7 @@ public class AjouterCommandeVue {
 
         try {
             majLivreDansMagasin();
+            majLivreDansCommande();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,6 +136,9 @@ public class AjouterCommandeVue {
         for (Livre livre : this.app.getClient().onVousRecommandeDansMagasin(commande.getMagasin())) {
             String res = livre.toString();
             Button btndetail = new Button("détails");
+            btndetail.setOnAction(event -> {
+                app.setFenetreLivreVue(livre);
+            });
             HBox hb = new HBox(new Text(res), new Text(app.getClient().qteDansMagasin(livre, commande.getMagasin()) + "en stock"), btndetail);
             VBoxLivresDansMagasin.getChildren().add(hb);
         }

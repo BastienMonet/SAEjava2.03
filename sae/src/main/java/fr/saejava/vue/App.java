@@ -4,6 +4,7 @@ import fr.saejava.modele.Administrateur;
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.ConnexionMySQL;
+import fr.saejava.modele.Livre;
 import fr.saejava.modele.Vendeur;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -87,12 +88,12 @@ public class App extends Application {
         this.stage.setScene(AjoutercommandeVue.getScene());
     }
 
-    public void setSceneLivreVue(){
-        LivreVue livreVue = new LivreVue(this);
-        this.stage.setScene(livreVue.getScene());
+    public void setFenetreLivreVue(Livre livre){
+        FenetreLivreVue livreVue = new FenetreLivreVue(this, livre);
+        livreVue.getFenetreLivreVue();
     }
 
-    public void setSceneVoirCommande(Commande commande) {
+    public void setFenetreVoirCommande(Commande commande) {
         VoirCommandeVue voirCommandeVue = new VoirCommandeVue(this, commande);
         voirCommandeVue.getFenetreVoirCommandeVue();
     }

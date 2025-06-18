@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sound.sampled.Control;
 
+import fr.saejava.controlleur.ControlleurAcheterLivre;
 import fr.saejava.controlleur.ControlleurCompteClient;
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
@@ -115,7 +116,7 @@ public class CompteClient {
             Button btndetail = new Button("détails");
             btndetail.setId(String.valueOf(commande.getNumCom()));
             btndetail.setOnAction(event -> {
-                app.setSceneVoirCommande(commande);
+                app.setFenetreVoirCommande(commande);
             });
 
             Button btnsupprimer = new Button("X");
@@ -129,10 +130,15 @@ public class CompteClient {
 
     public void majRecomandation() throws Exception {
         lesLivres.getChildren().clear();
-        for (Livre Livre : c.onVousRecommande()) {
-            String res = Livre.toString();
+        for (Livre livre : c.onVousRecommande()) {
+            String res = livre.toString();
             Button btndetail = new Button("détails");
+            btndetail.setOnAction(event -> {
+                app.setFenetreLivreVue(livre);
+            });
             Button btnacheter = new Button("acheter");
+            btnacheter.setId(livre.getTitre());
+            btnacheter.setOnAction(new ControlleurAcheterLivre(app, c));
             HBox hb = new HBox(new Text(res), btndetail, btnacheter);
             lesLivres.getChildren().add(hb);
         }
