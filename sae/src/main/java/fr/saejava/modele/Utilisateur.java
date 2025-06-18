@@ -162,12 +162,23 @@ public abstract class Utilisateur {
 
     public List<Livre> onVousRecommandeDansMagasin(Magasin m, String carac) throws SQLException{
         List<Livre> res = new ArrayList<>();
-        
-        PreparedStatement ps = laConnexion.prepareStatement("SELECT * " +
+
+        PreparedStatement ps;
+
+        if (! carac.equals("")){
+            ps = laConnexion.prepareStatement("SELECT * " +
                                                             "FROM LIVRE " +
-                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? and like ? ORDER BY nbreAchat DESC");
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? and titre like ? ORDER BY nbreAchat DESC");
         ps.setInt(1, m.getIdMag());
         ps.setString(2, "%" + carac + "%");
+        } else {
+            ps = laConnexion.prepareStatement("SELECT * " +
+                                                            "FROM LIVRE " +
+                                                            "JOIN POSSEDER ON LIVRE.isbn = POSSEDER.isbn where idmag = ? ORDER BY nbreAchat DESC");
+        ps.setInt(1, m.getIdMag());
+        }
+        
+         
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Livre l = new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat"));
