@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -66,6 +68,12 @@ public class VoirCommandeVue {
 
         lesDetail = new VBox();
 
+        ScrollPane scroll = new ScrollPane(lesDetail);
+
+        lesDetail.setAlignment(Pos.CENTER);
+        lesDetail.setSpacing(10);
+        BorderPane.setMargin(lesDetail, new Insets(0, 0, 0, 50));
+
         this.livreDansCommande();
 
         // // remplacer par une boucle pour afficher les livres
@@ -90,7 +98,7 @@ public class VoirCommandeVue {
         BorderPane fin = new BorderPane();
         fin.setTop(titreCont);
         fin.setLeft(infosCom);
-        fin.setRight(lesDetail);
+        fin.setCenter(scroll);
         fin.setBottom(retourCont);
 
         Scene root = new Scene(fin, 850, 700);
@@ -100,8 +108,8 @@ public class VoirCommandeVue {
         stage.setWidth(1000);
     }
 
-    private HBox afficheLivre(String titre, int qte, double prix){
-        Text livre = new Text(titre);
+    private HBox afficheDetailCommande(CommandeUnit comU){
+        Text livre = new Text(comU.getLivre().getTitre());
         livre.setStyle("-fx-font-size: 20;");
         Button detail = new Button("voir le detail");
         HBox livreG = new HBox(livre, detail);
@@ -110,29 +118,25 @@ public class VoirCommandeVue {
         HBox space = new HBox();
         space.setMinWidth(100);
 
-        Text quantite = new Text("[qte]");
+        Text quantite = new Text("x " + String.valueOf(comU.getQte()));
         quantite.setStyle("-fx-font-size: 20;");
-        Text prixLivre = new Text("[prix]");
+        Text prixLivre = new Text(String.valueOf(comU.getPrixTotal() + " €"));
         prixLivre.setStyle("-fx-font-size: 20;");
 
         HBox livreQtePrix = new HBox(quantite, prixLivre);
         livreQtePrix.setSpacing(20);
 
         HBox fin = new HBox(livreG, space, livreQtePrix);
-        fin.setAlignment(Pos.CENTER);
+        fin.setAlignment(Pos.CENTER_LEFT);
 
         return fin;
     }
 
-
-
     public void livreDansCommande() {
         lesDetail.getChildren().clear();
         for (CommandeUnit commandeUnit : commande.getListeCommandes()) {
-            String res = commandeUnit.toString();
-            Button detail = new Button("détails");
-            HBox hb = new HBox(new Text(res), detail);
-            lesDetail.getChildren().add(hb);
+            lesDetail.getChildren().add(afficheDetailCommande(commandeUnit));
+
 
         }
     }
