@@ -15,8 +15,9 @@ public class ConnexionMySQL {
 
 	public void connecter(String nomServeur, String nomBase, String nomLogin, String motDePasse) throws SQLException {
 		// si tout s'est bien passé la connexion n'est plus nulle
-		// mysql = DriverManager.getConnection("jdbc:mysql://servinfo-maria:3306/" + nomBase, nomLogin, motDePasse);
-		mysql = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + nomBase, nomLogin, motDePasse);
+		mysql = DriverManager.getConnection("jdbc:mysql://servinfo-maria:3306/" + nomBase, nomLogin, motDePasse);
+		// mysql = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + nomBase, nomLogin, motDePasse);
+
 		this.connecte=this.mysql!=null;
 	}
 	public void close() throws SQLException {
