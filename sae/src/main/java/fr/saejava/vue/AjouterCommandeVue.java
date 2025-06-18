@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -79,9 +80,17 @@ public class AjouterCommandeVue {
 
         Button valider = new Button("ajouter");
 
+        TextField rechercheMag = new TextField();
+        rechercheMag.setPromptText("Rechercher un magasin");
 
-        HBox hbAjoute = new HBox(textQte, qte, cblivre, valider);
-        hbAjoute.setSpacing(10);
+
+        GridPane gAjoute = new GridPane();
+        gAjoute.add(rechercheMag, 2, 0);
+        gAjoute.add(textQte, 0, 1);
+        gAjoute.add(qte, 1, 1);
+        gAjoute.add(cblivre, 2, 1);
+        gAjoute.add(valider, 3, 1);
+        gAjoute.setVgap(10);
 
 
         Button retour = new Button("retour");
@@ -105,7 +114,7 @@ public class AjouterCommandeVue {
         ScrollPane scrollPanelivreDansMagasin = new ScrollPane(VBoxLivresDansMagasin);
         scrollPanelivreDansMagasin.setMaxWidth(477);
 
-        VBox vbcenter = new VBox(new Text("les livres dans le magasin"), scrollPanelivreDansMagasin, new Text("la commande actuelle") , scrollPaneCommande, hbAjoute, menu);
+        VBox vbcenter = new VBox(new Text("les livres dans le magasin"), scrollPanelivreDansMagasin, new Text("la commande actuelle") , scrollPaneCommande, gAjoute, menu);
         vbcenter.setSpacing(10);
 
         BorderPane.setMargin(vbcenter, new Insets(0, 0, 0, 50));
