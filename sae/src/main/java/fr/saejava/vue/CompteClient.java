@@ -51,14 +51,14 @@ public class CompteClient {
 
         lesCommandes = new VBox();
 
-        Text commandText = new Text("Vos commande en cours...");
+        Text commandText = new Text("Vos commandes en cours...");
         commandText.setStyle("-fx-font-size: 20;");
 
         ScrollPane scrollPanecommande = new ScrollPane(lesCommandes);
         scrollPanecommande.setFitToWidth(true);
 
         
-        Text bienvenue = new Text("Bienvenue chère " + c.getNomUtil() + " !");
+        Text bienvenue = new Text("Bienvenue cher(e) " + c.getNomUtil() + " !");
         bienvenue.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
         HBox bienvenueBox = new HBox(bienvenue);
         bienvenueBox.setPadding(new Insets(10, 0, 20, 0));
@@ -127,7 +127,7 @@ public class CompteClient {
         BorderPane.setMargin(vbcenter, new Insets(0, 20, 0, 0));
 
 
-        Text onVousRecomande = new Text("on Vous Recommandes");
+        Text onVousRecomande = new Text("On vous recommande");
         onVousRecomande.setStyle("-fx-font-size: 20;");
         
         lesLivres = new GridPane();
