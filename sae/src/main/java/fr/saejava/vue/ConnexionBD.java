@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 
 public class ConnexionBD {
     
@@ -46,19 +48,19 @@ public class ConnexionBD {
 
         // Création des boutons
         Button btnConnexion = new Button("Se Connecter");
-        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         Button btnQuitter = new Button("Quitter");
-        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         // Mise en page des champs et labels
         VBox champs = new VBox(15,
             new VBox(10,
-                new javafx.scene.layout.HBox(20, labelNomBD, nomBD),
-                new javafx.scene.layout.HBox(20, labelLogin, login),
-                new javafx.scene.layout.HBox(20, labelMotDePasse, motDePasse)
+                new HBox(20, labelNomBD, nomBD),
+                new HBox(20, labelLogin, login),
+                new HBox(20, labelMotDePasse, motDePasse)
             ),
-            new javafx.scene.layout.HBox(60, btnConnexion, btnQuitter)
+            new HBox(60, btnConnexion, btnQuitter)
         );
 
         btnConnexion.setOnAction(new ControlleurConnexionBD(app, this));
@@ -69,11 +71,11 @@ public class ConnexionBD {
 
         // Centrer les éléments dans les HBox et VBox
         ((VBox)champs.getChildren().get(0)).setStyle("-fx-alignment: center;");
-        ((javafx.scene.layout.HBox)champs.getChildren().get(1)).setStyle("-fx-alignment: center;");
+        ((HBox)champs.getChildren().get(1)).setStyle("-fx-alignment: center;");
 
-        for (javafx.scene.Node node : ((VBox)champs.getChildren().get(0)).getChildren()) {
-            if (node instanceof javafx.scene.layout.HBox) {
-                ((javafx.scene.layout.HBox)node).setStyle("-fx-alignment: center;");
+        for (Node node : ((VBox)champs.getChildren().get(0)).getChildren()) {
+            if (node instanceof HBox) {
+                ((HBox)node).setStyle("-fx-alignment: center;");
             }
         }
 

@@ -85,7 +85,7 @@ public class CompteClient {
         
         VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande, ajouteCommande, rechercheMag, btnajoute);
 
-        Text onVousRecomande = new Text("on Vous Recommandes");
+        Text onVousRecomande = new Text("On Vous Recommande");
         
         lesLivres = new VBox();
 
