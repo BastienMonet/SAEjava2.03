@@ -60,12 +60,12 @@ public class ConnexionVue {
         connexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         connexion.setOnAction(new ControlleurConnexionUtil(app, this));
         connexion.setMinWidth(80);
-        connexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
         Button quitter = new Button("Quitter");
         quitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         quitter.setOnAction(new ControlleurConnexionUtil(app, this));
         quitter.setMinWidth(80);
-        quitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
         HBox boutonsAction = new HBox(connexion, quitter);
         boutonsAction.setAlignment(Pos.CENTER);
         boutonsAction.setSpacing(100);
@@ -74,7 +74,7 @@ public class ConnexionVue {
         inscription.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         inscription.setOnAction(new ControlleurConnexionUtil(app, this));
         inscription.setAlignment(Pos.CENTER);
-        inscription.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+
 
 
         VBox fin = new VBox(messBienvenue, infoConnextion, radio, boutonsAction, inscription);
