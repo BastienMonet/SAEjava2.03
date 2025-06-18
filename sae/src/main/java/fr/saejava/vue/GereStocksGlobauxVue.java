@@ -33,6 +33,26 @@ public class GereStocksGlobauxVue {
         texteNomMagasinPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
         TextField rechercheMag = new TextField();
+
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            nomMagasin.getItems().clear();
+            try {
+
+                if (newValue.isEmpty()) {
+                    for (Magasin mag : administrateur.voirToutLesMagasin()) {
+                        nomMagasin.getItems().add(mag.getNomMag());
+                    }
+                    return;
+                }
+                for (Magasin mag : administrateur.voirToutLesMagasin(newValue)) {
+                    nomMagasin.getItems().add(mag.getNomMag());
+               
+            }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la récupération des magasins : " + e.getMessage());
+            }
+            
+        });
         rechercheMag.setPromptText("Rechercher un magasin");
 
         nomMagasin = new ComboBox<>();
@@ -43,13 +63,31 @@ public class GereStocksGlobauxVue {
 
         VBox nomMagasinBox = new VBox(0, texteNomMagasinPane, rechercheMag, nomMagasin);
 
-        Text texteLivre = new Text("Livre");
+        Text texteLivre = new Text("Nom du livre");
         BorderPane texteLivrePane = new BorderPane(texteLivre);
         BorderPane.setAlignment(texteLivrePane, javafx.geometry.Pos.CENTER);
         texteLivrePane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
         TextField rechercheLivre = new TextField();
         rechercheLivre.setPromptText("Rechercher un livre");
+
+        rechercheLivre.textProperty().addListener((observable, oldValue, newValue) -> {
+            nomLivre.getItems().clear();
+            try {
+
+                if (newValue.isEmpty()) {
+                    for (Livre livre : administrateur.voirToutLesLivres()) {
+                        nomLivre.getItems().add(livre.getTitre());
+                    }
+                    return;
+                }
+                for (Livre livre : administrateur.voirToutLesLivres(newValue)) {
+                    nomLivre.getItems().add(livre.getTitre());
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la récupération des livres : " + e.getMessage());
+            }
+        });
 
         nomLivre = new ComboBox<>();
 
@@ -66,16 +104,16 @@ public class GereStocksGlobauxVue {
             updateTexteQteLivreDansMagasin();
         });
 
-        VBox livreBox = new VBox(0, texteLivrePane, rechercheLivre, nomLivre);
+        VBox livreBox = new VBox(0, texteLivre, texteLivrePane, rechercheLivre, nomLivre);
 
         Text texteQTE = new Text("Quantité");
-        BorderPane texteQTEPane = new BorderPane(texteLivre);
+        BorderPane texteQTEPane = new BorderPane(texteQTE);
         BorderPane.setAlignment(texteQTEPane, javafx.geometry.Pos.CENTER);
         texteQTEPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
         texteQTElivreDansMagasin = new Text("il y a ? fois le livre dans ce magasin");
 
-        qte = new TextField();
+        qte = new TextField("1");
 
         VBox qteBox = new VBox(0, texteQTE, texteQTEPane, qte);
 
@@ -124,7 +162,7 @@ public class GereStocksGlobauxVue {
             Livre livre = administrateur.getLivreBDparTitre(nomLiv);
 
             if (nomMag == null || nomLiv == null) {
-                texteQTElivreDansMagasin.setText("il y a : fois le livre dans ce magasin");
+                texteQTElivreDansMagasin.setText("il y a ? fois le livre dans ce magasin");
             } else {
                 int qteLivre = administrateur.qteDansMagasin(livre, mag);
                 texteQTElivreDansMagasin.setText("il y a : " + qteLivre + " fois le livre dans ce magasin");

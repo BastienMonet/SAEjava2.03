@@ -74,7 +74,7 @@ public class ControlleurCompteClient implements EventHandler<ActionEvent> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        } 
     }
     
 }

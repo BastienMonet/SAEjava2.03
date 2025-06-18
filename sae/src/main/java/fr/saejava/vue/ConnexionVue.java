@@ -22,6 +22,8 @@ public class ConnexionVue {
     private PasswordField mdpText;
     private ToggleGroup groupe;
 
+    Text connexionText;
+
     public ConnexionVue(App app) {
         Text messBienvenue = new Text("Salutation !\nVeuillez vous connecter.");
         messBienvenue.setTextAlignment(TextAlignment.CENTER);
@@ -56,6 +58,8 @@ public class ConnexionVue {
         radio.setAlignment(Pos.CENTER);
         radio.setSpacing(10);
 
+        connexionText = new Text("");
+
         Button connexion = new Button("Connexion");
         connexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         connexion.setOnAction(new ControlleurConnexionUtil(app, this));
@@ -77,7 +81,7 @@ public class ConnexionVue {
 
 
 
-        VBox fin = new VBox(messBienvenue, infoConnextion, radio, boutonsAction, inscription);
+        VBox fin = new VBox(messBienvenue, infoConnextion, radio, connexionText, boutonsAction, inscription);
         fin.setAlignment(Pos.CENTER);
         fin.setSpacing(30);
 
@@ -102,5 +106,9 @@ public class ConnexionVue {
 
     public Scene getScene() {
         return sceneConnexion;
+    }
+
+    public Text getConnexionText() {
+        return connexionText;
     }
 }

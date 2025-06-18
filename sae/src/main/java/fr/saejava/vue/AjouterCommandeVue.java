@@ -77,7 +77,7 @@ public class AjouterCommandeVue {
 
         Text textQte = new Text("Quantité : ");
 
-        qte = new TextField();
+        qte = new TextField(1 + "");
 
         Button valider = new Button("ajouter");
 
