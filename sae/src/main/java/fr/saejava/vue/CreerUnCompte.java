@@ -97,7 +97,9 @@ public class CreerUnCompte {
 
 
         Button btncreerCompte = new Button("Créer un compte");
+        btncreerCompte.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         Button btnAnnuler = new Button("Annuler");
+        btnAnnuler.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         btnAnnuler.setOnAction(new ControlleurCreerCompte(app, this));
         btncreerCompte.setOnAction(new ControlleurCreerCompte(app, this));
