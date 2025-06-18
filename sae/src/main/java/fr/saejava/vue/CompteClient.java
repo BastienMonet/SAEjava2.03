@@ -10,13 +10,17 @@ import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.Livre;
 import fr.saejava.modele.Magasin;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -26,7 +30,7 @@ public class CompteClient {
 
     private VBox lesCommandes;
 
-    private VBox lesLivres;
+    private GridPane lesLivres;
 
     private ComboBox<String> choixmag;
     private ComboBox<String> enligneChoix;
@@ -46,11 +50,18 @@ public class CompteClient {
 
         lesCommandes = new VBox();
 
+        Text commandText = new Text("Vos commande en cours...");
+        commandText.setStyle("-fx-font-size: 20;");
+
         ScrollPane scrollPanecommande = new ScrollPane(lesCommandes);
         scrollPanecommande.setFitToWidth(true);
 
         
         Text bienvenue = new Text("Bienvenue chère " + c.getNomUtil() + " !");
+        bienvenue.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
+        HBox bienvenueBox = new HBox(bienvenue);
+        bienvenueBox.setPadding(new Insets(10, 0, 20, 0));
+        bienvenueBox.setAlignment(Pos.CENTER);
         
        
         choixmag = new ComboBox<>();
@@ -82,11 +93,13 @@ public class CompteClient {
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
-        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande, ajouteCommande, rechercheMag, btnajoute);
+        VBox vbcenter = new VBox(20, commandText, scrollPanecommande, rechercheMag, ajouteCommande, btnajoute);
+        BorderPane.setMargin(vbcenter, new Insets(0, 20, 0, 0));
 
         Text onVousRecomande = new Text("on Vous Recommandes");
+        onVousRecomande.setStyle("-fx-font-size: 20;");
         
-        lesLivres = new VBox();
+        lesLivres = new GridPane();
 
         ScrollPane scrollPanelivre = new ScrollPane(lesLivres);
         scrollPanelivre.setFitToWidth(true);
@@ -94,7 +107,7 @@ public class CompteClient {
         majRecomandation();
         majLesCommandes();
 
-        VBox vbdroite = new VBox(onVousRecomande, scrollPanelivre);
+        VBox vbright = new VBox(20, onVousRecomande, scrollPanelivre);
 
         Button deco = new Button("deconnexion");
 
@@ -102,11 +115,13 @@ public class CompteClient {
             app.setSceneConnexionUtil();
         });
 
-        root.setLeft(vbgauche);
-        root.setRight(vbdroite);
+        root.setTop(bienvenueBox);
+        root.setCenter(vbcenter);
+        root.setRight(vbright);
         root.setBottom(deco);
+        root.setPadding(new Insets(10));
 
-        Scene scene = new Scene(root, 750, 600);
+        Scene scene = new Scene(root, 1000, 500);
 
         this.scene = scene;
     }
@@ -114,32 +129,53 @@ public class CompteClient {
 
     public void majLesCommandes() throws Exception {
         lesCommandes.getChildren().clear();
+        GridPane grid = new GridPane();
+        int i = 0;
         for (Commande commande : c.voirSesCommande()) {
-            String res = commande.toString();
+            Text res = new Text(commande.toString());
+            res.setStyle("-fx-font-size: 15;");
             Button btndetail = new Button("détails");
             btndetail.setId(String.valueOf(commande.getNumCom()));
             btndetail.setOnAction(event -> {
                 app.setSceneVoirCommande(commande);
             });
 
+            HBox space = new HBox();
+            space.setMinWidth(20);
             Button btnsupprimer = new Button("X");
             btnsupprimer.setId(String.valueOf(commande.getNumCom()));
             btnsupprimer.setOnAction(new ControlleurCompteClient(app, this));
             btnsupprimer.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-            HBox hb = new HBox(new Text(res), btndetail, btnsupprimer);
-            lesCommandes.getChildren().add(hb);
+            grid.add(res, 0, i);
+            grid.add(space, 1, i);
+            grid.add(btndetail, 2, i);
+            grid.add(btnsupprimer, 3, i);
+            i++;
         }
+        grid.setPadding(new Insets(10));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        lesCommandes.getChildren().add(grid);
     }
 
     public void majRecomandation() throws Exception {
         lesLivres.getChildren().clear();
+        GridPane grid = new GridPane();
+        int i = 0;
         for (Livre Livre : c.onVousRecommande()) {
-            String res = Livre.toString();
+            Text res = new Text(Livre.toString());
+            res.setStyle("-fx-font-size: 15;");
             Button btndetail = new Button("détails");
             Button btnacheter = new Button("acheter");
-            HBox hb = new HBox(new Text(res), btndetail, btnacheter);
-            lesLivres.getChildren().add(hb);
+            grid.add(res, 0, i);
+            grid.add(btndetail, 1, i);
+            grid.add(btnacheter, 2, i);
+            i++;
         }
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10));
+        lesLivres.getChildren().add(grid);
     }
 
 
