@@ -24,6 +24,10 @@ public class AdministrateurVue {
         Button gereStocks = new Button("Gérer les stocks globaux");
         gereStocks.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
+        Button voirlesStat = new Button("voir les statistique de la librairie");
+        voirlesStat.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+
+
         Button deconnexion = new Button("Déconnexion");
         deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
@@ -39,12 +43,15 @@ public class AdministrateurVue {
             }
         });
 
+        voirlesStat.setOnAction(event -> app.setStatistiqueVue());
+
+
         
 
 
-        VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, ajouteLivre , gereStocks, deconnexion);
+        VBox vueAdmin = new VBox(40, messageBVN, creerVendeur, ajouteLibrairie, ajouteLivre , gereStocks, voirlesStat, deconnexion);
         vueAdmin.setStyle("-fx-padding: 20; -fx-alignment: center;");
-        sceneAdmin = new Scene(vueAdmin, 500, 500);
+        sceneAdmin = new Scene(vueAdmin, 1000, 1000);
     }
 
     public Scene getSceneAdmin() {

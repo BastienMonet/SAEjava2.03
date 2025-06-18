@@ -158,7 +158,7 @@ public class AjouterCommandeVue {
         
 
         
-        this.scene = new Scene(root, 870, 400);
+        this.scene = new Scene(root, 1000, 1000);
     }
 
     public Scene getScene() {

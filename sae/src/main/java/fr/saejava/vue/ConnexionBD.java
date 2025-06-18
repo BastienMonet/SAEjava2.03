@@ -94,7 +94,7 @@ public class ConnexionBD {
         root.setCenter(centre);
 
 
-        this.scene = new Scene(root, 600, 400);
+        this.scene = new Scene(root, 1000, 1000);
     }
 
     public Scene getScene() {

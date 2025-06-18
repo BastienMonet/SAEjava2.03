@@ -99,7 +99,7 @@ public class GereStocksGlobauxVue {
 
         VBox vueGereBox = new VBox(40, messageInfo, nomMagasinBox, livreBox, texteQTElivreDansMagasin ,qteBox, selection);
         vueGereBox.setStyle("-fx-padding: 20; -fx-alignment: center;");
-        sceneGereBox = new Scene(vueGereBox, 500, 500);
+        sceneGereBox = new Scene(vueGereBox, 1000, 1000);
     }
 
     public Scene getSceneStocksGlobaux() {

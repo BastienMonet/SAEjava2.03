@@ -81,7 +81,7 @@ public class ConnexionVue {
         fin.setAlignment(Pos.CENTER);
         fin.setSpacing(30);
 
-        this.sceneConnexion = new Scene(fin, 400, 400);
+        this.sceneConnexion = new Scene(fin, 1000, 1000);
     }
 
     public String getNom() {

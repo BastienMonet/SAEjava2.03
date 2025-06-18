@@ -81,7 +81,7 @@ public class AjouteLivreVue {
         fin.setAlignment(Pos.CENTER);
         fin.setSpacing(20);
 
-        this.sceneAjouteLivre = new Scene(fin, 400, 500);
+        this.sceneAjouteLivre = new Scene(fin, 1000, 1000);
     }
 
     public Scene getScene(){

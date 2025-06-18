@@ -60,7 +60,7 @@ public class AjouteLibVue {
         fin.setAlignment(Pos.CENTER);
         fin.setSpacing(20);
 
-        this.sceneAjouteLib = new Scene(fin, 400, 300);
+        this.sceneAjouteLib = new Scene(fin, 1000, 1000);
     }
 
     public Scene getSceneAjouteLib(){

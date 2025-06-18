@@ -85,7 +85,7 @@ public class CreerVendeurVue {
 
         VBox vueCreationVendeur = new VBox(40, messageInfo, nomVendeurBox, prenomVendeurBox, mdpVendeurBox, creerVendeurBox);
         vueCreationVendeur.setStyle("-fx-padding: 20; -fx-alignment: center;");
-        sceneCreationVendeur = new Scene(vueCreationVendeur, 500, 500);
+        sceneCreationVendeur = new Scene(vueCreationVendeur, 1000, 1000);
     }
 
     public Scene getSceneCreationVendeur() {

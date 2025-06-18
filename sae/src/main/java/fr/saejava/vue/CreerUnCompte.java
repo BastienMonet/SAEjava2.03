@@ -117,7 +117,7 @@ public class CreerUnCompte {
         root.setBottom(hbbutton);
         root.setPadding(new Insets(0, 5, 20, 5));
 
-        Scene scene = new Scene(root, 500, 380);
+        Scene scene = new Scene(root, 1000, 1000);
 
         this.scene = scene;
     }

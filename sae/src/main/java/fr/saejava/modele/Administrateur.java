@@ -210,10 +210,10 @@ public class Administrateur extends Utilisateur {
 
 
 
-    ArrayList<Map.Entry<String, Integer>> CAparMagasin() throws SQLException{
+    public ArrayList<Map.Entry<String, Integer>> CAparMagasin() throws SQLException{
         ArrayList<Map.Entry<String, Integer>> result = new ArrayList<>();
 
-        PreparedStatement ps = laConnexion.prepareStatement("select nommag Magasin, sum(qte * prix) total" +
+        PreparedStatement ps = laConnexion.prepareStatement("select nommag Magasin, sum(qte * prix) total " +
                                 "from MAGASIN " +
                                 "natural join POSSEDER " +
                                 "natural join LIVRE " +

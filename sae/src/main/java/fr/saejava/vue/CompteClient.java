@@ -150,7 +150,7 @@ public class CompteClient {
         root.setBottom(deco);
         root.setPadding(new Insets(10));
 
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene = new Scene(root, 1000, 1000);
 
         this.scene = scene;
     }

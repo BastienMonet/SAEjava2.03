@@ -33,7 +33,7 @@ public class FenetreLivreVue {
         fin.setSpacing(20);
         fin.setAlignment(Pos.CENTER);
 
-        Scene root = new Scene(fin, 400, 300);
+        Scene root = new Scene(fin, 1000, 1000);
         stage.setScene(root);
     }
 

@@ -101,7 +101,7 @@ public class VoirCommandeVue {
         fin.setCenter(scroll);
         fin.setBottom(retourCont);
 
-        Scene root = new Scene(fin, 850, 700);
+        Scene root = new Scene(fin, 1000, 1000);
 
         stage.setScene(root);
         stage.setHeight(1000);

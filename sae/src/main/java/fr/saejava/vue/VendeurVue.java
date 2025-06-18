@@ -40,7 +40,7 @@ public class VendeurVue {
 
         VBox vueVendeurBox = new VBox(40, messageBVN, scroll, deconnexion);
         vueVendeurBox.setStyle("-fx-padding: 20; -fx-alignment: center;");
-        sceneVendeurBox = new Scene(vueVendeurBox, 500, 500);
+        sceneVendeurBox = new Scene(vueVendeurBox, 1000, 1000);
         try {
             majLesCommandes();
         } catch (Exception e) {
