@@ -1,6 +1,7 @@
 package fr.saejava.vue;
 
 import fr.saejava.modele.Livre;
+import fr.saejava.modele.Magasin;
 import fr.saejava.controlleur.ControlleurAjouteCommande;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.CommandeUnit;
@@ -82,6 +83,31 @@ public class AjouterCommandeVue {
 
         TextField rechercheMag = new TextField();
         rechercheMag.setPromptText("Rechercher un magasin");
+
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            cblivre.getItems().clear();
+
+            if (! newValue.equals("")){
+
+                
+                try {
+                    for (Livre livre : app.getClient().onVousRecommandeDansMagasin(commande.getMagasin(), newValue))
+                    cblivre.getItems().add(livre.getTitre());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                
+                try {
+                    for (Livre livre : app.getClient().onVousRecommandeDansMagasin(commande.getMagasin()))
+                    cblivre.getItems().add(livre.getTitre());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
 
 
         GridPane gAjoute = new GridPane();

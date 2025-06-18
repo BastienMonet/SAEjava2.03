@@ -94,10 +94,10 @@ public abstract class Utilisateur {
     public List<Magasin> voirToutLesMagasin(String carac) throws SQLException{
         List<Magasin> lstMag = new ArrayList<>();
 
-        String query = "SELECT * FROM MAGASIN where titre like ?";
+        String query = "SELECT * FROM MAGASIN where nommag like ? ";
         PreparedStatement ps = laConnexion.prepareStatement(query);
         ps.setString(1, "%"+carac+"%");
-        ResultSet rs = st.executeQuery(query);
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()){
             lstMag.add(new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag")));
@@ -108,10 +108,10 @@ public abstract class Utilisateur {
     public List<Livre> voirToutLesLivres(String carac) throws SQLException{
         List<Livre> lstLivre = new ArrayList<>();
 
-        String query = "SELECT * FROM LIVRE where titre like ?";
+        String query = "SELECT * FROM LIVRE where titre like ? ";
         PreparedStatement ps = laConnexion.prepareStatement(query);
         ps.setString(1,"%"+ carac + "%");
-        ResultSet rs = st.executeQuery(query);
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()){
             lstLivre.add(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")));

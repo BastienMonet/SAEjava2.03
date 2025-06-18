@@ -79,6 +79,33 @@ public class CompteClient {
         TextField rechercheMag = new TextField();
         rechercheMag.setPromptText("Rechercher un magasin");
 
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            choixmag.getItems().clear();
+
+            if (! newValue.equals("")){
+
+                
+                try {
+                    for (Magasin mag : c.voirToutLesMagasin(newValue))
+                    choixmag.getItems().add(mag.getNomMag());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                
+                try {
+                    for (Magasin mag : c.voirToutLesMagasin())
+                    choixmag.getItems().add(mag.getNomMag());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+            
+            
+        });
+
         Button btnajoute = new Button("ajouter une commande");
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));

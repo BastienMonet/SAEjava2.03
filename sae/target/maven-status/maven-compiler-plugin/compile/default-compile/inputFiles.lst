@@ -3,6 +3,7 @@
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteCommande.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteNouveauLivre.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteClient.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteVendeur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionBD.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurConnexionUtil.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCreerCompte.java
