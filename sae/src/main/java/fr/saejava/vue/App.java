@@ -36,7 +36,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
 
-        this.setVueVendeur();
+        this.setStatistiqueVue();
 
         stage.setTitle("SAE java");
         stage.show();
@@ -115,6 +115,11 @@ public class App extends Application {
     public void setVueVendeur() {
         VendeurVue vendeurVue = new VendeurVue(this);
         this.stage.setScene(vendeurVue.getSceneVendeur());
+    }
+
+    public void setStatistiqueVue() {
+        StatistiqueVue statistiquesVue = new StatistiqueVue(this);
+        this.stage.setScene(statistiquesVue.getScene());
     }
 
     public void close() {

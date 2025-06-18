@@ -192,8 +192,8 @@ public class CompteClient {
 
         GridPane grid = new GridPane();
         int i = 0;
-        for (Livre Livre : c.onVousRecommande()) {
-            Text res = new Text(Livre.toString());
+        for (Livre livre : c.onVousRecommande()) {
+            Text res = new Text(livre.toString());
             res.setStyle("-fx-font-size: 15;");
 
             Button btndetail = new Button("détails");
@@ -201,6 +201,10 @@ public class CompteClient {
                 app.setFenetreLivreVue(livre);
             });
             Button btnacheter = new Button("acheter");
+
+            btnacheter.setId(livre.getTitre());
+
+            btnacheter.setOnAction(new ControlleurAcheterLivre(app, c));
 
             grid.add(res, 0, i);
             grid.add(btndetail, 1, i);

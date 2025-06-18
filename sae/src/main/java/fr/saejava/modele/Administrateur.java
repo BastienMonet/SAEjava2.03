@@ -3,6 +3,9 @@ package fr.saejava.modele;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 import fr.saejava.exception.CompteDejaPrisException;
 
@@ -203,6 +206,34 @@ public class Administrateur extends Utilisateur {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+
+
+    ArrayList<Map.Entry<String, Integer>> CAparMagasin() throws SQLException{
+        ArrayList<Map.Entry<String, Integer>> result = new ArrayList<>();
+
+        PreparedStatement ps = laConnexion.prepareStatement("select nommag Magasin, sum(qte * prix) total" +
+                                "from MAGASIN " +
+                                "natural join POSSEDER " +
+                                "natural join LIVRE " +
+                                "group by nommag;");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()){
+            String nommag = rs.getString("Magasin");
+            int nbreAchat = rs.getInt("total");
+
+            Map.Entry<String, Integer> entry = new AbstractMap.SimpleEntry<>(nommag, nbreAchat);
+            result.add(entry);
+        }
+
+        rs.close();
+        return result;
+
+        
+
+
     }
 
 
