@@ -91,6 +91,34 @@ public abstract class Utilisateur {
         return lstMag;
     }
 
+    public List<Magasin> voirToutLesMagasin(String carac) throws SQLException{
+        List<Magasin> lstMag = new ArrayList<>();
+
+        String query = "SELECT * FROM MAGASIN where titre like ?";
+        PreparedStatement ps = laConnexion.prepareStatement(query);
+        ps.setString(1, "%"+carac+"%");
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()){
+            lstMag.add(new Magasin(rs.getInt("idmag"), rs.getString("nommag"), rs.getString("villemag")));
+        }
+        return lstMag;
+    }
+
+    public List<Livre> voirToutLesLivres(String carac) throws SQLException{
+        List<Livre> lstLivre = new ArrayList<>();
+
+        String query = "SELECT * FROM LIVRE where titre like ?";
+        PreparedStatement ps = laConnexion.prepareStatement(query);
+        ps.setString(1,"%"+ carac + "%");
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()){
+            lstLivre.add(new Livre(rs.getInt("isbn"), rs.getString("titre"), rs.getInt("nbpages"), rs.getInt("datepubli"), rs.getDouble("prix"), rs.getInt("nbreAchat")));
+        }
+        return lstLivre;
+    }
+
     public List<Livre> voirToutLesLivres() throws SQLException{
         List<Livre> lstLivre = new ArrayList<>();
 
