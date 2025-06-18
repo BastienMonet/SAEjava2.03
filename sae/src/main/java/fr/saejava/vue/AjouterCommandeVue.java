@@ -105,7 +105,7 @@ public class AjouterCommandeVue {
         ScrollPane scrollPanelivreDansMagasin = new ScrollPane(VBoxLivresDansMagasin);
         scrollPanelivreDansMagasin.setMaxWidth(477);
 
-        VBox vbcenter = new VBox(new Text("les livres dans le magasin"), scrollPanelivreDansMagasin, new Text("la commande acctuel") , scrollPaneCommande, hbAjoute, menu);
+        VBox vbcenter = new VBox(new Text("les livres dans le magasin"), scrollPanelivreDansMagasin, new Text("la commande actuelle") , scrollPaneCommande, hbAjoute, menu);
         vbcenter.setSpacing(10);
 
         BorderPane.setMargin(vbcenter, new Insets(0, 0, 0, 50));
