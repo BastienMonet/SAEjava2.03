@@ -6,6 +6,7 @@ import fr.saejava.controlleur.ControlleurCreerVendeur;
 import fr.saejava.modele.Administrateur;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -62,7 +63,7 @@ public class CreerVendeurVue {
         BorderPane.setAlignment(textMDPVendeurPane, javafx.geometry.Pos.CENTER);
         textMDPVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
-        mdpVendeur = new TextField();
+        mdpVendeur = new PasswordField();
         mdpVendeur.setPromptText("Entrez le mot de passe du vendeur");
         BorderPane mdpVendeurPane = new BorderPane(mdpVendeur);
         BorderPane.setAlignment(mdpVendeurPane, javafx.geometry.Pos.CENTER);
