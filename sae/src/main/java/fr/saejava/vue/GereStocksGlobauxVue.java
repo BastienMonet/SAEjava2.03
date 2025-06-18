@@ -32,18 +32,24 @@ public class GereStocksGlobauxVue {
         BorderPane.setAlignment(texteNomMagasinPane, javafx.geometry.Pos.CENTER);
         texteNomMagasinPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
+        TextField rechercheMag = new TextField();
+        rechercheMag.setPromptText("Rechercher un magasin");
+
         nomMagasin = new ComboBox<>();
 
         for (Magasin mag : administrateur.voirToutLesMagasin()) {
             nomMagasin.getItems().add(mag.getNomMag());
         }
 
-        VBox nomMagasinBox = new VBox(0, texteNomMagasinPane, nomMagasin);
+        VBox nomMagasinBox = new VBox(0, texteNomMagasinPane, rechercheMag, nomMagasin);
 
         Text texteLivre = new Text("Livre");
         BorderPane texteLivrePane = new BorderPane(texteLivre);
         BorderPane.setAlignment(texteLivrePane, javafx.geometry.Pos.CENTER);
         texteLivrePane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+
+        TextField rechercheLivre = new TextField();
+        rechercheLivre.setPromptText("Rechercher un livre");
 
         nomLivre = new ComboBox<>();
 
@@ -60,7 +66,7 @@ public class GereStocksGlobauxVue {
             updateTexteQteLivreDansMagasin();
         });
 
-        VBox livreBox = new VBox(0, texteLivrePane, nomLivre);
+        VBox livreBox = new VBox(0, texteLivrePane, rechercheLivre, nomLivre);
 
         Text texteQTE = new Text("Quantité");
         BorderPane texteQTEPane = new BorderPane(texteLivre);

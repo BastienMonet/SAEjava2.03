@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -74,11 +75,14 @@ public class CompteClient {
        
         HBox ajouteCommande = new HBox(choixmag, enligne, enligneChoix, livraison, livraisonChoix);
 
+        TextField rechercheMag = new TextField();
+        rechercheMag.setPromptText("Rechercher un magasin");
+
         Button btnajoute = new Button("ajouter une commande");
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
-        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande,ajouteCommande ,btnajoute);
+        VBox vbgauche = new VBox(20, bienvenue, scrollPanecommande, ajouteCommande, rechercheMag, btnajoute);
 
         Text onVousRecomande = new Text("on Vous Recommandes");
         
