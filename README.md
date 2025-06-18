@@ -13,7 +13,7 @@ source DB/sujet/creationLivreExpress.sql
 
 
 
-- pour la première installation lancé (vous en aurez besoin pour avoir accés au compte client/admin)
+- pour la première installation lancée (vous en aurez besoin pour avoir accés au compte client/admin)
 
 preinstallation.sh
 

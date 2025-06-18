@@ -63,6 +63,12 @@ public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
                 } else if (radioSelectionne.getText().equals("vendeur")){
                     estco = app.getVendeur().seConnecter(nom, prenom, motDePasse);
 
+                    if (estco){
+                        app.setVueVendeur();
+                    } else {
+                        app.alertConnexionEchoue();
+                    }
+
                     
 
                 } else if (radioSelectionne.getText().equals("administrateur")){

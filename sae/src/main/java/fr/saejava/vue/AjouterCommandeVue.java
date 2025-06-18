@@ -1,6 +1,7 @@
 package fr.saejava.vue;
 
 import fr.saejava.modele.Livre;
+import fr.saejava.modele.Magasin;
 import fr.saejava.controlleur.ControlleurAjouteCommande;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.CommandeUnit;
@@ -83,6 +84,31 @@ public class AjouterCommandeVue {
         TextField rechercheMag = new TextField();
         rechercheMag.setPromptText("Rechercher un magasin");
 
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            cblivre.getItems().clear();
+
+            if (! newValue.equals("")){
+
+                
+                try {
+                    for (Livre livre : app.getClient().onVousRecommandeDansMagasin(commande.getMagasin(), newValue))
+                    cblivre.getItems().add(livre.getTitre());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                
+                try {
+                    for (Livre livre : app.getClient().onVousRecommandeDansMagasin(commande.getMagasin()))
+                    cblivre.getItems().add(livre.getTitre());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
+
 
         GridPane gAjoute = new GridPane();
         gAjoute.add(rechercheMag, 2, 0);
@@ -125,6 +151,7 @@ public class AjouterCommandeVue {
 
         try {
             majLivreDansMagasin();
+            majLivreDansCommande();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,6 +171,9 @@ public class AjouterCommandeVue {
         for (Livre livre : this.app.getClient().onVousRecommandeDansMagasin(commande.getMagasin())) {
             String res = livre.toString();
             Button btndetail = new Button("détails");
+            btndetail.setOnAction(event -> {
+                app.setFenetreLivreVue(livre);
+            });
             HBox hb = new HBox(new Text(res), new Text(app.getClient().qteDansMagasin(livre, commande.getMagasin()) + "en stock"), btndetail);
             VBoxLivresDansMagasin.getChildren().add(hb);
         }

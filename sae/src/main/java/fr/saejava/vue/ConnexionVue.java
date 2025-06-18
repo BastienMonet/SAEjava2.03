@@ -57,10 +57,12 @@ public class ConnexionVue {
         radio.setSpacing(10);
 
         Button connexion = new Button("Connexion");
+        connexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         connexion.setOnAction(new ControlleurConnexionUtil(app, this));
         connexion.setMinWidth(80);
         connexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
         Button quitter = new Button("Quitter");
+        quitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         quitter.setOnAction(new ControlleurConnexionUtil(app, this));
         quitter.setMinWidth(80);
         quitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
@@ -69,6 +71,7 @@ public class ConnexionVue {
         boutonsAction.setSpacing(100);
 
         Button inscription = new Button("Pas de compte ?");
+        inscription.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
         inscription.setOnAction(new ControlleurConnexionUtil(app, this));
         inscription.setAlignment(Pos.CENTER);
         inscription.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");

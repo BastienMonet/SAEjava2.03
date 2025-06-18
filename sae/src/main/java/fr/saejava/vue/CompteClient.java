@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sound.sampled.Control;
 
+import fr.saejava.controlleur.ControlleurAcheterLivre;
 import fr.saejava.controlleur.ControlleurCompteClient;
 import fr.saejava.modele.Client;
 import fr.saejava.modele.Commande;
@@ -89,12 +90,40 @@ public class CompteClient {
         TextField rechercheMag = new TextField();
         rechercheMag.setPromptText("Rechercher un magasin");
 
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            choixmag.getItems().clear();
+
+            if (! newValue.equals("")){
+
+                
+                try {
+                    for (Magasin mag : c.voirToutLesMagasin(newValue))
+                    choixmag.getItems().add(mag.getNomMag());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                
+                try {
+                    for (Magasin mag : c.voirToutLesMagasin())
+                    choixmag.getItems().add(mag.getNomMag());
+
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+            
+            
+        });
+
         Button btnajoute = new Button("ajouter une commande");
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
         VBox vbcenter = new VBox(20, commandText, scrollPanecommande, rechercheMag, ajouteCommande, btnajoute);
         BorderPane.setMargin(vbcenter, new Insets(0, 20, 0, 0));
+
 
         Text onVousRecomande = new Text("on Vous Recommandes");
         onVousRecomande.setStyle("-fx-font-size: 20;");
@@ -137,7 +166,7 @@ public class CompteClient {
             Button btndetail = new Button("détails");
             btndetail.setId(String.valueOf(commande.getNumCom()));
             btndetail.setOnAction(event -> {
-                app.setSceneVoirCommande(commande);
+                app.setFenetreVoirCommande(commande);
             });
 
             HBox space = new HBox();
@@ -160,13 +189,19 @@ public class CompteClient {
 
     public void majRecomandation() throws Exception {
         lesLivres.getChildren().clear();
+
         GridPane grid = new GridPane();
         int i = 0;
         for (Livre Livre : c.onVousRecommande()) {
             Text res = new Text(Livre.toString());
             res.setStyle("-fx-font-size: 15;");
+
             Button btndetail = new Button("détails");
+            btndetail.setOnAction(event -> {
+                app.setFenetreLivreVue(livre);
+            });
             Button btnacheter = new Button("acheter");
+
             grid.add(res, 0, i);
             grid.add(btndetail, 1, i);
             grid.add(btnacheter, 2, i);

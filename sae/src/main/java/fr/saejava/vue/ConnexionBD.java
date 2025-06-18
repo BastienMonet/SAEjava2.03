@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 
 public class ConnexionBD {
     
@@ -56,10 +58,10 @@ public class ConnexionBD {
 
         // Création des boutons
         Button btnConnexion = new Button("Se Connecter");
-        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         Button btnQuitter = new Button("Quitter");
-        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         // Mise en page des champs et labels
         GridPane champs = new GridPane();
