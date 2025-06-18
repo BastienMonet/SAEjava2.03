@@ -176,8 +176,16 @@ public class CompteClient {
             Button btnsupprimer = new Button("X");
             Button btnmodifie = new Button("modifier");
             btnmodifie.setId(String.valueOf(commande.getNumCom()));
+            btnmodifie.setOnAction(event -> {
+                try {
+                    app.setSceneModifieCommande(commande);
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+                
+            });
+            btnmodifie.setId(String.valueOf(commande.getNumCom()));
             btnsupprimer.setId(String.valueOf(commande.getNumCom()));
-            btnmodifie.setOnAction(new ControlleurCompteClient(app, this));
             btnsupprimer.setOnAction(new ControlleurCompteClient(app, this));
             btnsupprimer.setStyle("-fx-background-color: red; -fx-text-fill: white;");
             grid.add(res, 0, i);

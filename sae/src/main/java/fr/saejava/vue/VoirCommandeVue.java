@@ -122,7 +122,7 @@ public class VoirCommandeVue {
         Button detail = new Button("voir le detail");
         detail.setOnAction(event -> {
             app.setFenetreLivreVue(comU.getLivre());
-        })
+        });
         HBox livreG = new HBox(livre, detail);
         livreG.setSpacing(20);
 
