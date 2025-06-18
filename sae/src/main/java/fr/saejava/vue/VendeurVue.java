@@ -25,6 +25,10 @@ public class VendeurVue {
         commandeBox.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
 
         Button deconnexion = new Button("Déconnexion");
+
+        deconnexion.setOnAction(event -> {
+            app.setSceneConnexionUtil();
+        });
         deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         VBox vueVendeurBox = new VBox(40, messageBVN, commandeBox, deconnexion);
