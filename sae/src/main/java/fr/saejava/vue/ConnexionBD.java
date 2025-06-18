@@ -48,10 +48,10 @@ public class ConnexionBD {
 
         // Création des boutons
         Button btnConnexion = new Button("Se Connecter");
-        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnConnexion.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         Button btnQuitter = new Button("Quitter");
-        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: white;");
+        btnQuitter.setStyle("-fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         // Mise en page des champs et labels
         VBox champs = new VBox(15,
