@@ -4,6 +4,7 @@ import javax.sound.sampled.Control;
 
 import fr.saejava.controlleur.ControlleurCreerVendeur;
 import fr.saejava.modele.Administrateur;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -31,6 +32,7 @@ public class CreerVendeurVue {
 
 
         Text messageInfo = new Text("Créez un compte vendeur");
+        messageInfo.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
 
         Text texteNomVendeur = new Text("Nom du vendeur");
         BorderPane textNomVendeurPane = new BorderPane(texteNomVendeur);
@@ -75,13 +77,15 @@ public class CreerVendeurVue {
         creerVendeur.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         Button deconnexion = new Button("Annuler");
-        deconnexion.setStyle("-fx-font-size: 10px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
+        deconnexion.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         deconnexion.setOnAction(event -> app.setSceneAdmin());
         creerVendeur.setOnAction(new ControlleurCreerVendeur(app ,this));
 
 
         HBox creerVendeurBox = new HBox(creerVendeur, deconnexion);
+        creerVendeurBox.setAlignment(Pos.CENTER);
+        creerVendeurBox.setSpacing(50);
 
         VBox vueCreationVendeur = new VBox(40, messageInfo, nomVendeurBox, prenomVendeurBox, mdpVendeurBox, creerVendeurBox);
         vueCreationVendeur.setStyle("-fx-padding: 20; -fx-alignment: center;");

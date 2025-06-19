@@ -11,6 +11,7 @@ public class AdministrateurVue {
     
     public AdministrateurVue(App app) {
         Text messageBVN = new Text("Bienvenue Administrateur");
+        messageBVN.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
 
         Button creerVendeur = new Button("Créer un compte vendeur");
         creerVendeur.setStyle("-fx-font-size: 16px; -fx-padding: 10px; -fx-background-color: #38b6ff; -fx-text-fill: black;");

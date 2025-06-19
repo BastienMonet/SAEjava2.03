@@ -45,9 +45,10 @@ public class AjouteLibVue {
 
 
         Button ajoute = new Button("Ajouter"); 
+        ajoute.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff;");
 
         Button annuler = new Button("Annuler");
-
+        annuler.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff;");
 
         ajoute.setOnAction(new ControlleurAjoutNouvelleLib(app, this));
         annuler.setOnAction(event -> {
@@ -55,6 +56,8 @@ public class AjouteLibVue {
         });
 
         HBox hbAjoute = new HBox(ajoute, annuler);
+        hbAjoute.setAlignment(Pos.CENTER);
+        hbAjoute.setSpacing(50);
 
         VBox fin = new VBox(titre, nomMag, nomVille, hbAjoute);
         fin.setAlignment(Pos.CENTER);
