@@ -78,9 +78,13 @@ public class ControlleurCompteVendeur implements EventHandler<ActionEvent> {
 
                 Client client = app.getVendeur().getClientParNom(nomUtilisateur);
 
+                client.setIdUtil(app.getVendeur().getIdClientParNom(nomUtilisateur));
+
                 Commande commande = new Commande(0, LocalDate.now().toString() , enligne, livraison, magasin, client);
 
-                app.setSceneAjouterCommandeVue(commande);
+                System.out.println(client);
+
+                app.setSceneAjouterCommandeVueVendeur(commande);
 
 
 

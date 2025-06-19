@@ -81,8 +81,17 @@ public class AjouterCommandeVue {
 
         Button valider = new Button("ajouter");
 
+
+
+        Button retire = new Button("retirer");
+        retire.setOnAction(new ControlleurAjouteCommande(app, this));
+
+
+
+
+
         TextField rechercheMag = new TextField();
-        rechercheMag.setPromptText("Rechercher un magasin");
+        rechercheMag.setPromptText("Rechercher un livre");
 
         rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
             cblivre.getItems().clear();
@@ -115,7 +124,8 @@ public class AjouterCommandeVue {
         gAjoute.add(textQte, 0, 1);
         gAjoute.add(qte, 1, 1);
         gAjoute.add(cblivre, 2, 1);
-        gAjoute.add(valider, 3, 1);
+        gAjoute.add(valider, 3,1);
+        gAjoute.add(retire, 4, 1);
         gAjoute.setVgap(10);
 
 

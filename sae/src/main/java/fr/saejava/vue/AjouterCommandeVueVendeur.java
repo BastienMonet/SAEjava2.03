@@ -3,7 +3,7 @@ package fr.saejava.vue;
 import fr.saejava.modele.Livre;
 import fr.saejava.modele.Magasin;
 import fr.saejava.controlleur.ControlleurAjouteCommande;
-import fr.saejava.controlleur.ControlleurModifierCommande;
+import fr.saejava.controlleur.ControlleurAjouteCommandeVendeur;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.CommandeUnit;
 import javafx.geometry.Insets;
@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ModifierCommandeVue {
+public class AjouterCommandeVueVendeur {
     
     private Scene scene;
 
@@ -37,7 +37,7 @@ public class ModifierCommandeVue {
     private VBox VBoxLivresDansMagasin;
     private VBox VboxCommande;
 
-    public ModifierCommandeVue(App app, Commande commande) throws Exception {
+    public AjouterCommandeVueVendeur(App app, Commande commande) throws Exception {
 
         this.app = app;
         this.commande = commande;
@@ -82,12 +82,17 @@ public class ModifierCommandeVue {
 
         Button valider = new Button("ajouter");
 
+
+
         Button retire = new Button("retirer");
-        retire.setOnAction(new ControlleurModifierCommande(app, this));
+        retire.setOnAction(new ControlleurAjouteCommandeVendeur(app, this));
+
+
+
 
 
         TextField rechercheMag = new TextField();
-        rechercheMag.setPromptText("Rechercher un magasin");
+        rechercheMag.setPromptText("Rechercher un livre");
 
         rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
             cblivre.getItems().clear();
@@ -120,21 +125,21 @@ public class ModifierCommandeVue {
         gAjoute.add(textQte, 0, 1);
         gAjoute.add(qte, 1, 1);
         gAjoute.add(cblivre, 2, 1);
-        gAjoute.add(valider, 3, 1);
+        gAjoute.add(valider, 3,1);
         gAjoute.add(retire, 4, 1);
         gAjoute.setVgap(10);
 
 
         Button retour = new Button("retour");
 
-        Button modifie = new Button("modifier la commande");
+        Button finaliser = new Button("finaliser la commande");
 
-        retour.setOnAction(new ControlleurModifierCommande(app, this));
-        valider.setOnAction(new ControlleurModifierCommande(app, this));
-        modifie.setOnAction(new ControlleurModifierCommande(app, this));
+        retour.setOnAction(new ControlleurAjouteCommandeVendeur(app, this));
+        valider.setOnAction(new ControlleurAjouteCommandeVendeur(app, this));
+        finaliser.setOnAction(new ControlleurAjouteCommandeVendeur(app, this));
 
         
-        HBox menu = new HBox(retour, modifie);
+        HBox menu = new HBox(retour, finaliser);
         menu.setSpacing(10);
 
         VboxCommande = new VBox();

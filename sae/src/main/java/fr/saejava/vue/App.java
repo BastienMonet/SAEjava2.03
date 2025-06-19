@@ -122,6 +122,11 @@ public class App extends Application {
         this.stage.setScene(vendeurVue.getSceneVendeur());
     }
 
+    public void setSceneAjouterCommandeVueVendeur(Commande commande) throws Exception {
+        AjouterCommandeVueVendeur AjoutercommandeVueVendeur = new AjouterCommandeVueVendeur(this, commande);
+        this.stage.setScene(AjoutercommandeVueVendeur.getScene());
+    }
+
     public void setStatistiqueVue() {
         StatistiqueVue statistiquesVue = new StatistiqueVue(this);
         this.stage.setScene(statistiquesVue.getScene());

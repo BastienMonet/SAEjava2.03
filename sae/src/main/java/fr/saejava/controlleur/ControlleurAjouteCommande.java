@@ -72,6 +72,10 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                 app.alertErreur(e);
                 e.printStackTrace();
             }
+        } else if (btn.getText().equals("retirer")){
+            ajouterCommandeVue.getCommande().removeCommandeUnit();
+            ajouterCommandeVue.majLivreDansCommande();
+
         }
     }
     

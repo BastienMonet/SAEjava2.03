@@ -121,6 +121,21 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    public int getIdClientParNom(String chaineString) throws SQLException {
+        String nom = chaineString.split(" ")[0];
+        String prenom = chaineString.split(" ")[1];
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM UTILISATEUR natural join CLIENT where nomcli = ? and prenomcli = ?");
+        ps.setString(1, nom);
+        ps.setString(2, prenom);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return rs.getInt("iduse");
+        } else {
+            throw new SQLException("Aucun client trouvé avec le nom : " + nom + " " + prenom);
+        }
+    }
+
     @Override
     public String toString() {
         return "Vendeur " + super.toString();

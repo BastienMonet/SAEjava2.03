@@ -1,6 +1,7 @@
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAcheterLivre.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjoutNouvelleLib.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteCommande.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteCommandeVendeur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurAjouteNouveauLivre.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteClient.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/controlleur/ControlleurCompteVendeur.java
@@ -30,6 +31,7 @@
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouteLibVue.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouteLivreVue.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouterCommandeVue.java
+/home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/AjouterCommandeVueVendeur.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/App.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/CompteClient.java
 /home/iut45/Etudiants/o22304875/Documents/SAE/javjav/SAEjava2.03/sae/src/main/java/fr/saejava/vue/ConnexionBD.java

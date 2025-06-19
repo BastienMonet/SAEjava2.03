@@ -79,8 +79,10 @@ public class Commande {
         this.listeCommandes.add(commandeUnit);
     }
 
-    public void removeCommandeUnit(CommandeUnit commandeUnit) {
-        this.listeCommandes.remove(commandeUnit);
+    public void removeCommandeUnit() {
+        if (! listeCommandes.isEmpty()) {
+            this.listeCommandes.remove(listeCommandes.size() - 1);
+        }
     }
 
 

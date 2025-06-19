@@ -494,6 +494,8 @@ public abstract class Utilisateur {
 
     }
 
+
+
     @Override
     public String toString() {
         return idUtil + " | " + nomUtil + " | " + prenomUtil + " | " + pwd;

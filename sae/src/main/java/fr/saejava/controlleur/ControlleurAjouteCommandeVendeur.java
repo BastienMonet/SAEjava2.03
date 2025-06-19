@@ -3,10 +3,8 @@ package fr.saejava.controlleur;
 import java.util.Optional;
 
 import fr.saejava.modele.CommandeUnit;
-import fr.saejava.vue.AjouterCommandeVue;
+import fr.saejava.vue.AjouterCommandeVueVendeur;
 import fr.saejava.vue.App;
-import fr.saejava.vue.ModifierCommandeVue;
-import fr.saejava.vue.ModifierCommandeVue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -14,14 +12,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
-public class ControlleurModifierCommande implements EventHandler<ActionEvent> {
+public class ControlleurAjouteCommandeVendeur implements EventHandler<ActionEvent> {
 
     private App app;
-    private ModifierCommandeVue modifierCommandeVue;
+    private AjouterCommandeVueVendeur ajouterCommandeVueVendeur;
 
-    public ControlleurModifierCommande(App app, ModifierCommandeVue modifierCommandeVue) {
+    public ControlleurAjouteCommandeVendeur(App app, AjouterCommandeVueVendeur ajouterCommandeVueVendeur) {
         this.app = app;
-        this.modifierCommandeVue = modifierCommandeVue;
+        this.ajouterCommandeVueVendeur = ajouterCommandeVueVendeur;
     }
 
     @Override
@@ -30,29 +28,29 @@ public class ControlleurModifierCommande implements EventHandler<ActionEvent> {
 
         if (btn.getText().equals("retour")) {
             try {
-                app.setSceneCompteClient();
+                app.setVueVendeur();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (btn.getText().equals("ajouter")) {
             try{
-                int qte = modifierCommandeVue.getQte();
-                String livreTitre = modifierCommandeVue.getCblivre();
+                int qte = ajouterCommandeVueVendeur.getQte();
+                String livreTitre = ajouterCommandeVueVendeur.getCblivre();
             
-                if (qte <= 0 || qte > app.getClient().qteDansMagasin(app.getClient().getLivreBDparTitre(livreTitre), modifierCommandeVue.getCommande().getMagasin())) {
+                if (qte <= 0 || qte > app.getClient().qteDansMagasin(app.getClient().getLivreBDparTitre(livreTitre), ajouterCommandeVueVendeur.getCommande().getMagasin())) {
                     app.alertQte();
                 } else {
-                    modifierCommandeVue.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getClient().getLivreBDparTitre(livreTitre), qte));
-                    modifierCommandeVue.majLivreDansCommande();
+                    ajouterCommandeVueVendeur.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getVendeur().getLivreBDparTitre(livreTitre), qte));
+                    ajouterCommandeVueVendeur.majLivreDansCommande();
                 }
             } catch (Exception e) {
                 app.alertErreur(e);
                 e.printStackTrace();
             }
-        } else if(btn.getText().equals("modifier la commande")) {
+        } else if(btn.getText().equals("finaliser la commande")) {
 
             try {
-                if ( ! modifierCommandeVue.getCommande().getListeCommandes().isEmpty()) {
+                if ( ! ajouterCommandeVueVendeur.getCommande().getListeCommandes().isEmpty()) {
 
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");
@@ -60,8 +58,8 @@ public class ControlleurModifierCommande implements EventHandler<ActionEvent> {
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.isPresent() && result.get() == ButtonType.OK) {
-                        app.getClient().updateSaCommande(modifierCommandeVue.getCommande());
-                        app.setSceneCompteClient();
+                        app.getVendeur().ajouteCommandeBD((ajouterCommandeVueVendeur.getCommande()));
+                        app.setVueVendeur();
                     }
 
 
@@ -75,8 +73,8 @@ public class ControlleurModifierCommande implements EventHandler<ActionEvent> {
                 e.printStackTrace();
             }
         } else if (btn.getText().equals("retirer")){
-            modifierCommandeVue.getCommande().removeCommandeUnit();
-            modifierCommandeVue.majLivreDansCommande();
+            ajouterCommandeVueVendeur.getCommande().removeCommandeUnit();
+            ajouterCommandeVueVendeur.majLivreDansCommande();
 
         }
     }
