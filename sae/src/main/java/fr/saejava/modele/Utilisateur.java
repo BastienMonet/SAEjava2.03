@@ -29,7 +29,8 @@ public abstract class Utilisateur {
         this.laConnexion = laConnexion;
     }
 
-    public Utilisateur(String nomUtil, String prenomUtil, String pwd) {
+    public Utilisateur(int idUtil, String nomUtil, String prenomUtil, String pwd) {
+        this.idUtil = idUtil;
         this.nomUtil = nomUtil;
         this.prenomUtil = prenomUtil;
         this.pwd = pwd;
@@ -332,7 +333,7 @@ public abstract class Utilisateur {
     }
 
 
-    public void ajouteCommandeBD(Commande com) throws SQLException {
+    public void ajouteSaCommandeBD(Commande com) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
         ps.setInt(1, max);
@@ -340,6 +341,31 @@ public abstract class Utilisateur {
         ps.setString(3, String.valueOf(com.enligne()));
         ps.setString(4, String.valueOf(com.getLivraison()));
         ps.setInt(5, this.getIdUtil());
+        ps.setInt(6, com.getMagasin().getIdMag());
+        ps.executeUpdate();
+
+        for (CommandeUnit comU : com.getListeCommandes()){
+            try {
+            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());
+            ajouteCommandeUnitBD(max,comU);
+            incrementeAchat(comU.getLivre().getIsbn());
+            } catch (Exception e){
+                System.err.println(e.getMessage());
+                System.err.println("vous avez demmander une commande impossible");
+            }
+        }
+        
+    }
+
+
+    public void ajouteUneCommandeBD(Commande com) throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
+        int max = getMaxnumCom();
+        ps.setInt(1, max);
+        ps.setString(2, com.getDateCom());
+        ps.setString(3, String.valueOf(com.enligne()));
+        ps.setString(4, String.valueOf(com.getLivraison()));
+        ps.setInt(5, com.getClient().getIdUtil());
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
@@ -487,14 +513,12 @@ public abstract class Utilisateur {
         ps.setInt(1, iduse);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
-            return new Client(rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), rs.getString("adressecli"), rs.getString("codepostal"), rs.getString("villecli"), rs.getDouble("monnaie"));
+            return new Client(rs.getInt("iduse"), rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), rs.getString("adressecli"), rs.getString("codepostal"), rs.getString("villecli"), rs.getDouble("monnaie"));
         } else {
             throw new SQLException("ce client n'existe pas");
         }
 
     }
-
-
 
     @Override
     public String toString() {

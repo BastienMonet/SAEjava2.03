@@ -114,7 +114,7 @@ public class Vendeur extends Utilisateur {
         ps.setString(2, prenom);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
-            return new Client(rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), 
+            return new Client(rs.getInt("iduse"), rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), 
                               rs.getString("adressecli"), rs.getString("codepostal"), rs.getString("villecli"), rs.getDouble("monnaie"));
         } else {
             throw new SQLException("Aucun client trouvé avec le nom : " + nom);

@@ -20,9 +20,9 @@ public class Client extends Utilisateur {
         super(laConnexion);
     }
 
-    public Client(String nomUtil, String prenomUtil, String pwd, String adresseUtil, String codePostal,
+    public Client(int idUtil, String nomUtil, String prenomUtil, String pwd, String adresseUtil, String codePostal,
             String villeUtil, Double monnaie) {
-        super(nomUtil, prenomUtil, pwd);
+        super(idUtil, nomUtil, prenomUtil, pwd);
         this.adresseUtil = adresseUtil;
         this.codePostal = codePostal;
         this.villeUtil = villeUtil;
@@ -130,7 +130,7 @@ public class Client extends Utilisateur {
 
     public void updateSaCommande(Commande c) throws Exception{
         retireSaCommande(this.getCommande(c.getNumCom()));
-        ajouteCommandeBD(c);
+        ajouteSaCommandeBD(c);
     }
 
 
