@@ -65,9 +65,11 @@ public class AjouteLivreVue {
         vb4.setAlignment(Pos.CENTER);
 
 
-        Button ajoute = new Button("Ajouter"); 
+        Button ajoute = new Button("Ajouter");
+        ajoute.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff;"); 
 
         Button annuler = new Button("Annuler");
+        annuler.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff;");
 
 
         ajoute.setOnAction(new ControlleurAjouteNouveauLivre(app, this));
@@ -76,6 +78,8 @@ public class AjouteLivreVue {
         });
 
         HBox hbAjoute = new HBox(ajoute, annuler);
+        hbAjoute.setAlignment(Pos.CENTER);
+        hbAjoute.setSpacing(50);
 
         VBox fin = new VBox(titre, vb1, vb2, vb3, vb4, hbAjoute);
         fin.setAlignment(Pos.CENTER);
