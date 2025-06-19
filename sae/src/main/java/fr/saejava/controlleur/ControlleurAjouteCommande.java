@@ -59,8 +59,13 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.isPresent() && result.get() == ButtonType.OK) {
-                        app.getClient().ajouteSaCommandeBD((ajouterCommandeVue.getCommande()));
-                        app.setSceneCompteClient();
+                        try {
+                            app.getClient().ajouteSaCommandeBD((ajouterCommandeVue.getCommande()));
+                            app.setSceneCompteClient();
+                        } catch (Exception e){
+                            app.alertErreur(e);
+                        }
+                        
                     }
 
 
