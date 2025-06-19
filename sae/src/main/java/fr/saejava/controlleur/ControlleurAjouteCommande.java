@@ -34,6 +34,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
             }
         } else if (btn.getText().equals("ajouter")) {
             try{
+
                 int qte = ajouterCommandeVue.getQte();
                 String livreTitre = ajouterCommandeVue.getCblivre();
             

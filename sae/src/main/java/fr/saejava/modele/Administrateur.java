@@ -230,10 +230,25 @@ public class Administrateur extends Utilisateur {
 
         rs.close();
         return result;
+    }
 
-        
 
+    public boolean livreEstDansBD(String titre) throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM LIVRE WHERE titre = ?");
+        ps.setString(1, titre);
+        ResultSet rs = ps.executeQuery();
+        boolean exists = rs.next();
+        rs.close();
+        return exists;
+    }
 
+    public boolean magasinEstDansBD(String nomMag) throws SQLException {
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN WHERE nommag = ?");
+        ps.setString(1, nomMag);
+        ResultSet rs = ps.executeQuery();
+        boolean exists = rs.next();
+        rs.close();
+        return exists;
     }
 
 

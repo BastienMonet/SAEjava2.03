@@ -171,11 +171,11 @@ public class App extends Application {
         alert.showAndWait();
     }
 
-    public void alertCompteDejaPris() {
+    public void alertInstanceDejaPrise() {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Compte déjà pris");
-        alert.setHeaderText("Un compte avec ces identifiants existe déjà.");
-        alert.setContentText("Veuillez choisir un autre nom d'utilisateur ou prénom.");
+        alert.setTitle("Instance déjà prise");
+        alert.setHeaderText("cette instance avec ces identifiants existe déjà.");
+        alert.setContentText("Veuillez choisir un autre nom");
         alert.showAndWait();
     }
 
