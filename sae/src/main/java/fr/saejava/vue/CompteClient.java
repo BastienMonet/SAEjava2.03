@@ -120,6 +120,7 @@ public class CompteClient {
         HBox ajouteCommande = new HBox(rechercheMag, choixmag, enligne, enligneChoix, livraison, livraisonChoix);
 
         Button btnajoute = new Button("ajouter une commande");
+        btnajoute.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
@@ -141,6 +142,7 @@ public class CompteClient {
         VBox vbright = new VBox(20, onVousRecomande, scrollPanelivre);
 
         Button deco = new Button("deconnexion");
+        deco.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
 
         deco.setOnAction(e -> {
             app.setSceneConnexionUtil();
@@ -166,6 +168,7 @@ public class CompteClient {
             Text res = new Text(commande.toString());
             res.setStyle("-fx-font-size: 15;");
             Button btndetail = new Button("détails");
+            btndetail.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
             btndetail.setId(String.valueOf(commande.getNumCom()));
             btndetail.setOnAction(event -> {
                 app.setFenetreVoirCommande(commande);
@@ -175,6 +178,7 @@ public class CompteClient {
             space.setMinWidth(20);
             Button btnsupprimer = new Button("X");
             Button btnmodifie = new Button("modifier");
+            btnmodifie.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
             btnmodifie.setId(String.valueOf(commande.getNumCom()));
             btnmodifie.setOnAction(event -> {
                 try {
@@ -214,7 +218,10 @@ public class CompteClient {
             btndetail.setOnAction(event -> {
                 app.setFenetreLivreVue(livre);
             });
+            btndetail.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
             Button btnacheter = new Button("acheter");
+            btnacheter.setStyle("-fx-font-size: 16px; -fx-background-color: #38b6ff;");
+            
 
             btnacheter.setId(livre.getTitre());
 
