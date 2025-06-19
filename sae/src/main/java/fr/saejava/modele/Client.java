@@ -126,9 +126,11 @@ public class Client extends Utilisateur {
             ajouteLivreDansMagasin(c.getMagasin(), comU.getLivre(), comU.getQte());
             decrementeAchat(comU.getLivre().getIsbn());
         }
+    }
 
-       
-        
+    public void updateSaCommande(Commande c) throws Exception{
+        retireSaCommande(this.getCommande(c.getNumCom()));
+        ajouteCommandeBD(c);
     }
 
 

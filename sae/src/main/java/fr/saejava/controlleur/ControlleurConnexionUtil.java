@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
     
@@ -48,6 +50,12 @@ public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
 
         RadioButton radioSelectionne = (RadioButton) connexionVue.getGroupe();
 
+        if (nom.isEmpty() || prenom.isEmpty() || motDePasse.isEmpty() || radioSelectionne == null) {
+            app.alertChampsVides();
+        }
+
+        Text connexionText;
+
             try {
                 boolean estco = false;
 
@@ -57,7 +65,10 @@ public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
                     if (estco){
                         app.setSceneCompteClient();
                     } else {
-                        app.alertConnexionEchoue();
+                        connexionText  = connexionVue.getConnexionText();
+                        connexionText.setText("Connexion échouée, identifiant ou mot de passe incorrect.");
+                        connexionText.setStyle("-fx-font-weight: bold;");
+                        connexionText.setFill(Color.RED);
                     }
                 
                 } else if (radioSelectionne.getText().equals("vendeur")){
@@ -66,7 +77,10 @@ public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
                     if (estco){
                         app.setVueVendeur();
                     } else {
-                        app.alertConnexionEchoue();
+                         connexionText  = connexionVue.getConnexionText();
+                        connexionText.setText("Connexion échouée, identifiant ou mot de passe incorrect.");
+                        connexionText.setStyle("-fx-font-weight: bold;");
+                        connexionText.setFill(Color.RED);
                     }
 
                     
@@ -77,7 +91,10 @@ public class ControlleurConnexionUtil implements EventHandler<ActionEvent> {
                     if (estco){
                         app.setSceneAdmin();
                     } else {
-                        app.alertConnexionEchoue();
+                         connexionText  = connexionVue.getConnexionText();
+                        connexionText.setText("Connexion échouée, identifiant ou mot de passe incorrect.");
+                        connexionText.setStyle("-fx-font-weight: bold;");
+                        connexionText.setFill(Color.RED);
                     }
                     
                 }

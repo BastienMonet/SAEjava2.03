@@ -83,6 +83,44 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    public List<String> voirToutLesNomClients() throws SQLException {
+        List<String> res = new ArrayList<>();
+        st = laConnexion.createStatement();
+        ResultSet rs = st.executeQuery("SELECT nomcli, prenomcli FROM UTILISATEUR natural join CLIENT");
+        while(rs.next()){
+            res.add(rs.getString("nomcli") + " " + rs.getString("prenomcli"));
+        }
+        return res;
+    }
+
+    public List<String> voirToutLesNomClients(String carac) throws SQLException {
+        List<String> res = new ArrayList<>();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT nomcli, prenomcli FROM UTILISATEUR natural join CLIENT where nomcli like ? or prenomcli like ? ");
+        ps.setString(1,  "%" + carac + "%");
+        ps.setString(2, "%" + carac + "%");
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            res.add(rs.getString("nomcli") + " " + rs.getString("prenomcli"));
+        }
+        return res;
+    }
+
+    public Client getClientParNom(String chaineString) throws SQLException {
+        String nom = chaineString.split(" ")[0];
+        String prenom = chaineString.split(" ")[1];
+        st = laConnexion.createStatement();
+        PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM UTILISATEUR natural join CLIENT where nomcli = ? and prenomcli = ?");
+        ps.setString(1, nom);
+        ps.setString(2, prenom);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return new Client(rs.getString("nomcli"), rs.getString("prenomcli"), rs.getString("pwd"), 
+                              rs.getString("adressecli"), rs.getString("codepostal"), rs.getString("villecli"), rs.getDouble("monnaie"));
+        } else {
+            throw new SQLException("Aucun client trouvé avec le nom : " + nom);
+        }
+    }
+
     @Override
     public String toString() {
         return "Vendeur " + super.toString();

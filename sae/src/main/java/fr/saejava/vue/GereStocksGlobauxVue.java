@@ -41,6 +41,26 @@ public class GereStocksGlobauxVue {
         GridPane.setHalignment(texteNomMagasin, HPos.RIGHT);
 
         TextField rechercheMag = new TextField();
+
+        rechercheMag.textProperty().addListener((observable, oldValue, newValue) -> {
+            nomMagasin.getItems().clear();
+            try {
+
+                if (newValue.isEmpty()) {
+                    for (Magasin mag : administrateur.voirToutLesMagasin()) {
+                        nomMagasin.getItems().add(mag.getNomMag());
+                    }
+                    return;
+                }
+                for (Magasin mag : administrateur.voirToutLesMagasin(newValue)) {
+                    nomMagasin.getItems().add(mag.getNomMag());
+               
+            }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la récupération des magasins : " + e.getMessage());
+            }
+            
+        });
         rechercheMag.setPromptText("Rechercher un magasin");
 
         nomMagasin = new ComboBox<>();
@@ -55,8 +75,27 @@ public class GereStocksGlobauxVue {
         texteLivre.setStyle("-fx-font-size: 20px;");
         GridPane.setHalignment(texteLivre, HPos.RIGHT);
 
+
         TextField rechercheLivre = new TextField();
         rechercheLivre.setPromptText("Rechercher un livre");
+
+        rechercheLivre.textProperty().addListener((observable, oldValue, newValue) -> {
+            nomLivre.getItems().clear();
+            try {
+
+                if (newValue.isEmpty()) {
+                    for (Livre livre : administrateur.voirToutLesLivres()) {
+                        nomLivre.getItems().add(livre.getTitre());
+                    }
+                    return;
+                }
+                for (Livre livre : administrateur.voirToutLesLivres(newValue)) {
+                    nomLivre.getItems().add(livre.getTitre());
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la récupération des livres : " + e.getMessage());
+            }
+        });
 
         nomLivre = new ComboBox<>();
 
@@ -165,7 +204,7 @@ public class GereStocksGlobauxVue {
             Livre livre = administrateur.getLivreBDparTitre(nomLiv);
 
             if (nomMag == null || nomLiv == null) {
-                texteQTElivreDansMagasin.setText("il y a : fois le livre dans ce magasin");
+                texteQTElivreDansMagasin.setText("il y a ? fois le livre dans ce magasin");
             } else {
                 int qteLivre = administrateur.qteDansMagasin(livre, mag);
                 texteQTElivreDansMagasin.setText("il y a : " + qteLivre + " fois le livre dans ce magasin");

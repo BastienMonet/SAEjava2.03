@@ -28,12 +28,14 @@ public class VoirCommandeVue {
     private VBox lesDetail;
 
     private Commande commande;
+    private App app;
 
     public VoirCommandeVue(App app, Commande commande) {
 
         Stage stage = new Stage();
         this.stage = stage;
         this.commande = commande;
+        this.app = app;
 
 
         Text titre = new Text("la commande");
@@ -118,6 +120,9 @@ public class VoirCommandeVue {
         Text livre = new Text(comU.getLivre().getTitre());
         livre.setStyle("-fx-font-size: 20;");
         Button detail = new Button("voir le detail");
+        detail.setOnAction(event -> {
+            app.setFenetreLivreVue(comU.getLivre());
+        });
         HBox livreG = new HBox(livre, detail);
         livreG.setSpacing(20);
 

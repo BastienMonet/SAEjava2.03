@@ -103,6 +103,11 @@ public class App extends Application {
         this.stage.setScene(ajouteLivreVue.getScene());
     }
 
+    public void setSceneModifieCommande(Commande commande) throws Exception {
+        ModifierCommandeVue modifierCommandeVue = new ModifierCommandeVue(this, commande);
+        this.stage.setScene(modifierCommandeVue.getScene());
+    }
+
     public ConnexionMySQL getConnexionMySQL() {
         return connexionMySQL;
     }

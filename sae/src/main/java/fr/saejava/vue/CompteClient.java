@@ -85,7 +85,7 @@ public class CompteClient {
         livraisonChoix.setValue("en magasin");
        
        
-        HBox ajouteCommande = new HBox(choixmag, enligne, enligneChoix, livraison, livraisonChoix);
+       
 
         TextField rechercheMag = new TextField();
         rechercheMag.setPromptText("Rechercher un magasin");
@@ -117,11 +117,13 @@ public class CompteClient {
             
         });
 
+        HBox ajouteCommande = new HBox(rechercheMag, choixmag, enligne, enligneChoix, livraison, livraisonChoix);
+
         Button btnajoute = new Button("ajouter une commande");
 
         btnajoute.setOnAction(new ControlleurCompteClient(app, this));
         
-        VBox vbcenter = new VBox(20, commandText, scrollPanecommande, rechercheMag, ajouteCommande, btnajoute);
+        VBox vbcenter = new VBox(20, commandText, scrollPanecommande, ajouteCommande, btnajoute);
         BorderPane.setMargin(vbcenter, new Insets(0, 20, 0, 0));
 
 
@@ -150,7 +152,7 @@ public class CompteClient {
         root.setBottom(deco);
         root.setPadding(new Insets(10));
 
-        Scene scene = new Scene(root, 1000, 1000);
+        Scene scene = new Scene(root, 1200, 1000);
 
         this.scene = scene;
     }
@@ -172,13 +174,25 @@ public class CompteClient {
             HBox space = new HBox();
             space.setMinWidth(20);
             Button btnsupprimer = new Button("X");
+            Button btnmodifie = new Button("modifier");
+            btnmodifie.setId(String.valueOf(commande.getNumCom()));
+            btnmodifie.setOnAction(event -> {
+                try {
+                    app.setSceneModifieCommande(commande);
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
+                
+            });
+            btnmodifie.setId(String.valueOf(commande.getNumCom()));
             btnsupprimer.setId(String.valueOf(commande.getNumCom()));
             btnsupprimer.setOnAction(new ControlleurCompteClient(app, this));
             btnsupprimer.setStyle("-fx-background-color: red; -fx-text-fill: white;");
             grid.add(res, 0, i);
             grid.add(space, 1, i);
             grid.add(btndetail, 2, i);
-            grid.add(btnsupprimer, 3, i);
+            grid.add(btnmodifie, 3, i);
+            grid.add(btnsupprimer, 4, i);
             i++;
         }
         grid.setPadding(new Insets(10));

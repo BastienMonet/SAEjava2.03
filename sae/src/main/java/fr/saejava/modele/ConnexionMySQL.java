@@ -26,7 +26,7 @@ public class ConnexionMySQL {
 		this.connecte=false;
 	}
 
-    	public boolean isConnecte() { return this.connecte;}
+    public boolean isConnecte() { return this.connecte;}
 	public Statement createStatement() throws SQLException {
 		return this.mysql.createStatement();
 	}

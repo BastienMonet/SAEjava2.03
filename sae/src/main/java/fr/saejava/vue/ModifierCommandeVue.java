@@ -3,6 +3,7 @@ package fr.saejava.vue;
 import fr.saejava.modele.Livre;
 import fr.saejava.modele.Magasin;
 import fr.saejava.controlleur.ControlleurAjouteCommande;
+import fr.saejava.controlleur.ControlleurModifierCommande;
 import fr.saejava.modele.Commande;
 import fr.saejava.modele.CommandeUnit;
 import javafx.geometry.Insets;
@@ -19,7 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class AjouterCommandeVue {
+public class ModifierCommandeVue {
     
     private Scene scene;
 
@@ -36,7 +37,7 @@ public class AjouterCommandeVue {
     private VBox VBoxLivresDansMagasin;
     private VBox VboxCommande;
 
-    public AjouterCommandeVue(App app, Commande commande) throws Exception {
+    public ModifierCommandeVue(App app, Commande commande) throws Exception {
 
         this.app = app;
         this.commande = commande;
@@ -121,14 +122,14 @@ public class AjouterCommandeVue {
 
         Button retour = new Button("retour");
 
-        Button finaliser = new Button("finaliser la commande");
+        Button modifie = new Button("modifier la commande");
 
-        retour.setOnAction(new ControlleurAjouteCommande(app, this));
-        valider.setOnAction(new ControlleurAjouteCommande(app, this));
-        finaliser.setOnAction(new ControlleurAjouteCommande(app, this));
+        retour.setOnAction(new ControlleurModifierCommande(app, this));
+        valider.setOnAction(new ControlleurModifierCommande(app, this));
+        modifie.setOnAction(new ControlleurModifierCommande(app, this));
 
         
-        HBox menu = new HBox(retour, finaliser);
+        HBox menu = new HBox(retour, modifie);
         menu.setSpacing(10);
 
         VboxCommande = new VBox();

@@ -1,7 +1,12 @@
 package fr.saejava.controlleur;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
+import fr.saejava.modele.Client;
+
+import fr.saejava.modele.Commande;
+import fr.saejava.modele.Magasin;
 import fr.saejava.vue.App;
 import fr.saejava.vue.VendeurVue;
 import javafx.event.ActionEvent;
@@ -43,7 +48,47 @@ public class ControlleurCompteVendeur implements EventHandler<ActionEvent> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        } if (btn.getText().equals("Ajouter une commande")) {
+            try {
+
+                String nomMagasin = vue.getChoixMag();
+
+                String nomUtilisateur = vue.getChoixUtil();
+
+                if (nomMagasin == null || nomUtilisateur == null || nomMagasin.isEmpty() || nomUtilisateur.isEmpty()) {
+                    app.alertChampsVides();
+                    return;
+                }
+
+                char enligne ;
+                    char livraison;
+
+                    if (vue.getEnligneChoix() == "Oui")
+                        enligne = 'O';
+                    else 
+                        enligne = 'N';
+
+                    if (vue.getLivraisonChoix() == "a domicile")
+                        livraison = 'C';
+                    else
+                        livraison = 'M';
+                
+
+                Magasin magasin = app.getVendeur().getMagasinBDparNom(nomMagasin);
+
+                Client client = app.getVendeur().getClientParNom(nomUtilisateur);
+
+                Commande commande = new Commande(0, LocalDate.now().toString() , enligne, livraison, magasin, client);
+
+                app.setSceneAjouterCommandeVue(commande);
+
+
+
+
+            } catch (Exception e) {
+                app.alertErreur(e);
+            }
+        }   
     }
     
 }
