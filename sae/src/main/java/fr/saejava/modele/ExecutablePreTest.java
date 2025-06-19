@@ -33,7 +33,7 @@ public class ExecutablePreTest {
             
             a.ajouteAdminBD(new Administrateur("a", "b", "c"));
 
-            a.ajouteClientBD(new Client("d", "e", "f", "ici", "012", null, 0.00));
+            a.ajouteClientBD(new Client(0, "d", "e", "f", "ici", "012", null, 0.00));
             
             boolean res = a.seConnecter("john", "vincent", "1234");
 
@@ -45,7 +45,7 @@ public class ExecutablePreTest {
             Magasin m1 = new Magasin(1, "m1", "BAXville");
             Magasin m2 = new Magasin(2, "m2", "centre");
             // a.retireLivreBD(1);
-            a.ajouteClientBD(new Client("h", "i", "j", "d", "e", "f", 0.0));
+            a.ajouteClientBD(new Client(0,"h", "i", "j", "d", "e", "f", 0.0));
             a.ajouteMagasinBD(m1);
             a.ajouteMagasinBD(m2);
             a.ajouteLivreBD(l1);

@@ -45,7 +45,7 @@ public class ControlleurCreerCompte implements EventHandler<ActionEvent> {
             app.alertMdpDifferent();
         } else {
         try {
-            Client c = new Client(nom, prenom, motDePasse, addresse, codePostal, ville, 0.00);
+            Client c = new Client(0, nom, prenom, motDePasse, addresse, codePostal, ville, 0.00);
             app.getAdministrateur().ajouteClientBD(c);
             app.setSceneConnexionUtil();
             app.alertAjoutUtilisateur();

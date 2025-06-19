@@ -51,6 +51,24 @@ public class VendeurVue {
         TextField rechercheUtil = new TextField();
         rechercheUtil.setPromptText("Rechercher un utilisateur");
 
+
+        rechercheUtil.textProperty().addListener((observable, oldValue, newValue) -> {
+            choixUtil.getItems().clear();
+            try {
+                if (newValue.isEmpty()) {
+                    for (String nomprenom : app.getVendeur().voirToutLesNomClients()) {
+                        choixUtil.getItems().add(nomprenom);
+                    }
+                    return;
+                }
+                for (String nomprenom : app.getVendeur().voirToutLesNomClients(newValue)) {
+                    choixUtil.getItems().add(nomprenom);
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+            }
+        });
+
         choixUtil = new ComboBox<>();
 
         choixmag = new ComboBox<>();

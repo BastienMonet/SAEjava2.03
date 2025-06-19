@@ -430,7 +430,6 @@ public abstract class Utilisateur {
     }
 
     public void retireDetailCommande(int numCom) throws Exception{
-        // TODO
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("DELETE DETAILCOMMANDE " +
                                                     "FROM DETAILCOMMANDE where numcom = ?");
