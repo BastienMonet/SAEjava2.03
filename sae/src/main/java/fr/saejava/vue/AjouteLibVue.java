@@ -24,7 +24,7 @@ public class AjouteLibVue {
         Text nom = new Text("Nom du magasin");
         HBox contNom = new HBox(nom);
         contNom.setMaxWidth(300);
-        contNom.setStyle("-fx-background-color: #5ce1e6;");
+        contNom.setStyle("-fx-background-color: #38b6ff;");
         contNom.setAlignment(Pos.CENTER);
         nomMagasin = new TextField();
         nomMagasin.setMaxWidth(300);
@@ -35,7 +35,7 @@ public class AjouteLibVue {
         Text ville = new Text("Ville du magasin");
         HBox contVille = new HBox(ville);
         contVille.setMaxWidth(300);
-        contVille.setStyle("-fx-background-color: #5ce1e6;");
+        contVille.setStyle("-fx-background-color: #38b6ff;");
         contVille.setAlignment(Pos.CENTER);
         nomCity = new TextField();
         nomCity.setMaxWidth(300);
