@@ -27,10 +27,10 @@ public class FenetreLivreVue {
         this.stage= stage;
 
         Random random = new Random();
-        int pg = random.nextInt(6);
+        int pg = random.nextInt(5);
 
         List<String> listePageGarde = new ArrayList<>();
-        listePageGarde.add("page_garde.png");
+        listePageGarde.add("page_garde1.png");
         listePageGarde.add("page_garde2.png");
         listePageGarde.add("page_garde3.png");
         listePageGarde.add("page_garde4.png");
@@ -47,7 +47,7 @@ public class FenetreLivreVue {
         );
         
 
-        Text titre = new Text("titre du livre : " + livre.getTitre());
+        Text titre = new Text(livre.getTitre());
         titre.setStyle("-fx-font-size: 35; -fx-font-weight: bold;");
         Text nbPages = new Text("nombre de pages : " + String.valueOf(livre.getNbPages()));
         nbPages.setStyle("-fx-font-size: 15;");
