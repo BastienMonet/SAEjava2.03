@@ -20,7 +20,8 @@ public class StatistiqueVue {
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
 
 
-        Button annuler = new Button("Annuler");
+        Button annuler = new Button("Retour");
+        annuler.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff;");
 
         annuler.setOnAction(event -> {
             app.setSceneAdmin();
