@@ -35,7 +35,7 @@ public class CreerVendeurVue {
         Text texteNomVendeur = new Text("Nom du vendeur");
         BorderPane textNomVendeurPane = new BorderPane(texteNomVendeur);
         BorderPane.setAlignment(textNomVendeurPane, javafx.geometry.Pos.CENTER);
-        textNomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+        textNomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         nomVendeur = new TextField();
         nomVendeur.setPromptText("Entrez le nom du vendeur");
@@ -48,7 +48,7 @@ public class CreerVendeurVue {
         Text textePrenomVendeur = new Text("Prénom du vendeur");
         BorderPane textPrenomVendeurPane = new BorderPane(textePrenomVendeur);
         BorderPane.setAlignment(textPrenomVendeurPane, javafx.geometry.Pos.CENTER);
-        textPrenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+        textPrenomVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         prenomVendeur = new TextField();
         prenomVendeur.setPromptText("Entrez le prénom du vendeur");
@@ -61,7 +61,7 @@ public class CreerVendeurVue {
         Text texteMDPVendeur = new Text("Mot de passe du vendeur");
         BorderPane textMDPVendeurPane = new BorderPane(texteMDPVendeur);
         BorderPane.setAlignment(textMDPVendeurPane, javafx.geometry.Pos.CENTER);
-        textMDPVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #5ce1e6; -fx-text-fill: black;");
+        textMDPVendeurPane.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-background-color: #38b6ff; -fx-text-fill: black;");
 
         mdpVendeur = new PasswordField();
         mdpVendeur.setPromptText("Entrez le mot de passe du vendeur");

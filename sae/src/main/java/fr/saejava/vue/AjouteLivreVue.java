@@ -23,7 +23,7 @@ public class AjouteLivreVue {
         Text nom = new Text("Titre du du livre");
         HBox contNom = new HBox(nom);
         contNom.setMaxWidth(300);
-        contNom.setStyle("-fx-background-color: #5ce1e6;");
+        contNom.setStyle("-fx-background-color: #38b6ff;");
         contNom.setAlignment(Pos.CENTER);
         titreLivre = new TextField();
         titreLivre.setMaxWidth(300);
@@ -34,7 +34,7 @@ public class AjouteLivreVue {
         Text nbpage = new Text("nombre de pages");
         HBox contnbpage = new HBox(nbpage);
         contnbpage.setMaxWidth(300);
-        contnbpage.setStyle("-fx-background-color: #5ce1e6;");
+        contnbpage.setStyle("-fx-background-color: #38b6ff;");
         contnbpage.setAlignment(Pos.CENTER);
         nbpages = new TextField();
         nbpages.setMaxWidth(300);
@@ -45,7 +45,7 @@ public class AjouteLivreVue {
         Text daText = new Text("Année de publication");
         HBox contdatepub = new HBox(daText);
         contdatepub.setMaxWidth(300);
-        contdatepub.setStyle("-fx-background-color: #5ce1e6;");
+        contdatepub.setStyle("-fx-background-color: #38b6ff;");
         contdatepub.setAlignment(Pos.CENTER);
         datePublic = new TextField();
         datePublic.setMaxWidth(300);
@@ -56,7 +56,7 @@ public class AjouteLivreVue {
         Text prixText = new Text("Prix du livre");
         HBox contprix = new HBox(prixText);
         contprix.setMaxWidth(300);
-        contprix.setStyle("-fx-background-color: #5ce1e6;");
+        contprix.setStyle("-fx-background-color: #38b6ff;");
         contprix.setAlignment(Pos.CENTER);
         prix = new TextField();
         prix.setMaxWidth(300);
