@@ -17,6 +17,20 @@ source DB/sujet/creationLivreExpress.sql
 
 preinstallation.sh
 
+ps : les identifiants pour se connecter a un client sont nom/prenom/motdepasse
+
+administrateur : a/b/c
+
+client : d/e/f
+
+
+
 - pour accéder au cli
 
-installation.sh
+installationCLI.sh
+
+
+- pour accéder a l'application javaFX
+
+installationFX.sh
+
