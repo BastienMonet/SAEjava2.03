@@ -42,6 +42,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                 } else {
                     ajouterCommandeVue.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getClient().getLivreBDparTitre(livreTitre), qte));
                     ajouterCommandeVue.majLivreDansCommande();
+                    ajouterCommandeVue.prixTotalVautCommande();
                 }
             } catch (Exception e) {
                 app.alertErreur(e);
@@ -75,6 +76,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
         } else if (btn.getText().equals("retirer")){
             ajouterCommandeVue.getCommande().removeCommandeUnit();
             ajouterCommandeVue.majLivreDansCommande();
+            ajouterCommandeVue.prixTotalVautCommande();
 
         }
     }

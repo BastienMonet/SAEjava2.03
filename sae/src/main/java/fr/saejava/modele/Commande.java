@@ -95,7 +95,25 @@ public class Commande {
     }
 
     public void ajouterCommandeUnit(CommandeUnit commandeUnit) {
-        this.listeCommandes.add(commandeUnit);
+        if (this.listeCommandes.isEmpty()){
+            this.listeCommandes.add(commandeUnit);
+            return;
+        }
+        Integer qte = null;
+        System.out.println("coucou");
+        List<CommandeUnit> cp = new ArrayList<>(listeCommandes);
+        for (CommandeUnit comU : cp){
+            if (commandeUnit.getLivre().equals(comU.getLivre())){;
+                qte = comU.getQte();
+                this.listeCommandes.remove(comU);
+            }
+        }
+        if (qte != null){
+            commandeUnit.setQte(qte + commandeUnit.getQte());
+            this.listeCommandes.add(commandeUnit);
+        } else {
+            this.listeCommandes.add(commandeUnit);
+        }
     }
 
     // public void commander() throws IllegalArgumentException, Exception{

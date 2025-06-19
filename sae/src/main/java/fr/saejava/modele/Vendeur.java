@@ -12,8 +12,8 @@ public class Vendeur extends Utilisateur {
     }
 
 
-    public Vendeur(String nomUtil, String prenomUtil, String pwd){
-        super(nomUtil, prenomUtil, pwd);
+    public Vendeur(int idUtil, String nomUtil, String prenomUtil, String pwd){
+        super(idUtil, nomUtil, prenomUtil, pwd);
     }
 
     public List<Commande> voirCommande() throws Exception{

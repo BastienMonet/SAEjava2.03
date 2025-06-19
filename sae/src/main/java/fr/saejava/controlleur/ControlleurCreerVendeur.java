@@ -42,7 +42,7 @@ public class ControlleurCreerVendeur implements EventHandler<ActionEvent> {
             app.alertChampsVides();
         } else {
             try {
-                administrateur.ajouteVendeurBD(new Vendeur(nom, prenom, motDePasse));
+                administrateur.ajouteVendeurBD(new Vendeur(0, nom, prenom, motDePasse));
                 app.setSceneAdmin();
                 app.alertAjoutUtilisateur();
             } catch (CompteDejaPrisException e) {

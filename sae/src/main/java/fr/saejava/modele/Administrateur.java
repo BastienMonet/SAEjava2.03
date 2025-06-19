@@ -15,8 +15,8 @@ public class Administrateur extends Utilisateur {
         super(laconnexion);
     }
 
-    public Administrateur(String nomUtil, String prenomUtil, String pwd){
-        super(nomUtil, prenomUtil, pwd);
+    public Administrateur(int idUtil , String nomUtil, String prenomUtil, String pwd){
+        super(idUtil, nomUtil, prenomUtil, pwd);
     }
 
     @Override
