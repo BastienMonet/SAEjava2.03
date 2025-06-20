@@ -13,11 +13,12 @@ public class ControlleurAjoutNouvelleLib implements EventHandler<ActionEvent> {
     private App app;
     private AjouteLibVue vue;
 
-    private Administrateur administrateur = app.getAdministrateur();
+    private Administrateur administrateur;
 
     public ControlleurAjoutNouvelleLib(App app, AjouteLibVue vue) {
         this.app = app;
         this.vue = vue;
+        this.administrateur = app.getAdministrateur();
     }
 
     @Override

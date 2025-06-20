@@ -35,6 +35,7 @@ public class ControlleurGererStock implements EventHandler<ActionEvent> {
                 } else {
                     administrateur.ajouteLivreDansMagasin(magasin, livre, qte);
                     app.alertAjoutSucces();
+                    vue.updateTexteQteLivreDansMagasin();
                 }
             } catch (Exception e) {
                 app.alertErreur(e);
@@ -50,6 +51,7 @@ public class ControlleurGererStock implements EventHandler<ActionEvent> {
                 } else {
                     administrateur.retireLivreDansMagasin(magasin, livre, qte);
                     app.alertAjoutSucces();
+                    vue.updateTexteQteLivreDansMagasin();
                 }
             } catch (Exception e) {
                 app.alertErreur(e);
