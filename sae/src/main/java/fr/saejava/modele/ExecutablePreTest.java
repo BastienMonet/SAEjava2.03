@@ -11,6 +11,11 @@ import java.sql.SQLException;
 public class ExecutablePreTest {
 
 
+    /**
+     * Point d'entrée de l'application.
+     * @param args les arguments de la ligne de commande
+     * @throws Exception si une erreur se produit lors de l'exécution
+     */
     public static void main(String[] args) throws Exception{
         System.out.println("entrer votre nom de base");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

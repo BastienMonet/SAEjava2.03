@@ -22,7 +22,11 @@ public class InterfaceCLI {
     private Vendeur vend;
     private ConnexionMySQL co;
 
-
+    /**
+     * Constructeur de la classe InterfaceCLI
+     * @param co la connexion à la base de données
+     * @throws Exception si une erreur se produit lors de la création des objets Client, Vendeur ou Administrateur
+     */
     public InterfaceCLI(ConnexionMySQL co) throws Exception{
         this.co = co;
         cli = new Client(co);
@@ -30,10 +34,21 @@ public class InterfaceCLI {
         adm = new Administrateur(co);
     }
 
+    /**
+     * Retourne l'objet Client
+     * @return l'objet Client
+     */
     public void close() throws SQLException {
         co.close();
     }
     
+    /**
+     * Affiche le menu pour commander des livres
+     * Permet à l'utilisateur de choisir des livres à ajouter à sa commande, de voir le détail de sa commande, de finaliser ou d'annuler la commande.
+     * @param u
+     * @param com
+     * @throws Exception
+     */
     public static void menuCommander(Utilisateur u, Commande com) throws Exception{
         boolean finiCommande = false;
         while (! finiCommande){
@@ -111,6 +126,13 @@ public class InterfaceCLI {
     }
 
 
+    /**
+     * Affiche le menu pour le client
+     * Permet au client de consulter le catalogue, de créer une commande, de consulter ses commandes, de supprimer une commande ou de quitter son compte.
+     * @param c l'objet Client
+     * @throws SQLException si une erreur se produit lors de l'accès à la base de données
+     * @throws Exception si une erreur se produit lors de l'exécution des opérations
+     */
     public static void menuClient(Client c) throws SQLException, Exception{
         boolean finiClient = false;
         System.out.println("connection reussi");
@@ -190,7 +212,13 @@ public class InterfaceCLI {
 
     }
 
-
+    /**
+     * Affiche le menu pour l'administrateur
+     * Permet à l'administrateur d'ajouter un magasin, d'ajouter un livre, d'ajouter ou de retirer un livre dans un magasin, ou de quitter le menu administrateur.
+     * @param a
+     * @throws SQLException
+     * @throws Exception
+     */
     public static void menuAdmin(Administrateur a) throws SQLException, Exception{
         boolean finiAdmin = false;
         System.out.println("connection reussi");
@@ -293,7 +321,12 @@ public class InterfaceCLI {
     }
 
 
-
+    /**
+     * Affiche le menu principal de l'application
+     * Permet à l'utilisateur de se connecter en tant que client ou administrateur, ou de quitter l'application.
+     * @throws SQLException si une erreur se produit lors de l'accès à la base de données
+     * @throws Exception
+     */
     public void menuMain() throws Exception{
 
         boolean fini = false;

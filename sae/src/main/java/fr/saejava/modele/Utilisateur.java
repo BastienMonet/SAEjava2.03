@@ -19,7 +19,10 @@ public abstract class Utilisateur {
     protected ConnexionMySQL laConnexion;
     protected Statement st;
     
-    
+    /**
+     * Constructeur de la classe Utilisateur
+     * @param laConnexion
+     */
     public Utilisateur(ConnexionMySQL laConnexion) {
         // this.nomUtil = nomUtil;
         // this.prenomUtil = prenomUtil;
@@ -29,6 +32,13 @@ public abstract class Utilisateur {
         this.laConnexion = laConnexion;
     }
 
+    /**
+     * Constructeur de la classe Utilisateur avec les paramètres
+     * @param idUtil l'identifiant de l'utilisateur
+     * @param nomUtil le nom de l'utilisateur
+     * @param prenomUtil le prénom de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     */
     public Utilisateur(int idUtil, String nomUtil, String prenomUtil, String pwd) {
         this.idUtil = idUtil;
         this.nomUtil = nomUtil;
@@ -37,48 +47,83 @@ public abstract class Utilisateur {
     }
 
 
-
+    /**
+     * Retourne l'identifiant de l'utilisateur
+     * @return l'identifiant de l'utilisateur
+     */
     public int getIdUtil() {
         return idUtil;
     }
 
-
+    /**
+     * Définit l'identifiant de l'utilisateur
+     * @param idUtil l'identifiant de l'utilisateur
+     */
     public void setIdUtil(int idUtil) {
         this.idUtil = idUtil;
     }
 
-
+    /**
+     * Retourne le nom de l'utilisateur
+     * @return le nom de l'utilisateur
+     */
     public String getNomUtil() {
         return nomUtil;
     }
 
-
+    /**
+     * Définit le nom de l'utilisateur
+     * @param nomUtil le nom de l'utilisateur
+     */
     public void setNomUtil(String nomUtil) {
         this.nomUtil = nomUtil;
     }
 
-
+    /**
+     * Retourne le prénom de l'utilisateur
+     * @return le prénom de l'utilisateur
+     */
     public String getPrenomUtil() {
         return prenomUtil;
     }
 
-
+    /**
+     * Définit le prénom de l'utilisateur
+     * @param prenomUtil le prénom de l'utilisateur
+     */
     public void setPrenomUtil(String prenomUtil) {
         this.prenomUtil = prenomUtil;
     }
 
-
+    /**
+     * Retourne le mot de passe de l'utilisateur
+     * @return le mot de passe de l'utilisateur
+     */
     public String getPwd() {
         return pwd;
     }
 
-
+    /**
+     * Définit le mot de passe de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     */
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
+    /**
+     * Méthode abstraite pour se connecter
+     * @param nom le nom de l'utilisateur
+     * @param prenom le prénom de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     * @return true si la connexion est réussie, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
     public abstract boolean seConnecter(String nom, String prenom, String pwd) throws SQLException;
 
+    /**
+     * Méthode abstraite pour se déconnecter
+     */
     public List<Magasin> voirToutLesMagasin() throws SQLException{
         List<Magasin> lstMag = new ArrayList<>();
 
@@ -92,6 +137,12 @@ public abstract class Utilisateur {
         return lstMag;
     }
 
+    /**
+     * Méthode pour voir tous les magasins contenant une certaine caractéristique dans leur nom
+     * @param carac la caractéristique à rechercher dans le nom des magasins
+     * @return une liste de magasins correspondant à la caractéristique
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Magasin> voirToutLesMagasin(String carac) throws SQLException{
         List<Magasin> lstMag = new ArrayList<>();
 
@@ -106,6 +157,12 @@ public abstract class Utilisateur {
         return lstMag;
     }
 
+    /**
+     * Méthode pour voir tous les livres contenant une certaine caractéristique dans leur titre
+     * @param carac la caractéristique à rechercher dans le titre des livres
+     * @return une liste de livres correspondant à la caractéristique
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> voirToutLesLivres(String carac) throws SQLException{
         List<Livre> lstLivre = new ArrayList<>();
 
@@ -120,6 +177,11 @@ public abstract class Utilisateur {
         return lstLivre;
     }
 
+    /**
+     * Méthode pour voir tous les livres
+     * @return une liste de tous les livres
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> voirToutLesLivres() throws SQLException{
         List<Livre> lstLivre = new ArrayList<>();
 
@@ -133,6 +195,11 @@ public abstract class Utilisateur {
         return lstLivre;
     }
 
+    /**
+     * Méthode pour voir les livres recommandés
+     * @return une liste de livres recommandés
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> onVousRecommande() throws SQLException{
         List<Livre> res = new ArrayList<>();
 
@@ -148,6 +215,12 @@ public abstract class Utilisateur {
         return res;
     }
 
+    /**
+     * Méthode pour voir les livres recommandés avec une caractéristique dans le titre
+     * @param carac la caractéristique à rechercher dans le titre des livres
+     * @return une liste de livres recommandés correspondant à la caractéristique
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> onVousRecommande(String carac) throws SQLException{
         List<Livre> res = new ArrayList<>();
 
@@ -173,6 +246,12 @@ public abstract class Utilisateur {
         return res;
     }
 
+    /**
+     * Méthode pour voir les livres recommandés dans un magasin spécifique
+     * @param m le magasin dans lequel on veut voir les livres recommandés
+     * @return une liste de livres recommandés dans le magasin
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> onVousRecommandeDansMagasin(Magasin m) throws SQLException{
         List<Livre> res = new ArrayList<>();
         
@@ -189,6 +268,13 @@ public abstract class Utilisateur {
         return res;
     }
 
+    /**
+     * Méthode pour voir les livres recommandés dans un magasin spécifique avec une caractéristique dans le titre
+     * @param m le magasin dans lequel on veut voir les livres recommandés
+     * @param carac la caractéristique à rechercher dans le titre des livres
+     * @return une liste de livres recommandés dans le magasin correspondant à la caractéristique
+     * @throws SQLException si une erreur SQL se produit
+     */
     public List<Livre> onVousRecommandeDansMagasin(Magasin m, String carac) throws SQLException{
         List<Livre> res = new ArrayList<>();
 
@@ -217,6 +303,12 @@ public abstract class Utilisateur {
         return res;
     }
 
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param id l'identifiant de l'utilisateur
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException si une erreur SQL se produit
+     */
     public Magasin getMagasinBDparNom(String nommag) throws SQLException, Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN where nommag = ? ");
         ps.setString(1, nommag);
@@ -229,7 +321,13 @@ public abstract class Utilisateur {
         
     }
 
-
+    /**
+     * Méthode pour obtenir un livre par son titre
+     * @param titre le titre du livre
+     * @return le livre correspondant au titre
+     * @throws SQLException si une erreur SQL se produit
+     * @throws Exception si le livre n'existe pas
+     */
     public Livre getLivreBDparTitre(String titre) throws SQLException, Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM LIVRE where titre = ? ");
         ps.setString(1, titre);
@@ -242,6 +340,12 @@ public abstract class Utilisateur {
         
     }
 
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param id l'identifiant de l'utilisateur
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException si une erreur SQL se produit
+     */
     public int getMaxnumCom() throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numcom) AS maxcom FROM COMMANDE");
         ResultSet rs = ps.executeQuery();
@@ -252,6 +356,11 @@ public abstract class Utilisateur {
         }
     }
 
+    /**
+     *  Méthode pour obtenir le numéro de la prochaine ligne de commande
+     * @return  le numéro de la prochaine ligne de commande
+     * @throws SQLException si une erreur SQL se produit
+     */
     public int getMaxnumComU() throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(numlig) AS maxlig FROM DETAILCOMMANDE");
         ResultSet rs = ps.executeQuery();
@@ -262,6 +371,12 @@ public abstract class Utilisateur {
         }
     }
 
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param id l'identifiant de l'utilisateur
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void retireLivreDansMagasin(Magasin m, Livre l, int qte) throws Exception{
         if (qte <= 0 || qte > 99){
             throw new Exception("la quantité saisie est érroné");
@@ -308,7 +423,12 @@ public abstract class Utilisateur {
         }
     }
 
-
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param id l'identifiant de l'utilisateur
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException si une erreur SQL se produit
+     */
     public Commande getCommande(int numCom) throws Exception{
         PreparedStatement ps = laConnexion.prepareStatement("select * from COMMANDE join MAGASIN on COMMANDE.idmag = MAGASIN.idmag where numcom = ?");
         ps.setInt(1, numCom);
@@ -332,6 +452,11 @@ public abstract class Utilisateur {
         
     }
 
+    /**
+     * Méthode pour vérifier si une commande est valide
+     * @param com la commande à vérifier
+     * @return true si la commande est valide, false sinon
+     */
     public boolean CommandeValide(Commande com) {
         for (CommandeUnit comU : com.getListeCommandes()){
             try {
@@ -346,7 +471,11 @@ public abstract class Utilisateur {
         return true;
     }
 
-
+    /**
+     * Méthode pour ajouter une commande à la base de données
+     * @param com la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     public void ajouteSaCommandeBD(Commande com) throws Exception {
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
@@ -377,7 +506,11 @@ public abstract class Utilisateur {
         
     }
 
-
+    /**
+     * Méthode pour ajouter une commande à la base de données
+     * @param com la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     public void ajouteUneCommandeBD(Commande com) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
@@ -402,6 +535,12 @@ public abstract class Utilisateur {
         
     }
 
+    /**
+     * Méthode pour ajouter une commande unitaire à la base de données
+     * @param numCommande le numéro de la commande
+     * @param comU la commande unitaire à ajouter
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void ajouteCommandeUnitBD(int numCommande,CommandeUnit comU) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("insert into DETAILCOMMANDE values (?, ?, ?, ?, ?)");
         ps.setInt(1, numCommande);
@@ -413,7 +552,13 @@ public abstract class Utilisateur {
 
     }
 
-
+    /**
+     * Méthode pour vérifier la quantité d'un livre dans un magasin
+     * @param l le livre à vérifier
+     * @param m le magasin dans lequel vérifier la quantité
+     * @return la quantité du livre dans le magasin
+     * @throws Exception si une erreur survient lors de la récupération de la quantité
+     */
     public int qteDansMagasin(Livre l, Magasin m) throws Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM POSSEDER as p JOIN MAGASIN as m on p.idmag = m.idmag where isbn = ? and nommag = ?");
         ps.setInt(1, l.getIsbn());
@@ -426,6 +571,12 @@ public abstract class Utilisateur {
         }
     }
 
+    /**
+     * Méthode pour voir les commandes d'un utilisateur
+     * @return une liste de commandes de l'utilisateur
+     * @throws SQLException si une erreur SQL se produit
+     * @throws Exception si une erreur survient lors de la récupération des commandes
+     */
     public List<CommandeUnit> voirDetailCommande(Commande com) throws SQLException, Exception{
 
         /*
@@ -449,6 +600,11 @@ public abstract class Utilisateur {
         return res;
     }
 
+    /**
+     * Méthode pour retirer une commande de la base de données
+     * @param c la commande à retirer
+     * @throws Exception si une erreur survient lors du retrait
+     */
     public void retireDetailCommande(int numCom) throws Exception{
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("DELETE DETAILCOMMANDE " +
@@ -458,6 +614,12 @@ public abstract class Utilisateur {
         
     }
 
+    /**
+     * Méthode pour obtenir le nombre d'achats d'un livre par son ISBN
+     * @param isbn l'ISBN du livre
+     * @return le nombre d'achats du livre
+     * @throws Exception si une erreur survient lors de la récupération du nombre d'achats
+     */
     public int getNbreAchats(int isbn) throws Exception {
         PreparedStatement ps = laConnexion.prepareStatement("Select * from LIVRE where isbn = ?");
         ps.setInt(1, isbn);
@@ -471,6 +633,11 @@ public abstract class Utilisateur {
 
     }
 
+    /**
+     * Méthode pour incrémenter le nombre d'achats d'un livre par son ISBN
+     * @param isbn l'ISBN du livre
+     * @throws Exception si une erreur survient lors de l'incrémentation
+     */
     public void incrementeAchat(int isbn) throws Exception{
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbreAchat = ? where isbn = ?");
@@ -479,6 +646,11 @@ public abstract class Utilisateur {
         ps.executeUpdate();
     }
 
+    /**
+     * Méthode pour décrémenter le nombre d'achats d'un livre par son ISBN
+     * @param isbn l'ISBN du livre
+     * @throws Exception si une erreur survient lors de la décrémentation
+     */
     public void decrementeAchat(int isbn) throws Exception{
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("Update LIVRE set nbreAchat = ? where isbn = ?");
@@ -487,6 +659,13 @@ public abstract class Utilisateur {
         ps.executeUpdate();
     }
 
+    /**
+     * Méthode pour ajouter un livre dans un magasin
+     * @param m le magasin dans lequel ajouter le livre
+     * @param l le livre à ajouter
+     * @param qte la quantité du livre à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     public void ajouteLivreDansMagasin(Magasin m, Livre l, int qte) throws Exception{
         if (qte <= 0 || qte > 99){
             throw new Exception("la quantité saisie est érroné");
@@ -527,6 +706,12 @@ public abstract class Utilisateur {
 
         }
 
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param iduse
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException
+     */
     public Client getUtilisateurParId(int iduse) throws SQLException{
         PreparedStatement ps = laConnexion.prepareStatement("select * from UTILISATEUR natural join CLIENT where iduse = ?");
         ps.setInt(1, iduse);
@@ -539,6 +724,12 @@ public abstract class Utilisateur {
 
     }
 
+    /**
+     * Méthode pour obtenir un utilisateur par son identifiant
+     * @param iduse
+     * @return l'utilisateur correspondant à l'identifiant
+     * @throws SQLException
+     */
     @Override
     public String toString() {
         return idUtil + " | " + nomUtil + " | " + prenomUtil + " | " + pwd;

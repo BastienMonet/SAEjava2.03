@@ -16,6 +16,10 @@ public class AjouteLivreVue {
 
     TextField titreLivre, nbpages, datePublic, prix; 
 
+    /**
+     * Constructeur de la vue pour ajouter un livre
+     * @param app l'application principale
+     */
     public AjouteLivreVue(App app) {
         Text titre = new Text("Ajouter un livre");
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
@@ -88,20 +92,42 @@ public class AjouteLivreVue {
         this.sceneAjouteLivre = new Scene(fin, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène pour ajouter un livre
+     * @return la scène pour ajouter un livre
+     */
     public Scene getScene(){
         return this.sceneAjouteLivre;
     }
 
-
+    /**
+     * Retourne le titre du livre saisi par l'utilisateur
+     * @return le titre du livre
+     */
     public String getTitreLivre() {
         return titreLivre.getText();
     }
+
+    /**
+     * Retourne le nombre de pages du livre saisi par l'utilisateur
+     * @return le nombre de pages
+     */
     public String getNbPages() {
         return nbpages.getText();
     }
+
+    /**
+     * Retourne l'année de publication du livre saisi par l'utilisateur
+     * @return l'année de publication
+     */
     public String getDatePublic() {
         return datePublic.getText();
     }
+
+    /**
+     * Retourne le prix du livre saisi par l'utilisateur
+     * @return le prix du livre
+     */
     public String getPrix() {
         return prix.getText();
     }
