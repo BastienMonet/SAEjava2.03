@@ -30,6 +30,11 @@ public class VoirCommandeVue {
     private Commande commande;
     private App app;
 
+    /**
+     * Constructeur de la vue pour voir une commande
+     * @param app l'application principale
+     * @param commande la commande à afficher
+     */
     public VoirCommandeVue(App app, Commande commande) {
 
         Stage stage = new Stage();
@@ -84,15 +89,6 @@ public class VoirCommandeVue {
 
         this.livreDansCommande();
 
-        // // remplacer par une boucle pour afficher les livres
-        // HBox L1 = this.afficheLivre("Livre 1", 1, 50);
-        // HBox L2 = this.afficheLivre("Livre 2", 50, 1);
-        // HBox L3 = this.afficheLivre("Livre 3", 8, 70);
-        // VBox livres = new VBox(L1, L2, L3);
-        // livres.setAlignment(Pos.CENTER);
-        // livres.setSpacing(10);
-        // BorderPane.setMargin(livres, new Insets(0, 0, 0, 50));
-
         Button retour = new Button("quitter");
 
         retour.setOnAction(event -> {
@@ -143,6 +139,9 @@ public class VoirCommandeVue {
         return fin;
     }
 
+    /**
+     * Met à jour l'affichage des détails de la commande dans la vue
+     */
     public void livreDansCommande() {
         lesDetail.getChildren().clear();
         for (CommandeUnit commandeUnit : commande.getListeCommandes()) {
@@ -152,11 +151,16 @@ public class VoirCommandeVue {
         }
     }
 
-
+    /**
+     * Affiche la fenêtre de la vue pour voir une commande
+     */
     public void getFenetreVoirCommandeVue() {
         this.stage.show();
     }
 
+    /**
+     * Ferme la fenêtre de la vue pour voir une commande
+     */
     public void closeFenetreVoirCommandeVue() {
         this.stage.close();
     }

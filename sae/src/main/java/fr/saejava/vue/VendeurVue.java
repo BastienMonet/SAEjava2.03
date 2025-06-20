@@ -27,7 +27,10 @@ public class VendeurVue {
     private ComboBox<String> livraisonChoix;
 
     
-    
+    /**
+     * Constructeur de la vue pour le vendeur
+     * @param app l'application principale
+     */
     public VendeurVue(App app) {
         Text messageBVN = new Text("Bienvenue dans l'interface vendeur");
 
@@ -147,15 +150,34 @@ public class VendeurVue {
         }
     }
 
+    /**
+     * Méthodes pour récupérer les valeurs des ComboBox
+     * @return la valeur sélectionnée dans chaque ComboBox
+     */
     public String getChoixUtil() {
         return choixUtil.getValue();
     }
+
+    /**
+     * Retourne le magasin sélectionné par l'utilisateur
+     * @return le nom du magasin sélectionné
+     */
     public String getChoixMag() {
         return choixmag.getValue();
     }
+
+    /**
+     * Retourne les choix d'en ligne et de livraison
+     * @return les valeurs sélectionnées pour en ligne et livraison
+     */
     public String getEnligneChoix() {
         return enligneChoix.getValue();
     }
+
+    /**
+     * Retourne le choix de livraison
+     * @return la valeur sélectionnée pour la livraison
+     */
     public String getLivraisonChoix() {
         return livraisonChoix.getValue();
     }

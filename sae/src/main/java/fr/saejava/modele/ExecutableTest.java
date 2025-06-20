@@ -10,6 +10,15 @@ import java.util.HashMap;
 
 public class ExecutableTest {
 
+    /**
+     * Main method to test the connection to the database and the functionality of the Administrateur class.
+     * It prompts the user for database name, login, and password, then attempts to connect to the database.
+     * If successful, it creates an instance of Administrateur and tests some of its methods.   
+     * @param args
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws Exception
+     */
     public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
 
         System.out.println("entrer votre nom de base");

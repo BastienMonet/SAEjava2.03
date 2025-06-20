@@ -15,6 +15,10 @@ import javafx.scene.text.Text;
 public class StatistiqueVue {
     Scene sceneAjouteLib;
 
+    /**
+     * Constructeur de la vue pour afficher les statistiques de la librairie
+     * @param app l'application principale
+     */
     public StatistiqueVue(App app) {
         Text titre = new Text("statistiques de la librairie: [nom de la librairie]");
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
@@ -52,7 +56,10 @@ public class StatistiqueVue {
 
     }
         
-
+    /**
+     * Retourne la scène de la vue des statistiques
+     * @return la scène de la vue des statistiques
+     */
     public Scene getScene(){
         return this.sceneAjouteLib;
     }

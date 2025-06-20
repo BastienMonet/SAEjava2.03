@@ -26,6 +26,10 @@ public class ConnexionBD {
 
     PasswordField motDePasse;
 
+    /**
+     * Constructeur de la vue pour la connexion à la base de données
+     * @param app l'application principale
+     */
     public ConnexionBD(App app) {
 
 
@@ -98,19 +102,34 @@ public class ConnexionBD {
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
 
+    /**
+     * Retourne la scène de connexion à la base de données
+     * @return la scène de connexion
+     */
     public Scene getScene() {
         return scene;
     }
 
-
+    /**
+     * Retourne le nom de la base de données, le login et le mot de passe saisis par l'utilisateur
+     * @return un tableau contenant le nom de la base de données, le login et le mot de passe
+     */
     public String getNomBD(){
         return nomBD.getText();
     }
-
-     public String getLogin(){
+    
+    /**
+     * Retourne le login saisi par l'utilisateur
+     * @return le login
+     */
+    public String getLogin(){
         return login.getText();
     }
 
+    /**
+     * Retourne le mot de passe saisi par l'utilisateur
+     * @return
+     */
      public String getMotDePasse(){
         return motDePasse.getText();
     }
