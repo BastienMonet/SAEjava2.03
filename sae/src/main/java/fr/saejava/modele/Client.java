@@ -16,10 +16,25 @@ public class Client extends Utilisateur {
     private Double monnaie = 0.00;
 
 
+    /**
+     * Constructeur de la classe Client
+     * @param laConnexion la connexion à la base de données
+     */
     public Client(ConnexionMySQL laConnexion) {
         super(laConnexion);
     }
 
+    /**
+     * Constructeur de la classe Client avec les paramètres
+     * @param idUtil l'identifiant de l'utilisateur
+     * @param nomUtil le nom de l'utilisateur
+     * @param prenomUtil le prénom de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     * @param adresseUtil l'adresse de l'utilisateur
+     * @param codePostal le code postal de l'utilisateur
+     * @param villeUtil la ville de l'utilisateur
+     * @param monnaie la monnaie du client
+     */
     public Client(int idUtil, String nomUtil, String prenomUtil, String pwd, String adresseUtil, String codePostal,
             String villeUtil, Double monnaie) {
         super(idUtil, nomUtil, prenomUtil, pwd);
@@ -29,33 +44,74 @@ public class Client extends Utilisateur {
         this.monnaie = monnaie;
     }
 
-
+    /**
+     * Retourne l'adresse de l'utilisateur
+     * @return l'adresse de l'utilisateur
+     */
     public String getAdresseUtil() {
         return adresseUtil;
     }
+
+    /**
+     * Retourne le code postal de l'utilisateur
+     * @return le code postal de l'utilisateur
+     */
     public String getCodePostal() {
         return codePostal;
     }
+
+    /**
+     * Retourne la ville de l'utilisateur
+     * @return la ville de l'utilisateur
+     */
     public String getVilleUtil() {
         return villeUtil;
     }
+
+    /**
+     * Retourne la monnaie du client
+     * @return la monnaie du client
+     */
     public double getMonnaie() {
         return monnaie;
     }
+
+    /**
+     * Définit l'adresse de l'utilisateur
+     * @param adresseUtil l'adresse de l'utilisateur
+     */
     public void setAdresseUtil(String adresseUtil) {
         this.adresseUtil = adresseUtil;
     }
+
+    /**
+     * Définit le code postal de l'utilisateur
+     * @param codePostal le code postal de l'utilisateur
+     */
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
+
+    /**
+     * Définit la ville de l'utilisateur
+     * @param villeUtil la ville de l'utilisateur
+     */
     public void setVilleUtil(String villeUtil) {
         this.villeUtil = villeUtil;
     }
 
+    /**
+     * Définit la monnaie du client
+     * @param monnaie la monnaie du client
+     */
     public void ajouteMonnaie(double montant){
         this.monnaie += montant;
     }
 
+    /**
+     * Définit la monnaie du client
+     * @param monnaie la monnaie du client
+     */
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
         String sql = "SELECT CLIENT.iduse, nomcli, prenomcli, pwd, adressecli, codePostal, villecli, monnaie \n" + //
@@ -87,6 +143,11 @@ public class Client extends Utilisateur {
         }
     }
 
+    /**
+     * Ajoute une commande à la base de données
+     * @param c la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     public List<Commande> voirSesCommande() throws SQLException, Exception{
 
         /*
@@ -112,6 +173,11 @@ public class Client extends Utilisateur {
         return res;
     }
 
+    /**
+     * Ajoute une commande à la base de données
+     * @param c la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     public void retireSaCommande(Commande c) throws Exception{
 
         retireDetailCommande(c.getNumCom());
@@ -133,7 +199,11 @@ public class Client extends Utilisateur {
         ajouteSaCommandeBD(c);
     }
 
-
+    /**
+     * Ajoute une commande à la base de données
+     * @param c la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     @Override
     public String toString() {
         if (idUtil == 0){

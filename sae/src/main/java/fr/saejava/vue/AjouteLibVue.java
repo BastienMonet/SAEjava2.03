@@ -17,6 +17,10 @@ public class AjouteLibVue {
 
     TextField nomCity;
 
+    /**
+     * Constructeur de la vue pour ajouter une librairie
+     * @param app l'application principale
+     */
     public AjouteLibVue(App app) {
         Text titre = new Text("Ajouter une librairie");
         titre.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
@@ -66,13 +70,26 @@ public class AjouteLibVue {
         this.sceneAjouteLib = new Scene(fin, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène pour ajouter une librairie
+     * @return la scène pour ajouter une librairie
+     */
     public Scene getSceneAjouteLib(){
         return this.sceneAjouteLib;
     }
 
+    /**
+     * Retourne le nom du magasin et de la ville saisis par l'utilisateur
+     * @return le nom du magasin et de la ville
+     */
     public String getNomMagasin() {
         return nomMagasin.getText();
     }
+
+    /**
+     * Retourne le nom de la ville saisi par l'utilisateur
+     * @return le nom de la ville
+     */
     public String getNomCity() {
         return nomCity.getText();
     }

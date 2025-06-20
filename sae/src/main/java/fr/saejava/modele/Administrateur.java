@@ -11,14 +11,33 @@ import fr.saejava.exception.CompteDejaPrisException;
 
 public class Administrateur extends Utilisateur {
     
+    /**
+     * Constructeur de la classe Administrateur
+     * @param laconnexion
+     */
     public Administrateur(ConnexionMySQL laconnexion){
         super(laconnexion);
     }
 
+    /**
+     * Constructeur de la classe Administrateur
+     * @param idUtil l'identifiant de l'utilisateur
+     * @param nomUtil le nom de l'utilisateur
+     * @param prenomUtil le prénom de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     */
     public Administrateur(int idUtil , String nomUtil, String prenomUtil, String pwd){
         super(idUtil, nomUtil, prenomUtil, pwd);
     }
 
+    /**
+     * Méthode pour se connecter en tant qu'administrateur
+     * @param nom le nom de l'administrateur
+     * @param prenom le prénom de l'administrateur
+     * @param pwd le mot de passe de l'administrateur
+     * @return true si la connexion est réussie, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
         String sql = "SELECT ADMINISTRATEUR.iduse, nomcli, prenomcli, pwd \n" + //
@@ -46,6 +65,13 @@ public class Administrateur extends Utilisateur {
         }
     }
 
+    /**
+     * Méthode pour se connecter en tant qu'administrateur
+     * @param nom le nom de l'administrateur
+     * @param pwd le mot de passe de l'administrateur
+     * @return true si la connexion est réussie, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
     public int getmaxisbn() throws SQLException{
         st = laConnexion.createStatement();
         ResultSet rs = st.executeQuery("select max(isbn) max from LIVRE");
@@ -56,7 +82,11 @@ public class Administrateur extends Utilisateur {
         }  
     }
 
-
+    /**
+     * Méthode pour ajouter un livre à la base de données
+     * @param l le livre à ajouter
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void ajouteLivreBD(Livre l) throws SQLException{
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("insert into LIVRE values (?, ?, ?, ?, ?, ?)");
@@ -74,6 +104,11 @@ public class Administrateur extends Utilisateur {
         
     }
 
+    /**
+     * Méthode pour retirer un livre de la base de données
+     * @param isbn l'ISBN du livre à retirer
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void retireLivreBD(int isbn) throws SQLException{
         st = laConnexion.createStatement();
         PreparedStatement ps = laConnexion.prepareStatement("delete from LIVRE where isbn = ?");
@@ -86,6 +121,11 @@ public class Administrateur extends Utilisateur {
         
     }
 
+    /**
+     * Méthode pour obtenir le prochain identifiant d'utilisateur
+     * @return le prochain identifiant d'utilisateur
+     * @throws SQLException si une erreur SQL se produit
+     */
     public int getMaxIdUtil() throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(iduse) AS iduse FROM UTILISATEUR");
         ResultSet rs = ps.executeQuery();
@@ -96,7 +136,11 @@ public class Administrateur extends Utilisateur {
         }
     }
 
-
+    /**
+     * Méthode pour ajouter un client à la base de données
+     * @param c le client à ajouter
+     * @throws Exception si un compte avec les mêmes informations existe déjà
+     */
     public void ajouteClientBD(Client c) throws Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * from CLIENT natural join UTILISATEUR where " + 
                                         "nomcli = ? and prenomcli = ?");
@@ -128,12 +172,14 @@ public class Administrateur extends Utilisateur {
                 System.err.println(e.getMessage());
             }
 
-        }
-
-        
-        
+        }   
     }
 
+    /**
+     * Méthode pour ajouter un administrateur à la base de données
+     * @param a l'administrateur à ajouter
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void ajouteAdminBD(Administrateur a) throws SQLException{
         st = laConnexion.createStatement();
         PreparedStatement ps1 = laConnexion.prepareStatement("insert into UTILISATEUR values (?, ?, ?, ?)");
@@ -155,6 +201,11 @@ public class Administrateur extends Utilisateur {
         
     }
 
+    /**
+     * Méthode pour ajouter un vendeur à la base de données
+     * @param v le vendeur à ajouter
+     * @throws Exception si un compte avec les mêmes informations existe déjà
+     */
     public void ajouteVendeurBD(Vendeur v) throws Exception{
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * from VENDEUR natural join UTILISATEUR where " + 
                                         "nomcli = ? and prenomcli = ?");
@@ -185,6 +236,11 @@ public class Administrateur extends Utilisateur {
         
     }
 
+    /**
+     * Méthode pour obtenir le prochain identifiant de magasin
+     * @return le prochain identifiant de magasin
+     * @throws SQLException si une erreur SQL se produit
+     */
     public int getMaxIdMag() throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT MAX(idMag) AS maxId FROM MAGASIN");
         ResultSet rs = ps.executeQuery();
@@ -195,6 +251,11 @@ public class Administrateur extends Utilisateur {
         }
     }
 
+    /**
+     * Méthode pour ajouter un magasin à la base de données
+     * @param m le magasin à ajouter
+     * @throws SQLException si une erreur SQL se produit
+     */
     public void ajouteMagasinBD(Magasin m) throws SQLException {
         int newIdMag = getMaxIdMag();
         PreparedStatement ps = laConnexion.prepareStatement("INSERT INTO MAGASIN VALUES (?, ?, ?)");
@@ -209,7 +270,11 @@ public class Administrateur extends Utilisateur {
     }
 
 
-
+    /**
+     * Méthode pour obtenir la liste de tous les magasins
+     * @return une liste de tous les magasins
+     * @throws SQLException si une erreur SQL se produit
+     */
     public ArrayList<Map.Entry<String, Integer>> CAparMagasin() throws SQLException{
         ArrayList<Map.Entry<String, Integer>> result = new ArrayList<>();
 
@@ -232,7 +297,12 @@ public class Administrateur extends Utilisateur {
         return result;
     }
 
-
+    /**
+     * Méthode pour vérifier si un livre est dans la base de données
+     * @param titre le titre du livre à vérifier
+     * @return true si le livre existe, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
     public boolean livreEstDansBD(String titre) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM LIVRE WHERE titre = ?");
         ps.setString(1, titre);
@@ -242,6 +312,12 @@ public class Administrateur extends Utilisateur {
         return exists;
     }
 
+    /**
+     * Méthode pour vérifier si un magasin est dans la base de données
+     * @param nomMag le nom du magasin à vérifier
+     * @return true si le magasin existe, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
     public boolean magasinEstDansBD(String nomMag) throws SQLException {
         PreparedStatement ps = laConnexion.prepareStatement("SELECT * FROM MAGASIN WHERE nommag = ?");
         ps.setString(1, nomMag);
@@ -253,9 +329,15 @@ public class Administrateur extends Utilisateur {
 
 
     
-
-        @Override
-        public String toString() {
-            return "Admin " + super.toString();
-        }
+    /**
+     * Méthode pour vérifier si un client est dans la base de données
+     * @param nom le nom du client à vérifier
+     * @param prenom le prénom du client à vérifier
+     * @return true si le client existe, false sinon
+     * @throws SQLException si une erreur SQL se produit
+     */
+    @Override
+    public String toString() {
+        return "Admin " + super.toString();
+    }
 }

@@ -9,6 +9,10 @@ import javafx.scene.text.Text;
 public class AdministrateurVue {
     Scene sceneAdmin;
     
+    /**
+     * Constructeur de la vue Administrateur
+     * @param app l'application principale
+     */
     public AdministrateurVue(App app) {
         Text messageBVN = new Text("Bienvenue Administrateur");
         messageBVN.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
@@ -55,6 +59,10 @@ public class AdministrateurVue {
         sceneAdmin = new Scene(vueAdmin, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène de l'administrateur
+     * @return la scène de l'administrateur
+     */
     public Scene getSceneAdmin() {
         return sceneAdmin;
     }

@@ -24,6 +24,10 @@ public class ConnexionVue {
 
     Text connexionText;
 
+    /**
+     * Constructeur de la vue pour la connexion des utilisateurs
+     * @param app l'application principale
+     */
     public ConnexionVue(App app) {
         Text messBienvenue = new Text("Salutation !\nVeuillez vous connecter.");
         messBienvenue.setTextAlignment(TextAlignment.CENTER);
@@ -88,26 +92,50 @@ public class ConnexionVue {
         this.sceneConnexion = new Scene(fin, 1000, 1000);
     }
 
+    /**
+     * Méthodes pour récupérer les informations saisies par l'utilisateur
+     * @return les informations saisies
+     */
     public String getNom() {
         return nomText.getText();
     }
 
+    /**
+     * Retourne le prénom saisi par l'utilisateur
+     * @return le prénom
+     */
     public String getPrenom() {
         return prenomText.getText();
     }
 
+    /**
+     * Retourne le mot de passe saisi par l'utilisateur
+     * @return le mot de passe
+     */
     public String getMdp() {
         return mdpText.getText();
     }
 
+    /**
+     * Retourne le type d'utilisateur sélectionné
+     * @return le type d'utilisateur (client, vendeur, administrateur)
+     */
     public Toggle getGroupe() {
         return groupe.getSelectedToggle();
     }
 
+    /**
+     * Retourne la scène de connexion
+     * @return la scène de connexion
+     */
     public Scene getScene() {
         return sceneConnexion;
     }
 
+    /**
+     * Retourne le texte de connexion
+     * @return le texte de connexion
+     */
     public Text getConnexionText() {
         return connexionText;
     }

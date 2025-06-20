@@ -37,6 +37,12 @@ public class ModifierCommandeVue {
     private VBox VBoxLivresDansMagasin;
     private VBox VboxCommande;
 
+    /**
+     * Constructeur de la vue pour modifier une commande
+     * @param app l'application principale
+     * @param commande la commande à modifier
+     * @throws Exception si une erreur se produit lors de la création de la vue
+     */
     public ModifierCommandeVue(App app, Commande commande) throws Exception {
 
         this.app = app;
@@ -167,6 +173,10 @@ public class ModifierCommandeVue {
         this.scene = new Scene(root, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène de la vue pour modifier une commande
+     * @return la scène de modification de commande
+     */
     public Scene getScene() {
         return this.scene;
     }
@@ -186,6 +196,9 @@ public class ModifierCommandeVue {
 
     }
 
+    /**
+     * Met à jour la liste des livres dans la commande
+     */
     public void majLivreDansCommande() {
         VboxCommande.getChildren().clear();
         for (CommandeUnit commandeUnit : commande.getListeCommandes()) {
@@ -195,6 +208,10 @@ public class ModifierCommandeVue {
         }
     }
 
+    /**
+     * Retourne la quantité saisie par l'utilisateur
+     * @return la quantité saisie
+     */
     public int getQte() {
         try {
             return Integer.parseInt(qte.getText());
@@ -205,10 +222,18 @@ public class ModifierCommandeVue {
         }
     }
 
+    /**
+     * Retourne le titre du livre sélectionné dans la liste déroulante
+     * @return le titre du livre
+     */
     public String getCblivre() {
         return cblivre.getValue();
     }
 
+    /**
+     * Retourne la commande associée à cette vue
+     * @return la commande
+     */
     public Commande getCommande() {
         return commande;
     }

@@ -22,6 +22,11 @@ import javafx.stage.Stage;
 public class FenetreLivreVue {
     Stage stage;
 
+    /**
+     * Constructeur de la vue pour afficher les détails d'un livre
+     * @param app l'application principale
+     * @param livre le livre à afficher
+     */
     public FenetreLivreVue(App app, Livre livre) {
         Stage stage = new Stage();
         this.stage= stage;
@@ -70,10 +75,16 @@ public class FenetreLivreVue {
         stage.setScene(root);
     }
 
+    /**
+     * Affiche la fenêtre de la vue livre
+     */
     public void getFenetreLivreVue (){
         stage.show();
     }
 
+    /**
+     * Ferme la fenêtre de la vue livre
+     */
     public void close() {
         stage.close();
     }

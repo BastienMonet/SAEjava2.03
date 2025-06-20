@@ -11,7 +11,13 @@ public class Vendeur extends Utilisateur {
         super(laConnexion);
     }
 
-
+    /**
+     * Constructeur de la classe Vendeur avec les paramètres
+     * @param idUtil l'identifiant de l'utilisateur
+     * @param nomUtil le nom de l'utilisateur
+     * @param prenomUtil le prénom de l'utilisateur
+     * @param pwd le mot de passe de l'utilisateur
+     */
     public Vendeur(int idUtil, String nomUtil, String prenomUtil, String pwd){
         super(idUtil, nomUtil, prenomUtil, pwd);
     }
@@ -41,7 +47,11 @@ public class Vendeur extends Utilisateur {
     }
 
 
-
+    /**
+     * Retire les détails de la commande
+     * @param numCom le numéro de la commande dont on veut retirer les détails
+     * @throws Exception
+     */
     public void retireCommande(int numCom) throws Exception{
         retireDetailCommande(numCom);
 
@@ -55,7 +65,11 @@ public class Vendeur extends Utilisateur {
         
     }
 
-
+    /**
+     * Ajoute une commande à la base de données
+     * @param c la commande à ajouter
+     * @throws Exception si une erreur survient lors de l'ajout
+     */
     @Override
     public boolean seConnecter(String nom, String prenom, String pwd) throws SQLException {
         String sql = "SELECT VENDEUR.iduse, nomcli, prenomcli, pwd \n" + //
@@ -83,6 +97,11 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    /**
+     * Ajoute un client à la base de données
+     * @param c le client à ajouter
+     * @throws SQLException si une erreur survient lors de l'ajout
+     */
     public List<String> voirToutLesNomClients() throws SQLException {
         List<String> res = new ArrayList<>();
         st = laConnexion.createStatement();
@@ -93,6 +112,12 @@ public class Vendeur extends Utilisateur {
         return res;
     }
 
+    /**
+     * Recherche les clients par nom ou prénom
+     * @param carac la chaîne de caractères à rechercher dans les noms ou prénoms des clients
+     * @return une liste de noms de clients correspondant à la recherche
+     * @throws SQLException si une erreur survient lors de la requête
+     */
     public List<String> voirToutLesNomClients(String carac) throws SQLException {
         List<String> res = new ArrayList<>();
         PreparedStatement ps = laConnexion.prepareStatement("SELECT nomcli, prenomcli FROM UTILISATEUR natural join CLIENT where nomcli like ? or prenomcli like ? ");
@@ -105,6 +130,12 @@ public class Vendeur extends Utilisateur {
         return res;
     }
 
+    /**
+     * Récupère un client par son nom et prénom
+     * @param chaineString la chaîne de caractères contenant le nom et le prénom du client
+     * @return un objet Client correspondant au nom et prénom fournis
+     * @throws SQLException si une erreur survient lors de la requête
+     */
     public Client getClientParNom(String chaineString) throws SQLException {
         String nom = chaineString.split(" ")[0];
         String prenom = chaineString.split(" ")[1];
@@ -121,6 +152,12 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    /**
+     * Récupère l'identifiant d'un client par son nom et prénom
+     * @param chaineString la chaîne de caractères contenant le nom et le prénom du client
+     * @return l'identifiant du client correspondant au nom et prénom fournis
+     * @throws SQLException si une erreur survient lors de la requête
+     */
     public int getIdClientParNom(String chaineString) throws SQLException {
         String nom = chaineString.split(" ")[0];
         String prenom = chaineString.split(" ")[1];
@@ -136,6 +173,10 @@ public class Vendeur extends Utilisateur {
         }
     }
 
+    /**
+     * Retourne une représentation textuelle de l'objet Vendeur
+     * @return une chaîne de caractères représentant le vendeur
+     */
     @Override
     public String toString() {
         return "Vendeur " + super.toString();

@@ -26,6 +26,10 @@ public class CreerVendeurVue {
     private TextField nomVendeur;
     private TextField mdpVendeur;
     
+    /**
+     * Constructeur de la vue pour créer un compte vendeur
+     * @param app l'application principale
+     */
     public CreerVendeurVue(App app) {
 
         this.app = app;
@@ -92,16 +96,34 @@ public class CreerVendeurVue {
         sceneCreationVendeur = new Scene(vueCreationVendeur, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène de création de vendeur
+     * @return la scène de création de vendeur
+     */
     public Scene getSceneCreationVendeur() {
         return sceneCreationVendeur;
     }
 
+    /**
+     * Retourne le nom, prénom et mot de passe du vendeur saisis par l'utilisateur
+     * @return le nom, prénom et mot de passe du vendeur
+     */
     public String getNomVendeur() {
         return nomVendeur.getText();
     }
+
+    /**
+     * Retourne le prénom du vendeur saisi par l'utilisateur
+     * @return le prénom du vendeur
+     */
     public String getPrenomVendeur() {
         return prenomVendeur.getText();
     }
+
+    /**
+     * Retourne le mot de passe du vendeur saisi par l'utilisateur
+     * @return le mot de passe du vendeur
+     */
     public String getMdpVendeur() {
         return mdpVendeur.getText();
     }

@@ -19,6 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Vue pour ajouter une commande
+ */
 public class AjouterCommandeVue {
     
     private Scene scene;
@@ -173,11 +176,18 @@ public class AjouterCommandeVue {
         this.scene = new Scene(root, 1000, 1000);
     }
 
+    /**
+     * Retourne la scène pour ajouter une commande
+     * @return la scène pour ajouter une commande
+     */
     public Scene getScene() {
         return this.scene;
     }
 
-
+    /**
+     * Met à jour la liste des livres disponibles dans le magasin
+     * @throws Exception si une erreur se produit lors de la récupération des livres
+     */
     public void majLivreDansMagasin() throws Exception {
         VBoxLivresDansMagasin.getChildren().clear();
         for (Livre livre : this.app.getClient().onVousRecommandeDansMagasin(commande.getMagasin())) {
@@ -192,6 +202,9 @@ public class AjouterCommandeVue {
 
     }
 
+    /**
+     * Met à jour la liste des livres dans la commande
+     */
     public void majLivreDansCommande() {
         VboxCommande.getChildren().clear();
         for (CommandeUnit commandeUnit : commande.getListeCommandes()) {
@@ -201,6 +214,10 @@ public class AjouterCommandeVue {
         }
     }
 
+    /**
+     * Retourne la quantité saisie par l'utilisateur
+     * @return la quantité saisie
+     */
     public int getQte() {
         try {
             return Integer.parseInt(qte.getText());
@@ -211,14 +228,25 @@ public class AjouterCommandeVue {
         }
     }
 
+    /**
+     * Retourne le livre sélectionné par l'utilisateur
+     * @return le titre du livre sélectionné
+     */
     public String getCblivre() {
         return cblivre.getValue();
     }
 
+    /**
+     * Retourne la commande en cours
+     * @return la commande
+     */
     public Commande getCommande() {
         return commande;
     }
 
+    /**
+     * Met à jour le prix total de la commande
+     */
     public void prixTotalVautCommande(){
         prixTotal.setText("prix total : " + commande.prixTotCommande());
     }

@@ -160,6 +160,10 @@ public class CompteClient {
     }
 
 
+    /**
+     * Met à jour la liste des commandes du client
+     * @throws Exception si une erreur survient lors de la récupération des commandes
+     */
     public void majLesCommandes() throws Exception {
         lesCommandes.getChildren().clear();
         GridPane grid = new GridPane();
@@ -205,6 +209,10 @@ public class CompteClient {
         lesCommandes.getChildren().add(grid);
     }
 
+    /**
+     * Met à jour la liste des livres recommandés pour le client
+     * @throws Exception si une erreur survient lors de la récupération des livres
+     */
     public void majRecomandation() throws Exception {
         lesLivres.getChildren().clear();
 
@@ -238,22 +246,34 @@ public class CompteClient {
         lesLivres.getChildren().add(grid);
     }
 
-
+    /**
+     * Retourne la scène du compte client
+     * @return la scène du compte client
+     */
     public Scene getScene(){
         return scene;
     }
 
-
+    /**
+     * Retourne le client associé à cette vue
+     * @return le client
+     */
     public String getChoixmag() {
         return choixmag.getValue();
     }
 
-
+    /**
+     * Retourne le choix d'achat en ligne
+     * @return le choix d'achat en ligne
+     */
     public String getEnligneChoix() {
         return enligneChoix.getValue();
     }
 
-
+    /**
+     * Retourne le choix de livraison
+     * @return le choix de livraison
+     */
     public String getLivraisonChoix() {
         return livraisonChoix.getValue();
     }

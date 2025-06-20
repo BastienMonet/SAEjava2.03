@@ -11,53 +11,45 @@ public class Magasin {
     private String nomMag;
     private String villeMag;
 
+    /**
+     * Constructeur de la classe Magasin
+     * @param idMag
+     * @param nomMag
+     * @param villeMag
+     */
     public Magasin(int idMag, String nomMag, String villeMag) {
         this.idMag = idMag;
         this.nomMag = nomMag;
         this.villeMag = villeMag;
     }
 
+    /**
+     * Constructeur de la classe Magasin sans paramètres
+     */
     public int getIdMag() {
         return idMag;
     }
+
+    /**
+     * Retourne l'identifiant du magasin
+     * @return l'identifiant du magasin
+     */
     public String getNomMag() {
         return nomMag;
     }
+
+    /**
+     * Retourne le nom du magasin
+     * @return le nom du magasin
+     */
     public String getVilleMag() {
         return villeMag;
     }
 
-    // public void ajouteLivre(Livre livre, int quantite) {
-    //     if (livres.containsKey(livre)) {
-    //         livres.put(livre, livres.get(livre) + quantite);
-    //     } else {
-    //         livres.put(livre, quantite);
-    //     }
-    // }
-
-    // public Boolean isDispo(Livre livre) {
-    //     return livres.containsKey(livre);
-    // }
-
-    // public void retireLivre(Livre livre, int qte) throws IllegalArgumentException, Exception {
-    //     if (livre == null) {
-    //         throw new IllegalArgumentException("Le livre ne peut pas être nul.");
-    //     }
-    //     if (livres.containsKey(livre)) {
-    //         int quantite = livres.get(livre);
-    //         if (quantite - qte > 0) {
-    //             livres.put(livre, quantite - qte);
-    //         } else if (quantite - qte == 0){
-    //             livres.remove(livre);
-    //         } else {
-    //             throw new Exception("il n'y a pas assez de livre dans le magsin");
-    //         }
-    //     }
-    //     else {
-    //         throw new IllegalArgumentException("Ce livre n'est pas disponible dans ce magasin.");
-    //     }
-    // }
-
+    /**
+     * Retourne la ville du magasin
+     * @return la ville du magasin
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null){return false;}
@@ -67,12 +59,19 @@ public class Magasin {
         return tmp.idMag == this.idMag && tmp.nomMag.equals(this.nomMag) && tmp.villeMag.equals(this.villeMag);
     }
     
-
+    /**
+     * Retourne le code de hachage du magasin
+     * @return le code de hachage du magasin
+     */
     @Override
     public int hashCode(){
         return idMag * 83;
     }
 
+    /**
+     * Définit l'identifiant du magasin
+     * @param idMag l'identifiant du magasin
+     */
     @Override
     public String toString() {
         return  idMag + " " + nomMag;
