@@ -53,7 +53,7 @@ public class ControlleurCreerCompte implements EventHandler<ActionEvent> {
             System.out.println("Erreur de la base de données : " + e.getMessage());
         } catch (CompteDejaPrisException e) {
             System.out.println("un compte porte dejà ces identifiants : " + e.getMessage());
-            app.alertCompteDejaPris();
+            app.alertInstanceDejaPrise();
         } catch (Exception e) {
             System.out.println("Erreur inconnue : " + e.getMessage());
         }

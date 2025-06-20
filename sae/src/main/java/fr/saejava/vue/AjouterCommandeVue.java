@@ -36,6 +36,8 @@ public class AjouterCommandeVue {
     private VBox VBoxLivresDansMagasin;
     private VBox VboxCommande;
 
+    private Text prixTotal;
+
     public AjouterCommandeVue(App app, Commande commande) throws Exception {
 
         this.app = app;
@@ -60,7 +62,7 @@ public class AjouterCommandeVue {
         magasin.setStyle("-fx-font-size: 20;");
         Text destinataire = new Text("destinataire : " + commande.getClient().getNomUtil());
         destinataire.setStyle("-fx-font-size: 20;");
-        Text prixTotal = new Text("prix total : " + commande.prixTotCommande());
+        prixTotal = new Text("prix total : " + commande.prixTotCommande());
         prixTotal.setStyle("-fx-font-size: 20;");
 
         VBox vb = new VBox(dateCom, enligne, livraison, magasin, destinataire, prixTotal);
@@ -215,6 +217,10 @@ public class AjouterCommandeVue {
 
     public Commande getCommande() {
         return commande;
+    }
+
+    public void prixTotalVautCommande(){
+        prixTotal.setText("prix total : " + commande.prixTotCommande());
     }
 
 }

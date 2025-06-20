@@ -34,6 +34,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
             }
         } else if (btn.getText().equals("ajouter")) {
             try{
+
                 int qte = ajouterCommandeVue.getQte();
                 String livreTitre = ajouterCommandeVue.getCblivre();
             
@@ -42,6 +43,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                 } else {
                     ajouterCommandeVue.getCommande().ajouterCommandeUnit(new CommandeUnit(app.getClient().getLivreBDparTitre(livreTitre), qte));
                     ajouterCommandeVue.majLivreDansCommande();
+                    ajouterCommandeVue.prixTotalVautCommande();
                 }
             } catch (Exception e) {
                 app.alertErreur(e);
@@ -58,8 +60,13 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.isPresent() && result.get() == ButtonType.OK) {
-                        app.getClient().ajouteSaCommandeBD((ajouterCommandeVue.getCommande()));
-                        app.setSceneCompteClient();
+                        try {
+                            app.getClient().ajouteSaCommandeBD((ajouterCommandeVue.getCommande()));
+                            app.setSceneCompteClient();
+                        } catch (Exception e){
+                            app.alertErreur(e);
+                        }
+                        
                     }
 
 
@@ -75,6 +82,7 @@ public class ControlleurAjouteCommande implements EventHandler<ActionEvent> {
         } else if (btn.getText().equals("retirer")){
             ajouterCommandeVue.getCommande().removeCommandeUnit();
             ajouterCommandeVue.majLivreDansCommande();
+            ajouterCommandeVue.prixTotalVautCommande();
 
         }
     }

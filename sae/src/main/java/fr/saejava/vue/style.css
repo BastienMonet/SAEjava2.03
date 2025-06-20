@@ -1,0 +1,24 @@
+
+
+.root {
+    -fx-font-family: "DejaVu Sans";
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-background-color: #1e5cec;
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #000000;
+}
+
+.TextField {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}

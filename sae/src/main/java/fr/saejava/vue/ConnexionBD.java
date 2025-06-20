@@ -95,6 +95,7 @@ public class ConnexionBD {
 
 
         this.scene = new Scene(root, 1000, 1000);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
 
     public Scene getScene() {

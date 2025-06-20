@@ -39,6 +39,10 @@ public class ControlleurAjouteNouveauLivre implements EventHandler<ActionEvent> 
             app.alertChampsVides();
         } else {
             try {
+                if (administrateur.livreEstDansBD(titre)) {
+                    app.alertInstanceDejaPrise();
+                    return;
+                }
                 administrateur.ajouteLivreBD(new Livre(0, titre, Integer.parseInt(nbpage), Integer.parseInt(datepub), Double.parseDouble(prix), 0));
                 app.setSceneAdmin();
                 app.alertAjoutSucces();

@@ -332,8 +332,22 @@ public abstract class Utilisateur {
         
     }
 
+    public boolean CommandeValide(Commande com) {
+        for (CommandeUnit comU : com.getListeCommandes()){
+            try {
+                if (qteDansMagasin(comU.getLivre(), com.getMagasin()) < comU.getQte()){
+                    return false;
+                }
+            } catch (Exception e){
+                System.err.println(e.getMessage());
+                return false;
+            }
+        }
+        return true;
+    }
 
-    public void ajouteSaCommandeBD(Commande com) throws SQLException {
+
+    public void ajouteSaCommandeBD(Commande com) throws Exception {
         PreparedStatement ps = laConnexion.prepareStatement("insert into COMMANDE values (?, ?, ?, ?, ?, ?)");
         int max = getMaxnumCom();
         ps.setInt(1, max);
@@ -344,16 +358,22 @@ public abstract class Utilisateur {
         ps.setInt(6, com.getMagasin().getIdMag());
         ps.executeUpdate();
 
-        for (CommandeUnit comU : com.getListeCommandes()){
-            try {
-            retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());
-            ajouteCommandeUnitBD(max,comU);
-            incrementeAchat(comU.getLivre().getIsbn());
-            } catch (Exception e){
-                System.err.println(e.getMessage());
-                System.err.println("vous avez demmander une commande impossible");
+        if (CommandeValide(com)){
+            for (CommandeUnit comU : com.getListeCommandes()){
+                try {
+                retireLivreDansMagasin(com.getMagasin(), comU.getLivre(), comU.getQte());
+                ajouteCommandeUnitBD(max,comU);
+                incrementeAchat(comU.getLivre().getIsbn());
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                    System.err.println("vous avez demmander une commande impossible");
+                }
             }
+        } else {
+            throw new Exception("vous avez demmander une commande impossible");
         }
+
+        
         
     }
 
