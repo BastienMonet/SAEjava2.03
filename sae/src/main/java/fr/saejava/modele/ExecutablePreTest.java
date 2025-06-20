@@ -62,6 +62,8 @@ public class ExecutablePreTest {
             System.out.println("problème de connection avec la base, assurer vous bien\n d'avoir le bon driver jdbc:mysql://servinfo-maria:3306/ et changer le dans ConnexionMySQL.java");
         }
 
+        System.out.println("les modification ont bien été effectué dans la BD, veuillez fermer le programme");
+
         
 
         
